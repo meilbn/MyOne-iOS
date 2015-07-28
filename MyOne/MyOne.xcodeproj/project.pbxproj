@@ -19,6 +19,10 @@
 		82E75E7A1B65F5C1000C8106 /* ThingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E791B65F5C1000C8106 /* ThingViewController.m */; };
 		82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E7C1B65F5CD000C8106 /* PersonViewController.m */; };
 		82E75E801B65F636000C8106 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E7F1B65F636000C8106 /* AboutViewController.m */; };
+		82E75E8A1B66102C000C8106 /* AppConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E891B66102C000C8106 /* AppConfigure.m */; };
+		82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E931B6725F8000C8106 /* BaseFunction.m */; };
+		82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E971B6753C9000C8106 /* BaseViewController.m */; };
+		82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,16 @@
 		82E75E7E1B65F636000C8106 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		82E75E7F1B65F636000C8106 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		82E75E811B65FF2C000C8106 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		82E75E841B660FB0000C8106 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		82E75E881B66102C000C8106 /* AppConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfigure.h; sourceTree = "<group>"; };
+		82E75E891B66102C000C8106 /* AppConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfigure.m; sourceTree = "<group>"; };
+		82E75E8B1B6611EF000C8106 /* MyOne.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOne.pch; sourceTree = "<group>"; };
+		82E75E921B6725F8000C8106 /* BaseFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFunction.h; sourceTree = "<group>"; };
+		82E75E931B6725F8000C8106 /* BaseFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFunction.m; sourceTree = "<group>"; };
+		82E75E961B6753C9000C8106 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		82E75E971B6753C9000C8106 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		82E75E991B678057000C8106 /* RightPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightPullToRefreshView.h; sourceTree = "<group>"; };
+		82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightPullToRefreshView.m; sourceTree = "<group>"; };
 		BFAA7262EA632554AE692584 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +116,7 @@
 		8269D27E1B65DC5C0041AE0B /* MyOne */ = {
 			isa = PBXGroup;
 			children = (
+				82E75E8C1B672101000C8106 /* Cells */,
 				82E75E6E1B65F553000C8106 /* Views */,
 				82E75E6D1B65F553000C8106 /* ViewControllers */,
 				82E75E6C1B65F553000C8106 /* Utils */,
@@ -119,6 +134,7 @@
 			children = (
 				8269D2801B65DC5C0041AE0B /* Info.plist */,
 				8269D2811B65DC5C0041AE0B /* main.m */,
+				82E75E8B1B6611EF000C8106 /* MyOne.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -143,6 +159,11 @@
 		82E75E6C1B65F553000C8106 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				82E75E841B660FB0000C8106 /* Constants.h */,
+				82E75E881B66102C000C8106 /* AppConfigure.h */,
+				82E75E891B66102C000C8106 /* AppConfigure.m */,
+				82E75E921B6725F8000C8106 /* BaseFunction.h */,
+				82E75E931B6725F8000C8106 /* BaseFunction.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -150,6 +171,7 @@
 		82E75E6D1B65F553000C8106 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				82E75E951B6753B0000C8106 /* BaseViewController */,
 				82E75E6F1B65F58A000C8106 /* HomeViewController.h */,
 				82E75E701B65F58A000C8106 /* HomeViewController.m */,
 				82E75E721B65F59E000C8106 /* ReadingViewController.h */,
@@ -169,8 +191,26 @@
 		82E75E6E1B65F553000C8106 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				82E75E991B678057000C8106 /* RightPullToRefreshView.h */,
+				82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		82E75E8C1B672101000C8106 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		82E75E951B6753B0000C8106 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				82E75E961B6753C9000C8106 /* BaseViewController.h */,
+				82E75E971B6753C9000C8106 /* BaseViewController.m */,
+			);
+			path = BaseViewController;
 			sourceTree = "<group>";
 		};
 		9C7621FC42D527A526CB7B8B /* Frameworks */ = {
@@ -326,11 +366,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */,
+				82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */,
 				82E75E7A1B65F5C1000C8106 /* ThingViewController.m in Sources */,
+				82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */,
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,
+				82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */,
 				82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
+				82E75E8A1B66102C000C8106 /* AppConfigure.m in Sources */,
 				82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */,
 				82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */,
 			);
@@ -402,7 +446,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -439,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -456,6 +500,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MyOne/MyOne.pch";
 				INFOPLIST_FILE = MyOne/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -494,6 +539,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MyOne/MyOne.pch";
 				INFOPLIST_FILE = MyOne/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

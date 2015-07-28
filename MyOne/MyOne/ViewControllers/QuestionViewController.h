@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 melody. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface QuestionViewController : UIViewController
+@interface QuestionViewController : BaseViewController
 
 @end

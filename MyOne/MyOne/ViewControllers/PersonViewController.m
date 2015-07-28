@@ -14,10 +14,16 @@
 
 @implementation PersonViewController
 
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	
+	[self setUpNavigationBarShowRightBarButtonItem:NO];
 }
+
+#pragma mark - Lifecycle
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

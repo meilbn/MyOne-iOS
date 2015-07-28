@@ -1,0 +1,46 @@
+//
+//  MyOne.pch
+//  MyOne
+//
+//  Created by HelloWorld on 7/27/15.
+//  Copyright (c) 2015 melody. All rights reserved.
+//
+
+#ifndef MyOne_MyOne_pch
+#define MyOne_MyOne_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define RGBA(r,g,b,a)         [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define RGB(r,g,b)            [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define BoldSystemFont(size)  [UIFont boldSystemFontOfSize:size]
+#define systemFont(size)      [UIFont systemFontOfSize:size]
+#define isIOS7                [[UIDevice currentDevice].systemVersion doubleValue]>=7.0?YES:NO
+#define SYSTEM_VERSION        [[[UIDevice currentDevice] systemVersion] floatValue]
+#define STATUSBAR_HEIGHT      [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NAVBAR_HEIGHT         (44.f + ((SYSTEM_VERSION >= 7) ? STATUSBAR_HEIGHT : 0))
+// 屏幕高度
+#define SCREEN_HEIGHT         [[UIScreen mainScreen] bounds].size.height
+// 屏幕宽度
+#define SCREEN_WIDTH          [[UIScreen mainScreen] bounds].size.width
+#define FULL_WIDTH            SCREEN_WIDTH
+#define FULL_HEIGHT           (SCREEN_HEIGHT - ((SYSTEM_VERSION >= 7) ? 0 : STATUSBAR_HEIGHT))
+#define CONTENT_HEIGHT        (FULL_HEIGHT - NAVBAR_HEIGHT)
+
+// 获取 View 的 frame 的属性
+#define GetViewWidth(view)    view.frame.size.width
+#define GetViewHeight(view)   view.frame.size.height
+#define GetViewX(view)        view.frame.origin.x
+#define GetViewY(view)        view.frame.origin.y
+
+// common
+#define UserDefaults          [NSUserDefaults standardUserDefaults]
+
+#define IsStringEmpty(string) (!string || [@"" isEqualToString:string])
+#define IsStringNotEmpty(string) (string && ![@"" isEqualToString:string])
+
+#import "Constants.h"
+#import "BaseFunction.h"
+
+#endif

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 melody. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface PersonViewController : UIViewController
+@interface PersonViewController : BaseViewController
 
 @end
