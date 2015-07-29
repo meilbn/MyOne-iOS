@@ -57,6 +57,7 @@
 #pragma mark - Private
 
 - (void)setUp {
+	self.backgroundColor = WebViewBGColor;
 	selfHeight = CGRectGetHeight(self.frame);
 	isNeedRefresh = NO;
 	canScrollBack = YES;

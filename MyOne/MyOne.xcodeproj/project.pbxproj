@@ -13,6 +13,16 @@
 		8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8269D2891B65DC5C0041AE0B /* Main.storyboard */; };
 		8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269D28C1B65DC5C0041AE0B /* Images.xcassets */; };
 		8269D29C1B65DC5C0041AE0B /* MyOneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D29B1B65DC5C0041AE0B /* MyOneTests.m */; };
+		828F6D1F1B68E785007521F0 /* home_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1B1B68E785007521F0 /* home_content.txt */; };
+		828F6D201B68E785007521F0 /* question_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1C1B68E785007521F0 /* question_content.txt */; };
+		828F6D211B68E785007521F0 /* reading_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1D1B68E785007521F0 /* reading_content.txt */; };
+		828F6D221B68E785007521F0 /* thing_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1E1B68E785007521F0 /* thing_content.txt */; };
+		828F6D2D1B68E98A007521F0 /* HomeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2C1B68E98A007521F0 /* HomeEntity.m */; };
+		828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */; };
+		828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D321B68E9BE007521F0 /* QuestionEntity.m */; };
+		828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D351B68E9CF007521F0 /* ThingEntity.m */; };
+		828F6D391B6918BA007521F0 /* ReadingBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D381B6918BA007521F0 /* ReadingBottomView.m */; };
+		828F6D3B1B6918C4007521F0 /* ReadingBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */; };
 		82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E701B65F58A000C8106 /* HomeViewController.m */; };
 		82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E731B65F59E000C8106 /* ReadingViewController.m */; };
 		82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E761B65F5AB000C8106 /* QuestionViewController.m */; };
@@ -48,6 +58,21 @@
 		8269D2951B65DC5C0041AE0B /* MyOneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyOneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269D29A1B65DC5C0041AE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8269D29B1B65DC5C0041AE0B /* MyOneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOneTests.m; sourceTree = "<group>"; };
+		828F6D1B1B68E785007521F0 /* home_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = home_content.txt; sourceTree = "<group>"; };
+		828F6D1C1B68E785007521F0 /* question_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = question_content.txt; sourceTree = "<group>"; };
+		828F6D1D1B68E785007521F0 /* reading_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content.txt; sourceTree = "<group>"; };
+		828F6D1E1B68E785007521F0 /* thing_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thing_content.txt; sourceTree = "<group>"; };
+		828F6D2B1B68E98A007521F0 /* HomeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntity.h; sourceTree = "<group>"; };
+		828F6D2C1B68E98A007521F0 /* HomeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntity.m; sourceTree = "<group>"; };
+		828F6D2E1B68E9A9007521F0 /* ReadingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingEntity.h; sourceTree = "<group>"; };
+		828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingEntity.m; sourceTree = "<group>"; };
+		828F6D311B68E9BE007521F0 /* QuestionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionEntity.h; sourceTree = "<group>"; };
+		828F6D321B68E9BE007521F0 /* QuestionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionEntity.m; sourceTree = "<group>"; };
+		828F6D341B68E9CF007521F0 /* ThingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingEntity.h; sourceTree = "<group>"; };
+		828F6D351B68E9CF007521F0 /* ThingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingEntity.m; sourceTree = "<group>"; };
+		828F6D371B6918BA007521F0 /* ReadingBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingBottomView.h; sourceTree = "<group>"; };
+		828F6D381B6918BA007521F0 /* ReadingBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingBottomView.m; sourceTree = "<group>"; };
+		828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingBottomView.xib; sourceTree = "<group>"; };
 		82E75E6F1B65F58A000C8106 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		82E75E701B65F58A000C8106 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		82E75E721B65F59E000C8106 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
@@ -117,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				82E75E8C1B672101000C8106 /* Cells */,
+				828F6D2A1B68E97F007521F0 /* Modules */,
 				82E75E6E1B65F553000C8106 /* Views */,
 				82E75E6D1B65F553000C8106 /* ViewControllers */,
 				82E75E6C1B65F553000C8106 /* Utils */,
@@ -132,6 +158,7 @@
 		8269D27F1B65DC5C0041AE0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				828F6D1A1B68E785007521F0 /* TestDatas */,
 				8269D2801B65DC5C0041AE0B /* Info.plist */,
 				8269D2811B65DC5C0041AE0B /* main.m */,
 				82E75E8B1B6611EF000C8106 /* MyOne.pch */,
@@ -154,6 +181,32 @@
 				8269D29A1B65DC5C0041AE0B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		828F6D1A1B68E785007521F0 /* TestDatas */ = {
+			isa = PBXGroup;
+			children = (
+				828F6D1B1B68E785007521F0 /* home_content.txt */,
+				828F6D1C1B68E785007521F0 /* question_content.txt */,
+				828F6D1D1B68E785007521F0 /* reading_content.txt */,
+				828F6D1E1B68E785007521F0 /* thing_content.txt */,
+			);
+			path = TestDatas;
+			sourceTree = "<group>";
+		};
+		828F6D2A1B68E97F007521F0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				828F6D2B1B68E98A007521F0 /* HomeEntity.h */,
+				828F6D2C1B68E98A007521F0 /* HomeEntity.m */,
+				828F6D2E1B68E9A9007521F0 /* ReadingEntity.h */,
+				828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */,
+				828F6D311B68E9BE007521F0 /* QuestionEntity.h */,
+				828F6D321B68E9BE007521F0 /* QuestionEntity.m */,
+				828F6D341B68E9CF007521F0 /* ThingEntity.h */,
+				828F6D351B68E9CF007521F0 /* ThingEntity.m */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		82E75E6C1B65F553000C8106 /* Utils */ = {
@@ -193,6 +246,9 @@
 			children = (
 				82E75E991B678057000C8106 /* RightPullToRefreshView.h */,
 				82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */,
+				828F6D371B6918BA007521F0 /* ReadingBottomView.h */,
+				828F6D381B6918BA007521F0 /* ReadingBottomView.m */,
+				828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,8 +369,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				828F6D201B68E785007521F0 /* question_content.txt in Resources */,
 				8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */,
+				828F6D211B68E785007521F0 /* reading_content.txt in Resources */,
 				8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */,
+				828F6D1F1B68E785007521F0 /* home_content.txt in Resources */,
+				828F6D3B1B6918C4007521F0 /* ReadingBottomView.xib in Resources */,
+				828F6D221B68E785007521F0 /* thing_content.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,12 +432,17 @@
 				82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */,
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,
 				82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */,
+				828F6D391B6918BA007521F0 /* ReadingBottomView.m in Sources */,
 				82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
 				82E75E8A1B66102C000C8106 /* AppConfigure.m in Sources */,
+				828F6D2D1B68E98A007521F0 /* HomeEntity.m in Sources */,
+				828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */,
 				82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */,
+				828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */,
 				82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */,
+				828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

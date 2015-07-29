@@ -8,6 +8,7 @@
 
 #import "BaseFunction.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <MJExtension/MJExtension.h>
 
 @implementation BaseFunction
 
@@ -31,6 +32,14 @@
 			result[4], result[5], result[6], result[7],
 			result[8], result[9], result[10], result[11],
 			result[12], result[13], result[14], result[15]];
+}
+
++ (NSDictionary *)loadTestDatasWithFileName:(NSString *)fileName {
+	NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@".txt"];
+	NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+	NSDictionary *testData = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+	
+	return testData;
 }
 
 @end

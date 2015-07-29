@@ -74,19 +74,7 @@
                     <view key="view" contentMode="scaleToFill" id="Wft-xi-ES8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="问题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O7-re-QXv">
-                                <rect key="frame" x="283" y="290" width="34" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="2O7-re-QXv" secondAttribute="centerY" id="brC-Hq-L3m"/>
-                            <constraint firstAttribute="centerX" secondItem="2O7-re-QXv" secondAttribute="centerX" id="n9L-Hs-PNd"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="问题" image="tabbar_item_question" id="NmF-wM-tTK">
                         <userDefinedRuntimeAttributes>
@@ -127,19 +115,7 @@
                     <view key="view" contentMode="scaleToFill" id="tHE-ff-ddO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东西" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzj-eP-i3w">
-                                <rect key="frame" x="283" y="290" width="34" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="Wzj-eP-i3w" secondAttribute="centerX" id="csv-fC-Yng"/>
-                            <constraint firstAttribute="centerY" secondItem="Wzj-eP-i3w" secondAttribute="centerY" id="sTx-WJ-Y1d"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="东西" image="tabbar_item_thing" id="X8n-UD-vGZ">
                         <userDefinedRuntimeAttributes>
@@ -180,19 +156,7 @@
                     <view key="view" contentMode="scaleToFill" id="AXo-K8-d5B">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFn-v7-vrc">
-                                <rect key="frame" x="283" y="290" width="34" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="bFn-v7-vrc" secondAttribute="centerY" id="PD3-Cd-itJ"/>
-                            <constraint firstAttribute="centerX" secondItem="bFn-v7-vrc" secondAttribute="centerX" id="vmO-65-5rP"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="4" title="个人" image="tabbar_item_person" id="NE2-D6-ueW">
                         <userDefinedRuntimeAttributes>
@@ -233,19 +197,7 @@
                     <view key="view" contentMode="scaleToFill" id="Dkk-UK-tGW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首页" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uU1-ob-Wl7">
-                                <rect key="frame" x="283" y="289" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="uU1-ob-Wl7" secondAttribute="centerY" id="FGv-mD-Y2y"/>
-                            <constraint firstAttribute="centerX" secondItem="uU1-ob-Wl7" secondAttribute="centerX" id="UI5-bB-Kui"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="首页" image="tabbar_item_home" id="WFm-ve-5he">
                         <userDefinedRuntimeAttributes>

@@ -9,6 +9,8 @@
 #import "QuestionViewController.h"
 #import "RightPullToRefreshView.h"
 #import <unistd.h>
+#import "QuestionEntity.h"
+#import <MJExtension/MJExtension.h>
 
 @interface QuestionViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -17,10 +19,12 @@
 @end
 
 @implementation QuestionViewController {
-	// 中间展示文章的视图控件的高度
-	CGFloat readingHeight;
-	// 当前一共有多少篇文章，默认为3篇
+	// 中间展示的视图控件的高度
+	CGFloat refreshHeight;
+	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
+	// 保存当前查看过的数据
+	NSMutableArray *readItems;
 }
 
 #pragma mark - View Lifecycle
@@ -31,10 +35,13 @@
 	
 	[self setUpNavigationBarShowRightBarButtonItem:YES];
 	
-	readingHeight = SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame);
+	refreshHeight = SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame);
 	numberOfItems = 3;
+	readItems = [[NSMutableArray alloc] init];
 	
-	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, readingHeight)];
+	[self loadTestData];
+	
+	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, refreshHeight)];
 	self.rightPullToRefreshView.delegate = self;
 	self.rightPullToRefreshView.dataSource = self;
 	[self.view addSubview:self.rightPullToRefreshView];
@@ -111,6 +118,13 @@
 
 - (void)whenHUDWasHidden {
 	[self.rightPullToRefreshView endRefreshing];
+}
+
+- (void)loadTestData {
+	// 先不做成可变的
+	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
+	QuestionEntity *questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
+	NSLog(@"questionEntity = %@", questionEntity);
 }
 
 #pragma mark - Parent

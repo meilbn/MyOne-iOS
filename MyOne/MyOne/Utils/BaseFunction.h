@@ -28,4 +28,13 @@
  */
 + (NSString *)md5Digest:(NSString *)str;
 
+/**
+ *  根据文件名来加载文件内容，并转化为 NSDictionary 对象
+ *
+ *  @param fileName 文件名
+ *
+ *  @return 转化之后的 NSDictionary 对象
+ */
++ (NSDictionary *)loadTestDatasWithFileName:(NSString *)fileName;
+
 @end
