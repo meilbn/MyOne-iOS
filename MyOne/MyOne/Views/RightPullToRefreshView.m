@@ -99,6 +99,14 @@
 	[self.carousel insertItemAtIndex:(numberOfItems - 1) animated:YES];
 }
 
+- (void)reloadItemAtIndex:(NSInteger)index animated:(BOOL)animated {
+	[self.carousel reloadItemAtIndex:index animated:animated];
+}
+
+- (UIView *)itemViewAtIndex:(NSInteger)index {
+	return [self.carousel itemViewAtIndex:index];
+}
+
 - (void)endRefreshing {
 	if (isNeedRefresh) {
 		CGRect frame = self.leftRefreshLabel.frame;
@@ -112,6 +120,16 @@
 			canScrollBack = YES;
 		}];
 	}
+}
+
+#pragma mark - Getter
+
+- (NSInteger)currentItemIndex {
+	return self.carousel.currentItemIndex;
+}
+
+- (UIView *)currentItemView {
+	return [self.carousel itemViewAtIndex:self.currentItemIndex];
 }
 
 #pragma mark - Setter
@@ -154,12 +172,12 @@
 	return CGRectGetWidth(self.frame);
 }
 
-//- (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
-//	NSLog(@"carouselCurrentItemIndexDidChange index = %ld", carousel.currentItemIndex);
-//}
+- (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
+	NSLog(@"carouselCurrentItemIndexDidChange index = %ld", carousel.currentItemIndex);
+}
 
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel {
-//	NSLog(@"carouselDidEndDecelerating index = %ld", carousel.currentItemIndex);
+	NSLog(@"carouselDidEndDecelerating index = %ld", carousel.currentItemIndex);
 	if (carousel.currentItemIndex == (numberOfItems - 1)) {
 		// 如果当前显示的是最后一个，则回调添加 item 方法
 		if ([self.delegate respondsToSelector:@selector(rightPullToRefreshViewDidScrollToLastItem:)]) {
@@ -220,11 +238,15 @@
 }
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
-//	NSLog(@"carouselDidEndScrollingAnimation");
+	NSLog(@"carouselDidEndScrollingAnimation");
 	// 如果当前的 item 为第一个并且 leftRefreshLabel 可以 scroll back，那么就刷新 leftRefreshLabel
 	if (carousel.currentItemIndex == 0 && canScrollBack) {
 		self.leftRefreshLabel.text = LeftDragToRightForRefreshHintText;
 		isNeedRefresh = NO;
+	}
+	
+	if ([self.delegate respondsToSelector:@selector(rightPullToRefreshView:didDisplayItemAtIndex:)]) {
+		[self.delegate rightPullToRefreshView:self didDisplayItemAtIndex:carousel.currentItemIndex];
 	}
 }
 

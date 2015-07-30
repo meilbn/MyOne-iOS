@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) id <RightPullToRefreshViewDelegate> delegate;
 @property (nonatomic, assign) id <RightPullToRefreshViewDataSource> dataSource;
+@property (nonatomic, readonly) NSInteger currentItemIndex;
+@property (nonatomic, strong, readonly) UIView *currentItemView;
 
 /**
  *  插入一个新的 item
@@ -23,6 +25,22 @@
  *  @param animated 是否需要动画
  */
 - (void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated;
+
+/**
+ *  重新加载指定下标的 item
+ *
+ *  @param index  要重新加载的 item 的下标
+ */
+- (void)reloadItemAtIndex:(NSInteger)index animated:(BOOL)animated;
+
+/**
+ *  获取指定下标的 item
+ *
+ *  @param index  要获取的 item 的下标
+ *
+ *  @return 指定下标的 item
+ */
+- (UIView *)itemViewAtIndex:(NSInteger)index;
 
 /**
  *  结束刷新
@@ -73,5 +91,7 @@
  *  @param rightPullToRefreshView rightPullToRefreshView
  */
 - (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView;
+
+- (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index;
 
 @end

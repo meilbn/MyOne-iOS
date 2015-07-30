@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1B661233D3DFA6BE8A20943B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11BEA97E2777D806B33A72EC /* libPods.a */; };
+		8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821392391B6A4749004D91EF /* ReadingAuthorView.m */; };
+		8213923F1B6A60FD004D91EF /* reading_content_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923B1B6A60FC004D91EF /* reading_content_1.txt */; };
+		821392401B6A60FD004D91EF /* reading_content_2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923C1B6A60FD004D91EF /* reading_content_2.txt */; };
+		821392411B6A60FD004D91EF /* reading_content_3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923D1B6A60FD004D91EF /* reading_content_3.txt */; };
+		821392421B6A60FD004D91EF /* reading_content_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923E1B6A60FD004D91EF /* reading_content_4.txt */; };
 		8269D2821B65DC5C0041AE0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2811B65DC5C0041AE0B /* main.m */; };
 		8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2841B65DC5C0041AE0B /* AppDelegate.m */; };
 		8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8269D2891B65DC5C0041AE0B /* Main.storyboard */; };
@@ -15,14 +20,12 @@
 		8269D29C1B65DC5C0041AE0B /* MyOneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D29B1B65DC5C0041AE0B /* MyOneTests.m */; };
 		828F6D1F1B68E785007521F0 /* home_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1B1B68E785007521F0 /* home_content.txt */; };
 		828F6D201B68E785007521F0 /* question_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1C1B68E785007521F0 /* question_content.txt */; };
-		828F6D211B68E785007521F0 /* reading_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1D1B68E785007521F0 /* reading_content.txt */; };
+		828F6D211B68E785007521F0 /* reading_content_0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1D1B68E785007521F0 /* reading_content_0.txt */; };
 		828F6D221B68E785007521F0 /* thing_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1E1B68E785007521F0 /* thing_content.txt */; };
 		828F6D2D1B68E98A007521F0 /* HomeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2C1B68E98A007521F0 /* HomeEntity.m */; };
 		828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */; };
 		828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D321B68E9BE007521F0 /* QuestionEntity.m */; };
 		828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D351B68E9CF007521F0 /* ThingEntity.m */; };
-		828F6D391B6918BA007521F0 /* ReadingBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D381B6918BA007521F0 /* ReadingBottomView.m */; };
-		828F6D3B1B6918C4007521F0 /* ReadingBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */; };
 		82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E701B65F58A000C8106 /* HomeViewController.m */; };
 		82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E731B65F59E000C8106 /* ReadingViewController.m */; };
 		82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E761B65F5AB000C8106 /* QuestionViewController.m */; };
@@ -48,6 +51,12 @@
 /* Begin PBXFileReference section */
 		11BEA97E2777D806B33A72EC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5495F9E3F4BE3E2E86412487 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		821392381B6A4749004D91EF /* ReadingAuthorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingAuthorView.h; sourceTree = "<group>"; };
+		821392391B6A4749004D91EF /* ReadingAuthorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingAuthorView.m; sourceTree = "<group>"; };
+		8213923B1B6A60FC004D91EF /* reading_content_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content_1.txt; sourceTree = "<group>"; };
+		8213923C1B6A60FD004D91EF /* reading_content_2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content_2.txt; sourceTree = "<group>"; };
+		8213923D1B6A60FD004D91EF /* reading_content_3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content_3.txt; sourceTree = "<group>"; };
+		8213923E1B6A60FD004D91EF /* reading_content_4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content_4.txt; sourceTree = "<group>"; };
 		8269D27C1B65DC5C0041AE0B /* MyOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269D2801B65DC5C0041AE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8269D2811B65DC5C0041AE0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,7 +69,7 @@
 		8269D29B1B65DC5C0041AE0B /* MyOneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyOneTests.m; sourceTree = "<group>"; };
 		828F6D1B1B68E785007521F0 /* home_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = home_content.txt; sourceTree = "<group>"; };
 		828F6D1C1B68E785007521F0 /* question_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = question_content.txt; sourceTree = "<group>"; };
-		828F6D1D1B68E785007521F0 /* reading_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content.txt; sourceTree = "<group>"; };
+		828F6D1D1B68E785007521F0 /* reading_content_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reading_content_0.txt; sourceTree = "<group>"; };
 		828F6D1E1B68E785007521F0 /* thing_content.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thing_content.txt; sourceTree = "<group>"; };
 		828F6D2B1B68E98A007521F0 /* HomeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeEntity.h; sourceTree = "<group>"; };
 		828F6D2C1B68E98A007521F0 /* HomeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeEntity.m; sourceTree = "<group>"; };
@@ -70,9 +79,6 @@
 		828F6D321B68E9BE007521F0 /* QuestionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionEntity.m; sourceTree = "<group>"; };
 		828F6D341B68E9CF007521F0 /* ThingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingEntity.h; sourceTree = "<group>"; };
 		828F6D351B68E9CF007521F0 /* ThingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingEntity.m; sourceTree = "<group>"; };
-		828F6D371B6918BA007521F0 /* ReadingBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingBottomView.h; sourceTree = "<group>"; };
-		828F6D381B6918BA007521F0 /* ReadingBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingBottomView.m; sourceTree = "<group>"; };
-		828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingBottomView.xib; sourceTree = "<group>"; };
 		82E75E6F1B65F58A000C8106 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		82E75E701B65F58A000C8106 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		82E75E721B65F59E000C8106 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
@@ -187,8 +193,12 @@
 			isa = PBXGroup;
 			children = (
 				828F6D1B1B68E785007521F0 /* home_content.txt */,
+				828F6D1D1B68E785007521F0 /* reading_content_0.txt */,
+				8213923B1B6A60FC004D91EF /* reading_content_1.txt */,
+				8213923C1B6A60FD004D91EF /* reading_content_2.txt */,
+				8213923D1B6A60FD004D91EF /* reading_content_3.txt */,
+				8213923E1B6A60FD004D91EF /* reading_content_4.txt */,
 				828F6D1C1B68E785007521F0 /* question_content.txt */,
-				828F6D1D1B68E785007521F0 /* reading_content.txt */,
 				828F6D1E1B68E785007521F0 /* thing_content.txt */,
 			);
 			path = TestDatas;
@@ -246,9 +256,8 @@
 			children = (
 				82E75E991B678057000C8106 /* RightPullToRefreshView.h */,
 				82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */,
-				828F6D371B6918BA007521F0 /* ReadingBottomView.h */,
-				828F6D381B6918BA007521F0 /* ReadingBottomView.m */,
-				828F6D3A1B6918C4007521F0 /* ReadingBottomView.xib */,
+				821392381B6A4749004D91EF /* ReadingAuthorView.h */,
+				821392391B6A4749004D91EF /* ReadingAuthorView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,12 +379,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				828F6D201B68E785007521F0 /* question_content.txt in Resources */,
+				821392411B6A60FD004D91EF /* reading_content_3.txt in Resources */,
 				8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */,
-				828F6D211B68E785007521F0 /* reading_content.txt in Resources */,
+				828F6D211B68E785007521F0 /* reading_content_0.txt in Resources */,
 				8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */,
 				828F6D1F1B68E785007521F0 /* home_content.txt in Resources */,
-				828F6D3B1B6918C4007521F0 /* ReadingBottomView.xib in Resources */,
 				828F6D221B68E785007521F0 /* thing_content.txt in Resources */,
+				821392401B6A60FD004D91EF /* reading_content_2.txt in Resources */,
+				8213923F1B6A60FD004D91EF /* reading_content_1.txt in Resources */,
+				821392421B6A60FD004D91EF /* reading_content_4.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,8 +444,8 @@
 				82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */,
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,
 				82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */,
-				828F6D391B6918BA007521F0 /* ReadingBottomView.m in Sources */,
 				82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */,
+				8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
 				82E75E8A1B66102C000C8106 /* AppConfigure.m in Sources */,

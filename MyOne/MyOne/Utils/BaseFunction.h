@@ -37,4 +37,13 @@
  */
 + (NSDictionary *)loadTestDatasWithFileName:(NSString *)fileName;
 
+/**
+ *  根据“yyyy-MM-dd”格式的时间获取文章头部的时间格式
+ *
+ *  @param originalMarketTime 原数据中的时间
+ *
+ *  @return 转换之后的时间
+ */
++ (NSString *)getReadingENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
+
 @end

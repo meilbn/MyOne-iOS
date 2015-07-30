@@ -53,6 +53,14 @@
 		NSLog(@"hudWasHidden");
 		[weakSelf whenHUDWasHidden];
 	};
+	
+//	UIDevice *device = [UIDevice currentDevice];
+//	NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
+//	NSString *deviceID = [BaseFunction md5Digest:currentDeviceId];
+//	// @"761784e559875c76cc95222cc8c8135a17bb61e1079fb654100ce81f4ef8e6ef"
+//	NSString *myid = @"761784e559875c76cc95222cc8c8135a17bb61e1079fb654100ce81f4ef8e6ef";
+//	NSLog(@"myid.length = %ld", myid.length);
+//	NSLog(@"deviceID = %@, deviceID.length = %ld", deviceID, deviceID.length);
 }
 
 #pragma mark - Lifecycle
