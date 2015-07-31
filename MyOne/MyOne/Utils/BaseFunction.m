@@ -58,6 +58,15 @@
 	return readingENMarketTime;
 }
 
++ (NSString *)getHomeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime {
+	NSDate *marketTime = [self dateFromString:originalMarketTime];
+	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+	[dateformatter setDateFormat:@"dd&MMMM , yyyy"];
+	NSString *readingENMarketTime = [dateformatter stringFromDate:marketTime];
+	
+	return readingENMarketTime;
+}
+
 + (NSDate *)dateFromString:(NSString *)dateStr {
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 	[inputFormatter setDateFormat:@"yyyy-MM-dd"];

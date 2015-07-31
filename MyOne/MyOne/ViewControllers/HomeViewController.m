@@ -11,6 +11,7 @@
 #import <unistd.h>
 #import "HomeEntity.h"
 #import <MJExtension/MJExtension.h>
+#import "HomeView.h"
 
 @interface HomeViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -54,6 +55,19 @@
 		[weakSelf whenHUDWasHidden];
 	};
 	
+//	NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
+//	NSArray *fontNames;
+//	NSInteger indFamily, indFont;
+//	NSLog(@"[familyNames count] === %ld", [familyNames count]);
+//	for (indFamily = 0; indFamily < [familyNames count]; ++indFamily) {
+//		NSLog(@"Family name: %@", [familyNames objectAtIndex:indFamily]);
+//		fontNames = [[NSArray alloc] initWithArray:[UIFont fontNamesForFamilyName:[familyNames objectAtIndex:indFamily]]];
+//		for (indFont = 0; indFont < [fontNames count]; ++indFont) {
+//			NSLog(@"Font name: %@", [fontNames objectAtIndex:indFont]);
+//		}
+//	}
+	
+	
 //	UIDevice *device = [UIDevice currentDevice];
 //	NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
 //	NSString *deviceID = [BaseFunction md5Digest:currentDeviceId];
@@ -83,20 +97,25 @@
 }
 
 - (UIView *)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-	UIWebView *webView = nil;
+//	UIWebView *webView = nil;
 	
 	//create new view if no view is available for recycling
 	if (view == nil) {
 		view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rightPullToRefreshView.frame), CGRectGetHeight(rightPullToRefreshView.frame))];
-		webView = [[UIWebView alloc] initWithFrame:view.bounds];
-		webView.scrollView.showsVerticalScrollIndicator = YES;
-		webView.scrollView.showsHorizontalScrollIndicator = NO;
-		webView.scalesPageToFit = NO;
-		webView.tag = 1;
-		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-		[view addSubview:webView];
+		
+		HomeView *homeView = [[HomeView alloc] initWithFrame:view.bounds];
+		[homeView configureViewWithHomeEntity:homeEntity];
+		[view addSubview:homeView];
+		
+//		webView = [[UIWebView alloc] initWithFrame:view.bounds];
+//		webView.scrollView.showsVerticalScrollIndicator = YES;
+//		webView.scrollView.showsHorizontalScrollIndicator = NO;
+//		webView.scalesPageToFit = NO;
+//		webView.tag = 1;
+//		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
+//		[view addSubview:webView];
 	} else {
-		webView = (UIWebView *)[view viewWithTag:1];
+//		webView = (UIWebView *)[view viewWithTag:1];
 	}
 	
 	//remember to always set any properties of your carousel item

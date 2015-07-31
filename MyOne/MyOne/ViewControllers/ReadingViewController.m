@@ -77,7 +77,7 @@
 #pragma mark - RightPullToRefreshViewDataSource
 
 - (NSInteger)numberOfItemsInRightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView {
-	NSLog(@"Person numberOfItemsInRightPullToRefreshView");
+//	NSLog(@"Person numberOfItemsInRightPullToRefreshView");
 	return numberOfItems;
 }
 

@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - iCarousel (1.8.1)
+  - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
   - MJExtension (2.5.3)
   - SDWebImage (3.7.3):
@@ -30,6 +31,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
   - iCarousel (~> 1.8.1)
+  - Masonry (~> 0.6.2)
   - MBProgressHUD (~> 0.9.1)
   - MJExtension (~> 2.5.3)
   - SDWebImage (~> 3.7.2)
@@ -37,6 +39,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   iCarousel: dace1cb858e3f4dc2614bee3201041247f82feda
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJExtension: d636ed42d1af44cba81106ae7831cccb66906eb7
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84

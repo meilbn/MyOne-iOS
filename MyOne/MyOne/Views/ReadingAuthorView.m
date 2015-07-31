@@ -9,10 +9,10 @@
 #import "ReadingAuthorView.h"
 #import "ReadingEntity.h"
 
-#define PraiseBtnTextColor [UIColor colorWithRed:80 / 255.0 green:80 / 255.0 blue:80 / 255.0 alpha:1.0]
-#define AuthorTextViewColor [UIColor colorWithRed:51 / 255.0 green:51 / 255.0 blue:51 / 255.0 alpha:1.0]
-#define AuthorTextColor [UIColor colorWithRed:90 / 255.0 green:91 / 255.0 blue:93 / 255.0 alpha:1.0]
-#define AuthorWenNameTextColor [UIColor colorWithRed:172 / 255.0 green:177 / 255.0 blue:180 / 255.0 alpha:1.0]
+#define PraiseBtnTextColor [UIColor colorWithRed:80 / 255.0 green:80 / 255.0 blue:80 / 255.0 alpha:1] // #505050
+#define AuthorTextViewColor [UIColor colorWithRed:51 / 255.0 green:51 / 255.0 blue:51 / 255.0 alpha:1] // #333333
+#define AuthorTextColor [UIColor colorWithRed:90 / 255.0 green:91 / 255.0 blue:93 / 255.0 alpha:1] // #5A5B5D
+#define AuthorWenNameTextColor [UIColor colorWithRed:172 / 255.0 green:177 / 255.0 blue:180 / 255.0 alpha:1] // #ACB1B4
 
 #define PaddingLeftRight 15
 #define PaddingTopBottom 30
@@ -42,7 +42,7 @@
 - (void)setUpViews {
 	// 初始化点赞 Button
 	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-	self.praiseNumberBtn.titleLabel.font = systemFont(12.0);
+	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
 	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:45 topCapHeight:0];
 	[self.praiseNumberBtn setBackgroundImage:btnImage forState:UIControlStateNormal];
@@ -60,19 +60,19 @@
 	// 初始化作者名字 Label
 	self.authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	self.authorLabel.textColor = AuthorTextColor;
-	self.authorLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:20.0];
+	self.authorLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:20];
 	[self addSubview:self.authorLabel];
 	
 	// 初始化作者网名 Label
 	self.authorWebNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	self.authorWebNameLabel.textColor = AuthorWenNameTextColor;
-	self.authorWebNameLabel.font = systemFont(13.0);
+	self.authorWebNameLabel.font = systemFont(13);
 	[self addSubview:self.authorWebNameLabel];
 	
 	// 初始化作者介绍 TextView
 	self.authorDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
 	self.authorDescriptionTextView.textColor = AuthorTextViewColor;
-	self.authorDescriptionTextView.font = systemFont(15.0);
+	self.authorDescriptionTextView.font = systemFont(15);
 	self.authorDescriptionTextView.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
 	self.authorDescriptionTextView.editable = NO;
 	self.authorDescriptionTextView.scrollEnabled = NO;
