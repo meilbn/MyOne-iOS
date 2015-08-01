@@ -99,7 +99,6 @@
 		webView.scrollView.backgroundColor = webView.backgroundColor;
 		webView.paginationBreakingMode = UIWebPaginationBreakingModePage;
 		webView.multipleTouchEnabled = NO;
-		webView.delegate = self;
 //		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
 //		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:readingEntity.sWebLk]]];
 		
@@ -133,6 +132,7 @@
 	[HTMLString appendString:appendString];
 	
 	[webView loadHTMLString:HTMLString baseURL:nil];
+	webView.delegate = self;
 	[webView.scrollView scrollsToTop];
 	
 	return view;
@@ -151,32 +151,25 @@
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
 	NSLog(@"current item index = %ld", index);
-	UIView *currentItem = [self.rightPullToRefreshView itemViewAtIndex:index];
-	UIWebView *webView = (UIWebView *)[currentItem viewWithTag:WebViewTag];
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//	UIView *currentItem = [self.rightPullToRefreshView itemViewAtIndex:index];
+//	UIWebView *webView = (UIWebView *)[currentItem viewWithTag:WebViewTag];
 	
 	NSLog(@"webView.scrollView.subviews.count = %ld", webView.scrollView.subviews.count);
-//	for (id view in webView.scrollView.subviews) {
-//		NSLog(@"%@", NSStringFromClass([view class]));
-//	}
+	//	for (id view in webView.scrollView.subviews) {
+	//		NSLog(@"%@", NSStringFromClass([view class]));
+	//	}
 	
-	readingEntity = [readItems objectAtIndex:(index % 5)];
+//	readingEntity = [readItems objectAtIndex:(index % 5)];
 	
 	ReadingAuthorView *readingAuthorView = nil;
 	
 	if (webView.scrollView.subviews.count < 4) {// 小于4说明还没有添加文章底部的作者详情 view
 		// webView 底部添加一个作者的描述视图
-//		ReadingBottomView *readingBottomView = [[ReadingBottomView alloc] initWithFrame:CGRectZero];
-//		// CGRectMake(0, webView.scrollView.contentSize.height - 248, SCREEN_WIDTH, 248)
-//		[readingBottomView configureViewWithReadingEntity:readingEntity];
-//		CGFloat bottomViewHeight = CGRectGetHeight(readingBottomView.frame);
-//		CGRect frame = CGRectMake(0, webView.scrollView.contentSize.height - bottomViewHeight, SCREEN_WIDTH, bottomViewHeight);
-//		readingBottomView.frame = frame;
-//		[webView.scrollView addSubview:readingBottomView];
-		
-//		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 100, 30)];
-//		label.text = [NSString stringWithFormat:@"%ld", index];
-//		[webView.scrollView addSubview:label];
-		
 		readingAuthorView = [[ReadingAuthorView alloc] initWithFrame:CGRectZero];
 		readingAuthorView.tag = BottomViewTag;
 	} else {
@@ -193,10 +186,6 @@
 		[webView.scrollView addSubview:readingAuthorView];
 	}
 }
-
-#pragma mark - UIWebViewDelegate
-
-
 
 #pragma mark - Network Requests
 

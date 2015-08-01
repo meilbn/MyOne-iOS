@@ -145,8 +145,6 @@
 	
 	// 初始化 contentBGImageView
 	self.contentBGImageView = [UIImageView new];
-//	UIImage *bgImage = [[UIImage imageNamed:@"contBack"] stretchableImageWithLeftCapWidth:20 topCapHeight:40];
-//	self.contentBGImageView.image = bgImage;
 	[self.containerView addSubview:self.contentBGImageView];
 	[self.contentBGImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.paintAuthorLabel.mas_bottom).with.offset(20);
@@ -156,31 +154,29 @@
 	
 	// 初始化 contentTextView
 	self.contentTextView = [UITextView new];
-//	self.contentTextView.textColor = [UIColor whiteColor];
-//	self.contentTextView.font = systemFont(13);
 	self.contentTextView.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
 	self.contentTextView.editable = NO;
 	self.contentTextView.scrollEnabled = NO;
 	self.contentTextView.backgroundColor = [UIColor clearColor];
 	[self.contentBGImageView addSubview:self.contentTextView];
 	[self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-//		make.edges.equalTo(self.contentBGImageView).with.insets(UIEdgeInsetsMake(0, 6, 0, 6));
 		make.left.equalTo(self.contentBGImageView.mas_left).with.offset(6);
 		make.top.equalTo(self.contentBGImageView.mas_top).with.offset(0);
 		make.right.equalTo(self.contentBGImageView.mas_right).with.offset(-6);
-		make.bottom.equalTo(self.contentBGImageView.mas_bottom).with.offset(4);
+		make.bottom.equalTo(self.contentBGImageView.mas_bottom).with.offset(0);
 	}];
 	
 	// 初始化 praiseNumberBtn
 	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
-	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:45 topCapHeight:0];
+	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:20 topCapHeight:2];
 	[self.praiseNumberBtn setBackgroundImage:btnImage forState:UIControlStateNormal];
 	[self.praiseNumberBtn setImage:[UIImage imageNamed:@"home_like"] forState:UIControlStateNormal];
 	[self.praiseNumberBtn setImage:[UIImage imageNamed:@"home_like_hl"] forState:UIControlStateSelected];
 	self.praiseNumberBtn.imageEdgeInsets = UIEdgeInsetsMake(2, 0, 0, 0);
-	self.praiseNumberBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+	self.praiseNumberBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
+	[self.praiseNumberBtn addTarget:self action:@selector(praise) forControlEvents:UIControlEventTouchUpInside];
 	[self.containerView addSubview:self.praiseNumberBtn];
 	[self.praiseNumberBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.contentBGImageView.mas_bottom).with.offset(30);
@@ -209,10 +205,14 @@
 	
 	self.contentBGImageView.image = [[UIImage imageNamed:@"contBack"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
 	
-	[self.praiseNumberBtn setTitle:homeEntity.strPn forState:UIControlStateNormal];
+	[self.praiseNumberBtn setTitle:[NSString stringWithFormat:@"  %@", homeEntity.strPn] forState:UIControlStateNormal];
 	[self.praiseNumberBtn sizeToFit];
 
 	self.scrollView.contentSize = CGSizeMake(0, CGRectGetHeight(self.containerView.frame));
+}
+
+- (void)praise {
+	self.praiseNumberBtn.selected = !self.praiseNumberBtn.isSelected;
 }
 
 /*

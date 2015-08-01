@@ -41,7 +41,7 @@
 
 - (void)setUpViews {
 	// 初始化点赞 Button
-	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
 	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:45 topCapHeight:0];
