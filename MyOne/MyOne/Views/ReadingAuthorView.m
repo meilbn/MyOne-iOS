@@ -162,7 +162,7 @@
 //	[self addSubview:self.authorDescriptionTextView];
 	
 	CGRect selfFrame = self.frame;
-	selfFrame.size.height = CGRectGetMaxY(self.authorDescriptionTextView.frame);
+	selfFrame.size.height = CGRectGetMaxY(self.authorDescriptionTextView.frame) + 10;
 	self.frame = selfFrame;
 	[self setNeedsDisplay];
 }

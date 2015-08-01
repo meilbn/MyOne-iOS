@@ -126,7 +126,7 @@
 	dateLabel.text = [BaseFunction getReadingENMarketTimeWithOriginalMarketTime:readingEntity.strContMarketTime];
 	
 	NSMutableString *HTMLString = [[NSMutableString alloc] initWithString:readingEntity.strContent];
-	NSString *insertString = [NSString stringWithFormat:@"<div style=\"margin-bottom: 185px;\"><p style=\"color: #5A5A5A; font-size: 21px; font-weight: bold; margin-top: 34px; margin-left: 5px;\">%@</p><p style=\"color: #888888; font-size: 14px; font-weight: bold; margin-left: 5px; margin-top: -15px;\">%@</p><p></p><div style=\"line-height: 26px; margin-top: 14px; margin-left: 5px; margin-right: 5px; color: #333333; font-size: 16px;\">", readingEntity.strContTitle, readingEntity.strContAuthor];
+	NSString *insertString = [NSString stringWithFormat:@"<div style=\"margin-bottom: 10px;\"><p style=\"color: #5A5A5A; font-size: 21px; font-weight: bold; margin-top: 34px; margin-left: 5px;\">%@</p><p style=\"color: #888888; font-size: 14px; font-weight: bold; margin-left: 5px; margin-top: -15px;\">%@</p><p></p><div style=\"line-height: 26px; margin-top: 14px; margin-left: 5px; margin-right: 5px; color: #333333; font-size: 16px;\">", readingEntity.strContTitle, readingEntity.strContAuthor];
 	[HTMLString insertString:insertString atIndex:0];
 	NSString *appendString = [NSString stringWithFormat:@"</div><p style=\"color: #333333; font-size: 15px; font-style: oblique; margin-left: 5px;\">%@</p></div>", readingEntity.strContAuthorIntroduce];
 	[HTMLString appendString:appendString];
@@ -177,6 +177,10 @@
 	}
 	
 	[readingAuthorView configureAuthorViewWithReadingEntity:readingEntity];
+	
+	CGSize readingContentSize = webView.scrollView.contentSize;
+	readingContentSize.height += CGRectGetHeight(readingAuthorView.frame);
+	webView.scrollView.contentSize = readingContentSize;
 	
 	CGFloat bottomViewHeight = CGRectGetHeight(readingAuthorView.frame);
 	CGRect bottomViewFrame = CGRectMake(0, webView.scrollView.contentSize.height - bottomViewHeight, SCREEN_WIDTH, bottomViewHeight);

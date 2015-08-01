@@ -17,6 +17,6 @@
 
 #define DefaultAnimationDuration 0.2
 
-#define WebViewBGColor [UIColor colorWithRed:249 / 255.0 green:249 / 255.0 blue:249 / 255.0 alpha:1]
+#define WebViewBGColor [UIColor whiteColor] // [UIColor colorWithRed:249 / 255.0 green:249 / 255.0 blue:249 / 255.0 alpha:1]
 
 #endif
