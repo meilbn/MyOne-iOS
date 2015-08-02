@@ -22,6 +22,11 @@
  */
 - (void)share;
 
+/**
+ *  不显示返回按钮的Title
+ */
+- (void)dontShowBackButtonTitle;
+
 - (void)showHUDWaitingWhileExecuting:(SEL)method;
 
 - (void)showHUDWithText:(NSString *)text delay:(NSTimeInterval)delay;

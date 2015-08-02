@@ -42,6 +42,7 @@
 	self.webView.scrollView.backgroundColor = self.webView.backgroundColor;
 	self.webView.paginationBreakingMode = UIWebPaginationBreakingModePage;
 	self.webView.multipleTouchEnabled = NO;
+	self.webView.scrollView.scrollsToTop = YES;
 	
 	// webView 顶部添加一个 UIView，高度为34，UIView 里面再添加一个 UILabel，x 为15，y 为12，高度为16，左右距离为15，水平垂直居中，系统默认字体，颜色#555555，大小为13。
 	UIView *webViewTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 34)];

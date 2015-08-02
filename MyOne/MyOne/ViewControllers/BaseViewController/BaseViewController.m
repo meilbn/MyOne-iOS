@@ -50,6 +50,10 @@
 	}
 }
 
+- (void)dontShowBackButtonTitle {
+	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+}
+
 #pragma mark - Touch Events
 
 - (void)share {

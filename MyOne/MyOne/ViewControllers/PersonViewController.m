@@ -7,6 +7,7 @@
 //
 
 #import "PersonViewController.h"
+#import "AboutViewController.h"
 
 #define rad(degrees) ((degrees) / (180.0 / M_PI))
 
@@ -29,12 +30,23 @@ static NSString *OtherCellID = @"OtherCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	
 	[self setUpNavigationBarShowRightBarButtonItem:NO];
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:0.9];
+	[self dontShowBackButtonTitle];
 	
 	tableViewHeight = SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame);
 	
 	[self setUpViews];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+    self.hidesBottomBarWhenPushed = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 #pragma mark - Lifecycle
@@ -99,6 +111,12 @@ static NSString *OtherCellID = @"OtherCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	if (indexPath.row == 0) {// 点击进入个人中心
+	} else if (indexPath.row == 1) {// 点击进入设置
+	} else if (indexPath.row == 2) {// 点击进入关于界面
+		AboutViewController *aboutViewController = [[AboutViewController alloc] init];
+		[self.navigationController pushViewController:aboutViewController animated:YES];
+	}
 }
 
 /*

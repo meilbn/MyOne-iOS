@@ -50,6 +50,7 @@
 	self.scrollView.showsHorizontalScrollIndicator = NO;
 	self.scrollView.alwaysBounceVertical = YES;
 	self.scrollView.backgroundColor = [UIColor whiteColor];
+	self.scrollView.scrollsToTop = YES;
 	[self addSubview:self.scrollView];
 	[self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
