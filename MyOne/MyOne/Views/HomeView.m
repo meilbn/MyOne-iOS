@@ -11,11 +11,9 @@
 #import "HomeEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define VOLTextColor [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1] // #555555
 #define PaintInfoTextColor [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1] // #555555
 #define DayTextColor [UIColor colorWithRed:55 / 255.0 green:194 / 255.0 blue:241 / 255.0 alpha:1] // #37C2F1
 #define MonthAndYearTextColor [UIColor colorWithRed:173 / 255.0 green:173 / 255.0 blue:173 / 255.0 alpha:1] // #ADADAD
-#define PraiseBtnTextColor [UIColor colorWithRed:80 / 255.0 green:80 / 255.0 blue:80 / 255.0 alpha:1] // #505050
 
 @interface HomeView ()
 
@@ -60,6 +58,7 @@
 	// 初始化 containerView
 	self.containerView = [UIView new];
 	[self.scrollView addSubview:self.containerView];
+	self.containerView.backgroundColor = self.scrollView.backgroundColor;
 	[self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.scrollView);
 		make.width.equalTo(self.scrollView);

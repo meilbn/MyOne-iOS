@@ -11,6 +11,7 @@
 #import <unistd.h>
 #import "QuestionEntity.h"
 #import <MJExtension/MJExtension.h>
+#import "QuestionView.h"
 
 @interface QuestionViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -25,6 +26,8 @@
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
 	NSMutableArray *readItems;
+	// 测试数据
+	QuestionEntity *questionEntity;
 }
 
 #pragma mark - View Lifecycle
@@ -57,6 +60,7 @@
 
 - (void)dealloc {
 	self.rightPullToRefreshView.delegate = nil;
+	self.rightPullToRefreshView.dataSource = nil;
 	self.rightPullToRefreshView = nil;
 }
 
@@ -73,26 +77,23 @@
 }
 
 - (UIView *)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-	UIWebView *webView = nil;
+	QuestionView *questionView = nil;
 	
 	//create new view if no view is available for recycling
 	if (view == nil) {
 		view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rightPullToRefreshView.frame), CGRectGetHeight(rightPullToRefreshView.frame))];
-		webView = [[UIWebView alloc] initWithFrame:view.bounds];
-		webView.scrollView.showsVerticalScrollIndicator = YES;
-		webView.scrollView.showsHorizontalScrollIndicator = NO;
-		webView.scalesPageToFit = NO;
-		webView.tag = 1;
-		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-		[view addSubview:webView];
+		questionView = [[QuestionView alloc] initWithFrame:view.bounds];
+		
+		[view addSubview:questionView];
 	} else {
-		webView = (UIWebView *)[view viewWithTag:1];
+		questionView = (QuestionView *)view.subviews[0];
 	}
 	
 	//remember to always set any properties of your carousel item
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
+	[questionView configureQuestionViewWithQuestionEntity:questionEntity];
 	
 	return view;
 }
@@ -123,8 +124,8 @@
 - (void)loadTestData {
 	// 先不做成可变的
 	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
-	QuestionEntity *questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
-	NSLog(@"questionEntity = %@", questionEntity);
+	questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
+//	NSLog(@"questionEntity = %@", questionEntity);
 }
 
 #pragma mark - Parent

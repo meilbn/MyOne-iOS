@@ -17,6 +17,14 @@
 
 #define DefaultAnimationDuration 0.2
 
+#define WebViewTag 1
+#define TopViewTag 10
+#define TopViewTimeLabelTag 11
+#define BottomViewTag 20
+
 #define WebViewBGColor [UIColor whiteColor] // [UIColor colorWithRed:249 / 255.0 green:249 / 255.0 blue:249 / 255.0 alpha:1]
+#define VOLTextColor [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1] // #555555
+#define DateTextColor [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1] // #555555
+#define PraiseBtnTextColor [UIColor colorWithRed:80 / 255.0 green:80 / 255.0 blue:80 / 255.0 alpha:1] // #505050
 
 #endif

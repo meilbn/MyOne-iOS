@@ -11,6 +11,7 @@
 #import <unistd.h>
 #import "ThingEntity.h"
 #import <MJExtension/MJExtension.h>
+#import "ThingView.h"
 
 @interface ThingViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -25,6 +26,8 @@
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
 	NSMutableArray *readItems;
+	// 测试数据
+	ThingEntity *thingEntity;
 }
 
 #pragma mark - View Lifecycle
@@ -48,7 +51,7 @@
 	
 	__weak typeof(self) weakSelf = self;
 	self.hudWasHidden = ^() {
-		NSLog(@"hudWasHidden");
+//		NSLog(@"hudWasHidden");
 		[weakSelf whenHUDWasHidden];
 	};
 }
@@ -57,6 +60,7 @@
 
 - (void)dealloc {
 	self.rightPullToRefreshView.delegate = nil;
+	self.rightPullToRefreshView.dataSource = nil;
 	self.rightPullToRefreshView = nil;
 }
 
@@ -68,31 +72,27 @@
 #pragma mark - RightPullToRefreshViewDataSource
 
 - (NSInteger)numberOfItemsInRightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView {
-	NSLog(@"Person numberOfItemsInRightPullToRefreshView");
+//	NSLog(@"Person numberOfItemsInRightPullToRefreshView");
 	return numberOfItems;
 }
 
 - (UIView *)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-	UIWebView *webView = nil;
+	ThingView *thingView = nil;
 	
 	//create new view if no view is available for recycling
 	if (view == nil) {
 		view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rightPullToRefreshView.frame), CGRectGetHeight(rightPullToRefreshView.frame))];
-		webView = [[UIWebView alloc] initWithFrame:view.bounds];
-		webView.scrollView.showsVerticalScrollIndicator = YES;
-		webView.scrollView.showsHorizontalScrollIndicator = NO;
-		webView.scalesPageToFit = NO;
-		webView.tag = 1;
-		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-		[view addSubview:webView];
+		thingView = [[ThingView alloc] initWithFrame:view.bounds];
+		[view addSubview:thingView];
 	} else {
-		webView = (UIWebView *)[view viewWithTag:1];
+		thingView = (ThingView *)view.subviews[0];
 	}
 	
 	//remember to always set any properties of your carousel item
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
+	[thingView configureViewWithThingEntity:thingEntity];
 	
 	return view;
 }
@@ -123,15 +123,15 @@
 - (void)loadTestData {
 	// 先不做成可变的
 	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"thing_content"];
-	ThingEntity *thingEntity = [ThingEntity objectWithKeyValues:testData[@"entTg"]];
-	NSLog(@"thingEntity = %@", thingEntity);
+	thingEntity = [ThingEntity objectWithKeyValues:testData[@"entTg"]];
+//	NSLog(@"thingEntity = %@", thingEntity);
 }
 
 #pragma mark - Parent
 
 - (void)share {
 	[super share];
-	NSLog(@"share --------");
+//	NSLog(@"share --------");
 }
 
 /*

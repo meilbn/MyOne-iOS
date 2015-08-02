@@ -28,7 +28,10 @@
 		828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */; };
 		828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D321B68E9BE007521F0 /* QuestionEntity.m */; };
 		828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D351B68E9CF007521F0 /* ThingEntity.m */; };
-		82A726601B6CD42600348EAC /* ReadingAuthorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A7265F1B6CD42600348EAC /* ReadingAuthorView.xib */; };
+		82A726951B6DB60000348EAC /* ThingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726941B6DB60000348EAC /* ThingView.m */; };
+		82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726971B6DC0BE00348EAC /* QuestionView.m */; };
+		82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269A1B6DF10F00348EAC /* PraiseView.m */; };
+		82A7269E1B6DFD3300348EAC /* ReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269D1B6DFD3300348EAC /* ReadingView.m */; };
 		82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E701B65F58A000C8106 /* HomeViewController.m */; };
 		82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E731B65F59E000C8106 /* ReadingViewController.m */; };
 		82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E761B65F5AB000C8106 /* QuestionViewController.m */; };
@@ -85,7 +88,14 @@
 		828F6D321B68E9BE007521F0 /* QuestionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionEntity.m; sourceTree = "<group>"; };
 		828F6D341B68E9CF007521F0 /* ThingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingEntity.h; sourceTree = "<group>"; };
 		828F6D351B68E9CF007521F0 /* ThingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingEntity.m; sourceTree = "<group>"; };
-		82A7265F1B6CD42600348EAC /* ReadingAuthorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReadingAuthorView.xib; sourceTree = "<group>"; };
+		82A726931B6DB60000348EAC /* ThingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingView.h; sourceTree = "<group>"; };
+		82A726941B6DB60000348EAC /* ThingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingView.m; sourceTree = "<group>"; };
+		82A726961B6DC0BE00348EAC /* QuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionView.h; sourceTree = "<group>"; };
+		82A726971B6DC0BE00348EAC /* QuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionView.m; sourceTree = "<group>"; };
+		82A726991B6DF10F00348EAC /* PraiseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PraiseView.h; sourceTree = "<group>"; };
+		82A7269A1B6DF10F00348EAC /* PraiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraiseView.m; sourceTree = "<group>"; };
+		82A7269C1B6DFD3300348EAC /* ReadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingView.h; sourceTree = "<group>"; };
+		82A7269D1B6DFD3300348EAC /* ReadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingView.m; sourceTree = "<group>"; };
 		82E75E6F1B65F58A000C8106 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		82E75E701B65F58A000C8106 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		82E75E721B65F59E000C8106 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
@@ -276,7 +286,14 @@
 				821392391B6A4749004D91EF /* ReadingAuthorView.m */,
 				821392431B6B3A9D004D91EF /* HomeView.h */,
 				821392441B6B3A9D004D91EF /* HomeView.m */,
-				82A7265F1B6CD42600348EAC /* ReadingAuthorView.xib */,
+				82A726931B6DB60000348EAC /* ThingView.h */,
+				82A726941B6DB60000348EAC /* ThingView.m */,
+				82A726961B6DC0BE00348EAC /* QuestionView.h */,
+				82A726971B6DC0BE00348EAC /* QuestionView.m */,
+				82A726991B6DF10F00348EAC /* PraiseView.h */,
+				82A7269A1B6DF10F00348EAC /* PraiseView.m */,
+				82A7269C1B6DFD3300348EAC /* ReadingView.h */,
+				82A7269D1B6DFD3300348EAC /* ReadingView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,7 +420,6 @@
 				8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */,
 				828F6D211B68E785007521F0 /* reading_content_0.txt in Resources */,
 				8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */,
-				82A726601B6CD42600348EAC /* ReadingAuthorView.xib in Resources */,
 				828F6D1F1B68E785007521F0 /* home_content.txt in Resources */,
 				828F6D221B68E785007521F0 /* thing_content.txt in Resources */,
 				821392401B6A60FD004D91EF /* reading_content_2.txt in Resources */,
@@ -459,8 +475,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */,
 				8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */,
 				82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */,
+				82A7269E1B6DFD3300348EAC /* ReadingView.m in Sources */,
+				82A726951B6DB60000348EAC /* ThingView.m in Sources */,
+				82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */,
 				82E75E7A1B65F5C1000C8106 /* ThingViewController.m in Sources */,
 				82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */,
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,

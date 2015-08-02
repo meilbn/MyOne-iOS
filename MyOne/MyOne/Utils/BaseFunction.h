@@ -38,13 +38,13 @@
 + (NSDictionary *)loadTestDatasWithFileName:(NSString *)fileName;
 
 /**
- *  根据“yyyy-MM-dd”格式的时间获取文章头部的时间格式
+ *  根据“yyyy-MM-dd”格式的时间获取文章或者东西头部的时间格式
  *
  *  @param originalMarketTime 原数据中的时间
  *
  *  @return 转换之后的时间
  */
-+ (NSString *)getReadingENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
++ (NSString *)getENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
 
 /**
  *  根据“yyyy-MM-dd”格式的时间获取首页的时间格式（天）和（月、年）用 & 连接，用来切割字符串
