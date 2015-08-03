@@ -20,8 +20,6 @@
 @end
 
 @implementation QuestionViewController {
-	// 中间展示的视图控件的高度
-	CGFloat refreshHeight;
 	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
@@ -32,19 +30,33 @@
 
 #pragma mark - View Lifecycle
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
+	if (self) {
+		UIImage *deselectedImage = [[UIImage imageNamed:@"tabbar_item_question"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+		UIImage *selectedImage = [[UIImage imageNamed:@"tabbar_item_question_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+		// 底部导航item
+		UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"问题" image:nil tag:0];
+		tabBarItem.image = deselectedImage;
+		tabBarItem.selectedImage = selectedImage;
+		self.tabBarItem = tabBarItem;
+	}
+	
+	return self;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	// Do any additional setup after loading the view.
-	
 	[self setUpNavigationBarShowRightBarButtonItem:YES];
 	
-	refreshHeight = SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame);
 	numberOfItems = 3;
 	readItems = [[NSMutableArray alloc] init];
 	
 	[self loadTestData];
 	
-	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, refreshHeight)];
+	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
 	self.rightPullToRefreshView.dataSource = self;
 	[self.view addSubview:self.rightPullToRefreshView];

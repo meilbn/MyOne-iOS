@@ -17,7 +17,6 @@
 		8213924C1B6BAAD5004D91EF /* Century Gothic Bold.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8213924A1B6BA788004D91EF /* Century Gothic Bold.TTF */; };
 		8269D2821B65DC5C0041AE0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2811B65DC5C0041AE0B /* main.m */; };
 		8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2841B65DC5C0041AE0B /* AppDelegate.m */; };
-		8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8269D2891B65DC5C0041AE0B /* Main.storyboard */; };
 		8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269D28C1B65DC5C0041AE0B /* Images.xcassets */; };
 		8269D29C1B65DC5C0041AE0B /* MyOneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D29B1B65DC5C0041AE0B /* MyOneTests.m */; };
 		828F6D1F1B68E785007521F0 /* home_content.txt in Resources */ = {isa = PBXBuildFile; fileRef = 828F6D1B1B68E785007521F0 /* home_content.txt */; };
@@ -32,6 +31,8 @@
 		82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726971B6DC0BE00348EAC /* QuestionView.m */; };
 		82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269A1B6DF10F00348EAC /* PraiseView.m */; };
 		82A7269E1B6DFD3300348EAC /* ReadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269D1B6DFD3300348EAC /* ReadingView.m */; };
+		82A726A11B6E0B2600348EAC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726A01B6E0B2600348EAC /* SettingsViewController.m */; };
+		82A726A61B6E264200348EAC /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726A51B6E264200348EAC /* DSNavigationBar.m */; };
 		82E75E711B65F58A000C8106 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E701B65F58A000C8106 /* HomeViewController.m */; };
 		82E75E741B65F59E000C8106 /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E731B65F59E000C8106 /* ReadingViewController.m */; };
 		82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E761B65F5AB000C8106 /* QuestionViewController.m */; };
@@ -71,7 +72,6 @@
 		8269D2811B65DC5C0041AE0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8269D2831B65DC5C0041AE0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8269D2841B65DC5C0041AE0B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8269D28A1B65DC5C0041AE0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8269D28C1B65DC5C0041AE0B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8269D2951B65DC5C0041AE0B /* MyOneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyOneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269D29A1B65DC5C0041AE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +96,10 @@
 		82A7269A1B6DF10F00348EAC /* PraiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraiseView.m; sourceTree = "<group>"; };
 		82A7269C1B6DFD3300348EAC /* ReadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingView.h; sourceTree = "<group>"; };
 		82A7269D1B6DFD3300348EAC /* ReadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingView.m; sourceTree = "<group>"; };
+		82A7269F1B6E0B2600348EAC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		82A726A01B6E0B2600348EAC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		82A726A41B6E264200348EAC /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationBar.h; sourceTree = "<group>"; };
+		82A726A51B6E264200348EAC /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationBar.m; sourceTree = "<group>"; };
 		82E75E6F1B65F58A000C8106 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		82E75E701B65F58A000C8106 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		82E75E721B65F59E000C8106 /* ReadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingViewController.h; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		8269D27E1B65DC5C0041AE0B /* MyOne */ = {
 			isa = PBXGroup;
 			children = (
+				82A726A21B6E264200348EAC /* ThirdParty */,
 				82E75E8C1B672101000C8106 /* Cells */,
 				821392491B6BA5B8004D91EF /* Fonts */,
 				828F6D2A1B68E97F007521F0 /* Modules */,
@@ -180,7 +185,6 @@
 				82E75E6C1B65F553000C8106 /* Utils */,
 				8269D2831B65DC5C0041AE0B /* AppDelegate.h */,
 				8269D2841B65DC5C0041AE0B /* AppDelegate.m */,
-				8269D2891B65DC5C0041AE0B /* Main.storyboard */,
 				8269D28C1B65DC5C0041AE0B /* Images.xcassets */,
 				8269D27F1B65DC5C0041AE0B /* Supporting Files */,
 			);
@@ -245,6 +249,23 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		82A726A21B6E264200348EAC /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				82A726A31B6E264200348EAC /* DSNavigationBar */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		82A726A31B6E264200348EAC /* DSNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				82A726A41B6E264200348EAC /* DSNavigationBar.h */,
+				82A726A51B6E264200348EAC /* DSNavigationBar.m */,
+			);
+			path = DSNavigationBar;
+			sourceTree = "<group>";
+		};
 		82E75E6C1B65F553000C8106 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +294,8 @@
 				82E75E7C1B65F5CD000C8106 /* PersonViewController.m */,
 				82E75E7E1B65F636000C8106 /* AboutViewController.h */,
 				82E75E7F1B65F636000C8106 /* AboutViewController.m */,
+				82A7269F1B6E0B2600348EAC /* SettingsViewController.h */,
+				82A726A01B6E0B2600348EAC /* SettingsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -417,7 +440,6 @@
 				8213924C1B6BAAD5004D91EF /* Century Gothic Bold.TTF in Resources */,
 				828F6D201B68E785007521F0 /* question_content.txt in Resources */,
 				821392411B6A60FD004D91EF /* reading_content_3.txt in Resources */,
-				8269D28B1B65DC5C0041AE0B /* Main.storyboard in Resources */,
 				828F6D211B68E785007521F0 /* reading_content_0.txt in Resources */,
 				8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */,
 				828F6D1F1B68E785007521F0 /* home_content.txt in Resources */,
@@ -475,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A726A61B6E264200348EAC /* DSNavigationBar.m in Sources */,
 				82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */,
 				8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */,
 				82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */,
@@ -486,6 +509,7 @@
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,
 				82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */,
 				82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */,
+				82A726A11B6E0B2600348EAC /* SettingsViewController.m in Sources */,
 				8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
 				821392451B6B3A9D004D91EF /* HomeView.m in Sources */,
@@ -517,17 +541,6 @@
 			targetProxy = 8269D2961B65DC5C0041AE0B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8269D2891B65DC5C0041AE0B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8269D28A1B65DC5C0041AE0B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8269D29D1B65DC5C0041AE0B /* Debug */ = {

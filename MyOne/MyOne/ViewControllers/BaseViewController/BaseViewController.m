@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	//设置标题栏不能覆盖下面viewcontroller的内容
+	self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 #pragma mark - Lifecycle

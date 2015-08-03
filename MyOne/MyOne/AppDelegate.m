@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "ReadingViewController.h"
+#import "QuestionViewController.h"
+#import "ThingViewController.h"
+#import "PersonViewController.h"
+#import "DSNavigationBar.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +23,66 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	
+	UITabBarController *rootTabBarController = [[UITabBarController alloc] init];
+	
+	// 首页
+	HomeViewController *homeViewController = [[HomeViewController alloc] init];
+	UINavigationController *homeNavigationController = [self dsNavigationController];
+	[homeNavigationController setViewControllers:@[homeViewController]];
+	// 文章
+	ReadingViewController *readingViewController = [[ReadingViewController alloc] init];
+	UINavigationController *readingNavigationController = [self dsNavigationController];
+	[readingNavigationController setViewControllers:@[readingViewController]];
+	// 问题
+	QuestionViewController *questionViewController = [[QuestionViewController alloc] init];
+	UINavigationController *questionNavigationController = [self dsNavigationController];
+	[questionNavigationController setViewControllers:@[questionViewController]];
+	// 东西
+	ThingViewController *thingViewController = [[ThingViewController alloc] init];
+	UINavigationController *thingNavigationController = [self dsNavigationController];
+	[thingNavigationController setViewControllers:@[thingViewController]];
+	// 个人
+	PersonViewController *personViewController = [[PersonViewController alloc] init];
+	UINavigationController *personNavigationController = [self dsNavigationController];
+	[personNavigationController setViewControllers:@[personViewController]];
+	
+	// create a color and set it to the DSNavigationBar appereance
+	UIColor * color = [UIColor colorWithRed:236 / 255.0 green:236 / 255.0 blue:236 / 255.0 alpha:1];
+	[[DSNavigationBar appearance] setNavigationBarWithColor:color];
+	
+	rootTabBarController.viewControllers = @[homeNavigationController, readingNavigationController, questionNavigationController, thingNavigationController, personNavigationController];
+	rootTabBarController.tabBar.tintColor = [UIColor colorWithRed:55 / 255.0 green:196 / 255.0 blue:242 / 255.0 alpha:1];
+	rootTabBarController.tabBar.barTintColor = [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:239 / 255.0 alpha:1];
+	rootTabBarController.tabBar.backgroundColor = [UIColor clearColor];
+	rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
+	
+	// 设置状态栏的字体颜色为白色
+	[application setStatusBarStyle:UIStatusBarStyleDefault];
+	self.window.rootViewController = rootTabBarController;
+	[self.window makeKeyAndVisible];
+	
 	return YES;
+}
+
+- (UINavigationController *)dsNavigationController {
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
+	[navigationController.navigationBar setOpaque:YES];
+	
+	return navigationController;
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+	CGRect rect = CGRectMake(0, 0, 1, 1);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+	[color setFill];
+	UIRectFill(rect);
+	
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return image;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

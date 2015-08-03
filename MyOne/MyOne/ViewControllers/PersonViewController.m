@@ -8,6 +8,7 @@
 
 #import "PersonViewController.h"
 #import "AboutViewController.h"
+#import "SettingsViewController.h"
 
 #define rad(degrees) ((degrees) / (180.0 / M_PI))
 
@@ -20,12 +21,25 @@
 static NSString *AccountCellID = @"AccountCell";
 static NSString *OtherCellID = @"OtherCell";
 
-@implementation PersonViewController{
-	// 中间展示的视图控件的高度
-	CGFloat tableViewHeight;
-}
+@implementation PersonViewController
 
 #pragma mark - View Lifecycle
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
+	if (self) {
+		UIImage *deselectedImage = [[UIImage imageNamed:@"tabbar_item_person"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+		UIImage *selectedImage = [[UIImage imageNamed:@"tabbar_item_person_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+		// 底部导航item
+		UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人" image:nil tag:0];
+		tabBarItem.image = deselectedImage;
+		tabBarItem.selectedImage = selectedImage;
+		self.tabBarItem = tabBarItem;
+	}
+	
+	return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,8 +47,6 @@ static NSString *OtherCellID = @"OtherCell";
 	[self setUpNavigationBarShowRightBarButtonItem:NO];
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:0.9];
 	[self dontShowBackButtonTitle];
-	
-	tableViewHeight = SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame);
 	
 	[self setUpViews];
 }
@@ -66,7 +78,7 @@ static NSString *OtherCellID = @"OtherCell";
 #pragma mark - Pirvate
 
 - (void)setUpViews {
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, tableViewHeight)];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	// 不显示空 cell
 	self.tableView.tableFooterView = [[UIView alloc] init];
 	// 设置 cell 的行高，固定为69
@@ -113,6 +125,8 @@ static NSString *OtherCellID = @"OtherCell";
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.row == 0) {// 点击进入个人中心
 	} else if (indexPath.row == 1) {// 点击进入设置
+		SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+		[self.navigationController pushViewController:settingsViewController animated:YES];
 	} else if (indexPath.row == 2) {// 点击进入关于界面
 		AboutViewController *aboutViewController = [[AboutViewController alloc] init];
 		[self.navigationController pushViewController:aboutViewController animated:YES];

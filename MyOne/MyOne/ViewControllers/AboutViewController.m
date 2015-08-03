@@ -21,9 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//	self.title = @"关于";
 	[self setTitleView];
-	
 	[self setUpViews];
 	
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.wufazhuce.com/about?from=ONEApp"]]];
@@ -41,7 +39,7 @@
 - (void)setTitleView {
 	UILabel *titleLabel = [UILabel new];
 	titleLabel.text = @"关于";
-	titleLabel.textColor = [UIColor colorWithRed:91 / 255.0 green:91 / 255.0 blue:91 / 255.0 alpha:1];
+	titleLabel.textColor = TitleTextColor;
 	titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
 	[titleLabel sizeToFit];
 	self.navigationItem.titleView = titleLabel;
