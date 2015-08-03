@@ -12,6 +12,7 @@
 #import "HomeEntity.h"
 #import <MJExtension/MJExtension.h>
 #import "HomeView.h"
+#import "HTTPTool.h"
 
 @interface HomeViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -67,6 +68,12 @@
 		[weakSelf whenHUDWasHidden];
 	};
 	
+//	[HTTPTool requestHomeContentByDate:@"2015-08-03" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//		NSLog(@"responseObject = %@", responseObject);
+//	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//		NSLog(@"error = %@", error);
+//	}];
+	
 //	UIDevice *device = [UIDevice currentDevice];
 //	NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
 //	NSString *deviceID = [BaseFunction md5Digest:currentDeviceId];
@@ -113,6 +120,8 @@
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
 	[homeView configureViewWithHomeEntity:homeEntity];
+	
+	NSLog(@"date = %@", [BaseFunction stringDateBeforeTodaySeveralDays:index]);
 	
 	return view;
 }

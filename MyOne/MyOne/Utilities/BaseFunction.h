@@ -55,4 +55,15 @@
  */
 + (NSString *)getHomeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
 
+/**
+ *  获取今天之前的相应天数的日期
+ *
+ *  @param days 几天之前
+ *
+ *  @return 相应天数之前的那天的日期
+ */
++ (NSString *)stringDateBeforeTodaySeveralDays:(NSInteger)days;
+
++ (NSString *)stringDateFromDate:(NSDate *)date;
+
 @end

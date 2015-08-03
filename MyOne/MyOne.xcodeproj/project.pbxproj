@@ -43,6 +43,9 @@
 		82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E931B6725F8000C8106 /* BaseFunction.m */; };
 		82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E971B6753C9000C8106 /* BaseViewController.m */; };
 		82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */; };
+		82EE5A2E1B6F51240012DAFD /* HTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A2D1B6F51240012DAFD /* HTTPTool.m */; };
+		82EE5A311B6F611B0012DAFD /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A301B6F611B0012DAFD /* CustomImageView.m */; };
+		82EE5A341B6F624A0012DAFD /* CircularLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A331B6F624A0012DAFD /* CircularLoaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,12 @@
 		82E75E971B6753C9000C8106 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		82E75E991B678057000C8106 /* RightPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightPullToRefreshView.h; sourceTree = "<group>"; };
 		82E75E9A1B678057000C8106 /* RightPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightPullToRefreshView.m; sourceTree = "<group>"; };
+		82EE5A2C1B6F51240012DAFD /* HTTPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPTool.h; sourceTree = "<group>"; };
+		82EE5A2D1B6F51240012DAFD /* HTTPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPTool.m; sourceTree = "<group>"; };
+		82EE5A2F1B6F611B0012DAFD /* CustomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageView.h; sourceTree = "<group>"; };
+		82EE5A301B6F611B0012DAFD /* CustomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageView.m; sourceTree = "<group>"; };
+		82EE5A321B6F624A0012DAFD /* CircularLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularLoaderView.h; sourceTree = "<group>"; };
+		82EE5A331B6F624A0012DAFD /* CircularLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLoaderView.m; sourceTree = "<group>"; };
 		BFAA7262EA632554AE692584 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,7 +191,7 @@
 				828F6D2A1B68E97F007521F0 /* Modules */,
 				82E75E6E1B65F553000C8106 /* Views */,
 				82E75E6D1B65F553000C8106 /* ViewControllers */,
-				82E75E6C1B65F553000C8106 /* Utils */,
+				82E75E6C1B65F553000C8106 /* Utilities */,
 				8269D2831B65DC5C0041AE0B /* AppDelegate.h */,
 				8269D2841B65DC5C0041AE0B /* AppDelegate.m */,
 				8269D28C1B65DC5C0041AE0B /* Images.xcassets */,
@@ -266,7 +275,7 @@
 			path = DSNavigationBar;
 			sourceTree = "<group>";
 		};
-		82E75E6C1B65F553000C8106 /* Utils */ = {
+		82E75E6C1B65F553000C8106 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				82E75E841B660FB0000C8106 /* Constants.h */,
@@ -274,8 +283,10 @@
 				82E75E891B66102C000C8106 /* AppConfigure.m */,
 				82E75E921B6725F8000C8106 /* BaseFunction.h */,
 				82E75E931B6725F8000C8106 /* BaseFunction.m */,
+				82EE5A2C1B6F51240012DAFD /* HTTPTool.h */,
+				82EE5A2D1B6F51240012DAFD /* HTTPTool.m */,
 			);
-			path = Utils;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		82E75E6D1B65F553000C8106 /* ViewControllers */ = {
@@ -317,6 +328,10 @@
 				82A7269A1B6DF10F00348EAC /* PraiseView.m */,
 				82A7269C1B6DFD3300348EAC /* ReadingView.h */,
 				82A7269D1B6DFD3300348EAC /* ReadingView.m */,
+				82EE5A2F1B6F611B0012DAFD /* CustomImageView.h */,
+				82EE5A301B6F611B0012DAFD /* CustomImageView.m */,
+				82EE5A321B6F624A0012DAFD /* CircularLoaderView.h */,
+				82EE5A331B6F624A0012DAFD /* CircularLoaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -504,14 +519,17 @@
 				82A7269E1B6DFD3300348EAC /* ReadingView.m in Sources */,
 				82A726951B6DB60000348EAC /* ThingView.m in Sources */,
 				82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */,
+				82EE5A311B6F611B0012DAFD /* CustomImageView.m in Sources */,
 				82E75E7A1B65F5C1000C8106 /* ThingViewController.m in Sources */,
 				82E75E9B1B678057000C8106 /* RightPullToRefreshView.m in Sources */,
 				82E75E801B65F636000C8106 /* AboutViewController.m in Sources */,
+				82EE5A2E1B6F51240012DAFD /* HTTPTool.m in Sources */,
 				82E75E941B6725F8000C8106 /* BaseFunction.m in Sources */,
 				82E75E771B65F5AB000C8106 /* QuestionViewController.m in Sources */,
 				82A726A11B6E0B2600348EAC /* SettingsViewController.m in Sources */,
 				8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
+				82EE5A341B6F624A0012DAFD /* CircularLoaderView.m in Sources */,
 				821392451B6B3A9D004D91EF /* HomeView.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
 				82E75E8A1B66102C000C8106 /* AppConfigure.m in Sources */,

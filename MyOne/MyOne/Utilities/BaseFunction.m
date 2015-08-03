@@ -10,6 +10,9 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <MJExtension/MJExtension.h>
 
+// 1天的长度
+static const NSTimeInterval oneDay = 24 * 60 * 60;
+
 @implementation BaseFunction
 
 /**
@@ -73,6 +76,38 @@
 	[inputFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
 	// 标准时间
 	return [inputFormatter dateFromString:dateStr];
+}
+
+/**
+ *  获取今天之前的相应天数的日期
+ *
+ *  @param days 几天之前
+ *
+ *  @return 相应天数之前的那天的日期
+ */
++ (NSString *)stringDateBeforeTodaySeveralDays:(NSInteger)days {
+	NSString *stringDate = @"";
+	
+	NSDate *now = [NSDate date];
+	NSDate *theDate;
+	
+	if (days != 0) {
+		theDate = [now initWithTimeIntervalSinceNow:(-oneDay * days)];
+	} else {
+		theDate = now;
+	}
+	
+	stringDate = [BaseFunction stringDateFromDate:theDate];
+	
+	return stringDate;
+}
+
++ (NSString *)stringDateFromDate:(NSDate *)date {
+	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+	[dateformatter setDateFormat:@"yyyy-MM-dd"];
+	NSString *dateString = [dateformatter stringFromDate:date];
+	
+	return dateString;
 }
 
 @end
