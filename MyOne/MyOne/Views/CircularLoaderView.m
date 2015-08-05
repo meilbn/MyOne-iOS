@@ -105,9 +105,9 @@ static const CGFloat circleRadius = 20.0;
 - (void)configure {
 	circlePathLayer = [[CAShapeLayer alloc] init];
 	circlePathLayer.frame = self.bounds;
-	circlePathLayer.lineWidth = 4;
+	circlePathLayer.lineWidth = 5;
 	circlePathLayer.fillColor = [UIColor clearColor].CGColor;
-	circlePathLayer.strokeColor = [UIColor redColor].CGColor;
+	circlePathLayer.strokeColor = LoadingCircleColor.CGColor;
 	[self.layer addSublayer:circlePathLayer];
 	self.backgroundColor = [UIColor whiteColor];
 	self.progress = 0;

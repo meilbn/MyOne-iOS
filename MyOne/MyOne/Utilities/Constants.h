@@ -31,4 +31,6 @@
 
 #define TitleTextColor [UIColor colorWithRed:91 / 255.0 green:91 / 255.0 blue:91 / 255.0 alpha:1]
 
+#define LoadingCircleColor [UIColor colorWithRed:132 / 255.0 green:132 / 255.0 blue:132 / 255.0 alpha:1]
+
 #endif

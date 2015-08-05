@@ -31,6 +31,8 @@
 	CGFloat draggedX;
 	// 标记是否能够 scroll back，用在刷新的时候不改变 leftRefreshLabel 的 frame，默认为 YES
 	BOOL canScrollBack;
+	// 最后一次显示的 item 的下标
+	NSInteger lastItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -62,6 +64,7 @@
 	isNeedRefresh = NO;
 	canScrollBack = YES;
 	draggedX = 0;
+	lastItemIndex = -1;
 	
 	[self setUpViews];
 }
@@ -245,9 +248,13 @@
 		isNeedRefresh = NO;
 	}
 	
-	if ([self.delegate respondsToSelector:@selector(rightPullToRefreshView:didDisplayItemAtIndex:)]) {
-		[self.delegate rightPullToRefreshView:self didDisplayItemAtIndex:carousel.currentItemIndex];
+	if (lastItemIndex != carousel.currentItemIndex) {
+		if ([self.delegate respondsToSelector:@selector(rightPullToRefreshView:didDisplayItemAtIndex:)]) {
+			[self.delegate rightPullToRefreshView:self didDisplayItemAtIndex:carousel.currentItemIndex];
+		}
 	}
+	
+	lastItemIndex = carousel.currentItemIndex;
 	
 //	if (carousel.currentItemIndex == (numberOfItems - 1)) {
 //		// 如果当前显示的是最后一个，则回调添加 item 方法

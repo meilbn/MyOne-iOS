@@ -80,6 +80,30 @@
 	}
 }
 
+{
+  "questionAdEntity" : {
+    "strQuestionContent" : "轮子君问：喜欢一个人，对方却对你没兴趣，是一种怎样的体验？",
+    "strQuestionMarketTime" : "2015-08-05",
+    "strQuestionId" : "1064",
+    "sEditor" : "(责任编辑：好谢翔）",
+    "strPraiseNumber" : "11304",
+    "strLastUpdateDate" : "2015-08-05 19:45:05",
+    "entQNCmt" : {
+      "upFg" : "",
+      "strCnt" : "",
+      "strId" : "",
+      "strD" : "",
+      "pNum" : ""
+    },
+    "strDayDiffer" : "",
+    "sWebLk" : "http:\/\/m.wufazhuce.com\/question\/2015-08-05",
+    "strAnswerTitle" : "@Xthejoker丶 答轮子君：",
+    "strAnswerContent" : "老师只能否定你的成绩，老板只能否定你的工作。<br><br>但是她呢，把你整个人都否定了。<br><br>你的勤劳勇敢高大帅气，你的博古通今风趣幽默，对她都不构成意义；你小心翼翼的示好，精心准备的礼物，背地里琢磨了好久的冷笑话，都并没有什么卵用；你把自己的好用心雕琢反复修饰，包装华美双手奉上；她低头看了看，耸耸肩，好像不是我想要的呢。<br><br>打败一个人有时候就是这么简单。",
+    "strQuestionTitle" : "被喜欢的人拒绝是种怎样的体验？"
+  },
+  "result" : "SUCCESS"
+}
+
 
 东西数据获取：
 地址：http://bea.wufazhuce.com/OneForWeb/one/o_f

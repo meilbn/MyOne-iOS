@@ -12,6 +12,7 @@
 #import "QuestionEntity.h"
 #import <MJExtension/MJExtension.h>
 #import "QuestionView.h"
+#import "HTTPTool.h"
 
 @interface QuestionViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -23,9 +24,14 @@
 	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
-	NSMutableArray *readItems;
+//	NSMutableArray *readItems;
+	NSMutableDictionary *readItems;
 	// 测试数据
-	QuestionEntity *questionEntity;
+//	QuestionEntity *questionEntity;
+	// 最后更新的日期
+	NSString *lastUpdateDate;
+	// 最后展示的 item 的下标
+//	NSInteger lastConfigureViewForItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -51,10 +57,12 @@
 	// Do any additional setup after loading the view.
 	[self setUpNavigationBarShowRightBarButtonItem:YES];
 	
-	numberOfItems = 3;
-	readItems = [[NSMutableArray alloc] init];
+	numberOfItems = 2;
+	readItems = [[NSMutableDictionary alloc] init];
+	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
+//	lastConfigureViewForItemIndex = -1;
 	
-	[self loadTestData];
+//	[self loadTestData];
 	
 	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
@@ -63,9 +71,10 @@
 	
 	__weak typeof(self) weakSelf = self;
 	self.hudWasHidden = ^() {
-		NSLog(@"hudWasHidden");
 		[weakSelf whenHUDWasHidden];
 	};
+	
+	[self requestQuestionContentAtIndex:0];
 }
 
 #pragma mark - Lifecycle
@@ -84,7 +93,6 @@
 #pragma mark - RightPullToRefreshViewDataSource
 
 - (NSInteger)numberOfItemsInRightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView {
-	NSLog(@"Person numberOfItemsInRightPullToRefreshView");
 	return numberOfItems;
 }
 
@@ -105,7 +113,14 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-	[questionView configureQuestionViewWithQuestionEntity:questionEntity];
+	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+		NSLog(@"question refresh index = %ld", index);
+		[questionView refreshSubviewsForNewItem];
+	} else {// 当前这个 item 是展示过了但是没有显示过数据的
+		NSLog(@"question configure index = %ld", index);
+//		lastConfigureViewForItemIndex = MAX(index, lastConfigureViewForItemIndex);
+		[questionView configureViewWithQuestionEntity:readItems[[@(index) stringValue]]];
+	}
 	
 	return view;
 }
@@ -116,15 +131,45 @@
 	[self showHUDWaitingWhileExecuting:@selector(request)];
 }
 
-- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
-	numberOfItems++;
-	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+- (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
+	NSLog(@"question didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
+	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
+		NSLog(@"question add new item ----");
+		numberOfItems++;
+		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+	}
+	
+	if (index < readItems.count && readItems[[@(index) stringValue]]) {
+//		NSLog(@"question lastConfigureViewForItemIndex = %ld index = %ld", lastConfigureViewForItemIndex, index);
+		NSLog(@"question didDisplay index = %ld", index);
+		QuestionView *questionView = (QuestionView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
+		[questionView configureViewWithQuestionEntity:readItems[[@(index) stringValue]]];
+	} else {
+		[self requestQuestionContentAtIndex:index];
+	}
 }
 
 #pragma mark - Network Requests
 
 - (void)request {
 	sleep(2);
+}
+
+- (void)requestQuestionContentAtIndex:(NSInteger)index {
+	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
+	[HTTPTool requestQuestionContentByDate:date lastUpdateDate:lastUpdateDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
+			NSLog(@"question request index = %ld date = %@ success-------", index, date);
+			QuestionEntity *returnQuestionEntity = [QuestionEntity objectWithKeyValues:responseObject[@"questionAdEntity"]];
+			if (IsStringEmpty(returnQuestionEntity.strQuestionId)) {
+				returnQuestionEntity.strQuestionMarketTime = date;
+			}
+			[readItems setObject:returnQuestionEntity forKey:[@(index) stringValue]];
+			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+		}
+	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"question error = %@", error);
+	}];
 }
 
 #pragma mark - Private
@@ -135,8 +180,8 @@
 
 - (void)loadTestData {
 	// 先不做成可变的
-	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
-	questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
+//	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
+//	questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
 //	NSLog(@"questionEntity = %@", questionEntity);
 }
 
@@ -144,7 +189,7 @@
 
 - (void)share {
 	[super share];
-	NSLog(@"share --------");
+//	NSLog(@"share --------");
 }
 
 /*

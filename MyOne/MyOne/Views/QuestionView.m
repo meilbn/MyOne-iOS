@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) PraiseView *praiseView;
+@property (strong, nonatomic) UIActivityIndicatorView *indicatorView;// item 加载中转转的菊花
 
 @end
 
@@ -56,36 +57,65 @@
 	[self.webView.scrollView addSubview:webViewTopView];
 	
 	[self addSubview:self.webView];
+	
+	// 初始化加载中的菊花控件
+	self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	self.indicatorView.hidesWhenStopped = YES;
+	[self addSubview:self.indicatorView];
 }
 
-- (void)configureQuestionViewWithQuestionEntity:(QuestionEntity *)questionEntity {
+- (void)startRefreshing {
+	self.indicatorView.center = self.center;
+	[self.indicatorView startAnimating];
+}
+
+- (void)configureViewWithQuestionEntity:(QuestionEntity *)questionEntity {
 	currentQuestion = questionEntity;
 	
-	self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
+	// 如果当前的问题内容没有获取过来，就暂时直接加载该问题对应的官方手机版网页
+	if (IsStringEmpty(questionEntity.strQuestionId)) {
+		self.dateLabel.text = @"";
+		
+		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://m.wufazhuce.com/question/%@", questionEntity.strQuestionMarketTime]]]];
+	} else {
+		self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
+		
+		NSMutableString *HTMLString = [[NSMutableString alloc] init];
+		// Questin Title
+		[HTMLString appendString:@"<div style=\"margin-bottom: 100px; margin-top: 34px;\"><table style=\"width: 100%;\"><tbody style=\"display: table-row-group; vertical-align: middle; border-color: inherit;\"><tr style=\"display: table-row; vertical-align: inherit;\"><td style=\"width: 84px;\" align=\"center\"><img style=\"width: 42px; height: 42px; vertical-align: middle;\" alt=\"问题\" src=\"http://s2-cdn.wufazhuce.com/m.wufazhuce/images/question.png\" /></td>"];
+		[HTMLString appendString:[NSString stringWithFormat:@"<td><p style=\"margin-top: 0; margin-left: 0; color: #5A5B5C; font-size: 16px; font-weight: bold;\">%@</p></td></tr></tbody></table>", questionEntity.strQuestionTitle]];
+		// Question Content
+		[HTMLString appendString:[NSString stringWithFormat:@"<div style=\"line-height: 26px; margin-top: 14px;\"><p style=\"margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p></div>", questionEntity.strQuestionContent]];
+		// Separate Line
+		[HTMLString appendString:@"<div style=\"margin-top: 15px; margin-bottom: 15px; width: 95%; height: 1px; background-color: #d4d4d4; margin-left: auto; margin-right: auto;\"></div>"];
+		// Answer Title
+		[HTMLString appendString:[NSString stringWithFormat:@"<table style=\"width: 100%%;\"><tbody style=\"display: table-row-group; vertical-align: middle; border-color: inherit;\"><tr style=\"display: table-row; vertical-align: inherit; border-color: inherit;\"><td style=\"width: 84px;\" align=\"center\"><img style=\"width: 42px; height: 42px; vertical-align: middle;\" alt=\"回答\" src=\"http://s2-cdn.wufazhuce.com/m.wufazhuce/images/answer.png\" /></td><td align=\"left\"><p style=\"margin-top: 0; margin-left: 0; color: #5A5B5C; font-size: 16px; font-weight: bold; margin-right: 20px; margin-bottom: 0; text-shadow: none;\">%@</p></td></tr></tbody></table>", questionEntity.strAnswerTitle]];
+		// Answer Content
+		[HTMLString appendString:[NSString stringWithFormat:@"<div style=\"line-height: 26px; margin-top: 14px;\"><p></p><p style=\"margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p><p></p></div>", questionEntity.strAnswerContent]];
+		// Question Editor
+		[HTMLString appendString:[NSString stringWithFormat:@"<p style=\"color: #333333; font-style: oblique; margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p></div>", questionEntity.sEditor]];
+		
+		[self.webView loadHTMLString:HTMLString baseURL:nil];
+	}
 	
-	NSMutableString *HTMLString = [[NSMutableString alloc] init];
-	// Questin Title
-	[HTMLString appendString:@"<div style=\"margin-bottom: 20px; margin-top: 34px;\"><table style=\"width: 100%;\"><tbody style=\"display: table-row-group; vertical-align: middle; border-color: inherit;\"><tr style=\"display: table-row; vertical-align: inherit;\"><td style=\"width: 84px;\" align=\"center\"><img style=\"width: 42px; height: 42px; vertical-align: middle;\" alt=\"问题\" src=\"http://s2-cdn.wufazhuce.com/m.wufazhuce/images/question.png\" /></td>"];
-	[HTMLString appendString:[NSString stringWithFormat:@"<td><p style=\"margin-top: 0; margin-left: 0; color: #5A5B5C; font-size: 16px; font-weight: bold;\">%@</p></td></tr></tbody></table>", questionEntity.strQuestionTitle]];
-	// Question Content
-	[HTMLString appendString:[NSString stringWithFormat:@"<div style=\"line-height: 26px; margin-top: 14px;\"><p style=\"margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p></div>", questionEntity.strQuestionContent]];
-	// Separate Line
-	[HTMLString appendString:@"<div style=\"margin-top: 15px; margin-bottom: 15px; width: 95%; height: 1px; background-color: #d4d4d4; margin-left: auto; margin-right: auto;\"></div>"];
-	// Answer Title
-	[HTMLString appendString:[NSString stringWithFormat:@"<table style=\"width: 100%%;\"><tbody style=\"display: table-row-group; vertical-align: middle; border-color: inherit;\"><tr style=\"display: table-row; vertical-align: inherit; border-color: inherit;\"><td style=\"width: 84px;\" align=\"center\"><img style=\"width: 42px; height: 42px; vertical-align: middle;\" alt=\"回答\" src=\"http://s2-cdn.wufazhuce.com/m.wufazhuce/images/answer.png\" /></td><td align=\"left\"><p style=\"margin-top: 0; margin-left: 0; color: #5A5B5C; font-size: 16px; font-weight: bold; margin-right: 20px; margin-bottom: 0; text-shadow: none;\">%@</p></td></tr></tbody></table>", questionEntity.strAnswerTitle]];
-	// Answer Content
-	[HTMLString appendString:[NSString stringWithFormat:@"<div style=\"line-height: 26px; margin-top: 14px;\"><p></p><p style=\"margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p><p></p></div>", questionEntity.strAnswerContent]];
-	// Question Editor
-	[HTMLString appendString:[NSString stringWithFormat:@"<p style=\"color: #333333; font-style: oblique; margin-left: 20px; margin-right: 20px; margin-bottom: 0; text-shadow: none; font-size: 15px;\">%@</p></div>", questionEntity.sEditor]];
-	
-	[self.webView loadHTMLString:HTMLString baseURL:nil];
 	self.webView.delegate = self;
 	[self.webView.scrollView scrollsToTop];
+}
+
+- (void)refreshSubviewsForNewItem {
+	self.dateLabel.text = @"";
+	
+	self.webView.hidden = YES;
+	
+	[self startRefreshing];
 }
 
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+	[self.indicatorView stopAnimating];
+	self.webView.hidden = NO;
+	
 	PraiseView *praiseView = nil;
 	
 	if (webView.scrollView.subviews.count < 4) {// 小于4说明还没有添加文章底部的作者详情 view
@@ -96,14 +126,19 @@
 		praiseView = (PraiseView *)[webView.scrollView viewWithTag:BottomViewTag];
 	}
 	
-	[praiseView configureViewWithPraiseNumber:currentQuestion.strPraiseNumber];
-	
-	CGRect bottomViewFrame = praiseView.frame;
-	bottomViewFrame.origin.y = webView.scrollView.contentSize.height - CGRectGetHeight(praiseView.frame) - 62;
-	praiseView.frame = bottomViewFrame;
-	
-	if (!praiseView.superview) {
-		[webView.scrollView addSubview:praiseView];
+	// 如果当前的问题内容没有获取过来，就不添加点赞的视图
+	if (IsStringNotEmpty(currentQuestion.strQuestionId)) {
+		[praiseView configureViewWithPraiseNumber:currentQuestion.strPraiseNumber];
+		
+		CGRect bottomViewFrame = praiseView.frame;
+		bottomViewFrame.origin.y = webView.scrollView.contentSize.height - CGRectGetHeight(praiseView.frame) - 39;
+		praiseView.frame = bottomViewFrame;
+		
+		if (!praiseView.superview) {
+			[webView.scrollView addSubview:praiseView];
+		}
+	} else {
+		praiseView.hidden = YES;
 	}
 }
 
