@@ -9,7 +9,6 @@
 #import "HomeView.h"
 #import <Masonry/Masonry.h>
 #import "HomeEntity.h"
-//#import <SDWebImage/UIImageView+WebCache.h>
 #import "CustomImageView.h"
 
 #define PaintInfoTextColor [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1] // #555555

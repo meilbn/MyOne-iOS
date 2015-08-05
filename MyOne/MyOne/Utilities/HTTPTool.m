@@ -70,7 +70,13 @@
  *  @param fail     请求失败 Block
  */
 + (void)requestThingContentByDate:(NSString *)date  success:(SuccessBlock)success failBlock:(FailBlock)fail {
-	
+	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+	NSDictionary *parameters = @{@"strDate" : date, @"strRow" : @"1"};
+	[manager GET:URL_GET_THING_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		success(operation,responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		fail(operation,error);
+	}];
 }
 
 @end

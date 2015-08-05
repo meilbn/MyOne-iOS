@@ -12,6 +12,7 @@
 #import "ThingEntity.h"
 #import <MJExtension/MJExtension.h>
 #import "ThingView.h"
+#import "HTTPTool.h"
 
 @interface ThingViewController () <RightPullToRefreshViewDelegate, RightPullToRefreshViewDataSource>
 
@@ -23,9 +24,12 @@
 	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
-	NSMutableArray *readItems;
+//	NSMutableArray *readItems;
+	NSMutableDictionary *readItems;
 	// 测试数据
-	ThingEntity *thingEntity;
+//	ThingEntity *thingEntity;
+	// 最后展示的 item 的下标
+	NSInteger lastConfigureViewForItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -51,10 +55,11 @@
 	// Do any additional setup after loading the view.
 	[self setUpNavigationBarShowRightBarButtonItem:YES];
 	
-	numberOfItems = 3;
-	readItems = [[NSMutableArray alloc] init];
+	numberOfItems = 2;
+	readItems = [[NSMutableDictionary alloc] init];
+	lastConfigureViewForItemIndex = 0;
 	
-	[self loadTestData];
+//	[self loadTestData];
 	
 	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
@@ -66,6 +71,8 @@
 //		NSLog(@"hudWasHidden");
 		[weakSelf whenHUDWasHidden];
 	};
+	
+	[self requestThingContentAtIndex:0];
 }
 
 #pragma mark - Lifecycle
@@ -104,7 +111,15 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-	[thingView configureViewWithThingEntity:thingEntity];
+//	NSLog(@"viewForItem index = %ld, numberOfItems = %ld, readItems.count = %ld", index, numberOfItems, readItems.count);
+	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+//		NSLog(@"refresh index = %ld", index);
+		[thingView refreshSubviewsForNewItem];
+	} else {// 当前这个 item 是展示过了但是没有显示过数据的
+//		NSLog(@"configure index = %ld", index);
+		lastConfigureViewForItemIndex = MAX(index, lastConfigureViewForItemIndex);
+		[thingView configureViewWithThingEntity:readItems[[@(index) stringValue]] animated:YES];
+	}
 	
 	return view;
 }
@@ -115,15 +130,50 @@
 	[self showHUDWaitingWhileExecuting:@selector(request)];
 }
 
-- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
-	numberOfItems++;
-	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+//- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
+//	numberOfItems++;
+//	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+//}
+
+- (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
+//	NSLog(@"didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
+	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
+//		NSLog(@"add new item ----");
+		numberOfItems++;
+		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+	}
+	
+	if (index < readItems.count && readItems[[@(index) stringValue]]) {
+//		NSLog(@"didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
+		ThingView *thingView = (ThingView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
+//		NSLog(@"lastConfigureViewForItemIndex < index : %@", lastConfigureViewForItemIndex < index ? @"YES" : @"NO");
+//		NSLog(@"(!lastConfigureViewForItemIndex && !index) : %@", (!lastConfigureViewForItemIndex && !index) ? @"YES" : @"NO");
+		[thingView configureViewWithThingEntity:readItems[[@(index) stringValue]] animated:(lastConfigureViewForItemIndex == 0 || lastConfigureViewForItemIndex < index)];
+		//		[rightPullToRefreshView endRefreshing];
+	} else {
+		[self requestThingContentAtIndex:index];
+	}
 }
 
 #pragma mark - Network Requests
 
 - (void)request {
 	sleep(2);
+}
+
+- (void)requestThingContentAtIndex:(NSInteger)index {
+	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
+	[HTTPTool requestThingContentByDate:date success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		//		NSLog(@"responseObject = %@", responseObject);
+		if ([responseObject[@"rs"] isEqualToString:REQUEST_SUCCESS]) {
+			//			NSLog(@"request index = %ld date = %@ success-------", index, date);
+			ThingEntity *returnThingEntity = [ThingEntity objectWithKeyValues:responseObject[@"entTg"]];
+			[readItems setObject:returnThingEntity forKey:[@(index) stringValue]];
+			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+		}
+	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"error = %@", error);
+	}];
 }
 
 #pragma mark - Private
@@ -134,8 +184,8 @@
 
 - (void)loadTestData {
 	// 先不做成可变的
-	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"thing_content"];
-	thingEntity = [ThingEntity objectWithKeyValues:testData[@"entTg"]];
+//	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"thing_content"];
+//	thingEntity = [ThingEntity objectWithKeyValues:testData[@"entTg"]];
 //	NSLog(@"thingEntity = %@", thingEntity);
 }
 

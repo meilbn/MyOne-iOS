@@ -28,6 +28,7 @@
 	NSMutableDictionary *readItems;
 	// 测试数据
 //	HomeEntity *homeEntity;
+	// 最后展示的 item 的下标
 	NSInteger lastConfigureViewForItemIndex;
 }
 
@@ -137,11 +138,11 @@
 	[self showHUDWaitingWhileExecuting:@selector(request)];
 }
 
-- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
+//- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
 //	numberOfItems++;
 //	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 //	NSLog(@"DidScrollToLastItem numberOfItems = %ld", numberOfItems);
-}
+//}
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
 	NSLog(@"didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
@@ -150,9 +151,6 @@
 		numberOfItems++;
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
-//	else if (index == numberOfItems - 2) {// 如果当前 item 是没有展示过的，因为添加方法先与本方法执行，所以减去 2
-//		
-//	}
 	
 	if (index < readItems.count && readItems[[@(index) stringValue]]) {
 		NSLog(@"didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
