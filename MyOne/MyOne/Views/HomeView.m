@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UIImageView *contentBGImageView;
 @property (nonatomic, strong) UITextView *contentTextView;
 @property (nonatomic, strong) UIButton *praiseNumberBtn;
+@property (strong, nonatomic) UIActivityIndicatorView *indicatorView;// item 加载中转转的菊花
 
 @end
 
@@ -57,7 +58,7 @@
 		make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
 	}];
 	
-	// 初始化 containerView
+	// 初始化容器视图
 	self.containerView = [UIView new];
 	[self.scrollView addSubview:self.containerView];
 	self.containerView.backgroundColor = self.scrollView.backgroundColor;
@@ -66,7 +67,7 @@
 		make.width.equalTo(self.scrollView);
 	}];
 	
-	// 初始化 volLabel
+	// 初始化 VOL 文字控件
 	self.volLabel = [UILabel new];
 	self.volLabel.font = systemFont(13);
 	self.volLabel.textColor = VOLTextColor;
@@ -78,7 +79,7 @@
 		make.height.mas_equalTo(@16);
 	}];
 	
-	// 初始化 paintImageView
+	// 初始化显示画控件
 	self.paintImageView = [[CustomImageView alloc] init];
 	[self.containerView addSubview:self.paintImageView];
 	CGFloat paintWidth = SCREEN_WIDTH - 20;
@@ -90,7 +91,7 @@
 		make.height.mas_equalTo(@(paintHeight));
 	}];
 	
-	// 初始化 paintNameLabel
+	// 初始化画名文字控件
 	self.paintNameLabel = [UILabel new];
 	self.paintNameLabel.textColor = PaintInfoTextColor;
 	self.paintNameLabel.font = systemFont(12);
@@ -102,7 +103,7 @@
 		make.right.equalTo(self.containerView.mas_right).with.offset(-10);
 	}];
 	
-	// 初始化 paintAuthorLabel
+	// 初始化画作者
 	self.paintAuthorLabel = [UILabel new];
 	self.paintAuthorLabel.textColor = PaintInfoTextColor;
 	self.paintAuthorLabel.font = systemFont(12);
@@ -114,7 +115,7 @@
 		make.right.equalTo(self.containerView.mas_right).with.offset(-10);
 	}];
 	
-	// 初始化 dayLabel
+	// 初始化日文字控件
 	self.dayLabel = [UILabel new];
 	self.dayLabel.textColor = DayTextColor;
 	self.dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:43];
@@ -129,7 +130,7 @@
 		make.height.mas_equalTo(@33);
 	}];
 	
-	// 初始化 monthAndYearLabel
+	// 初始化月和年文字控件
 	self.monthAndYearLabel = [UILabel new];
 	self.monthAndYearLabel.textColor = MonthAndYearTextColor;
 	self.monthAndYearLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:10];
@@ -144,7 +145,7 @@
 		make.height.mas_equalTo(@12);
 	}];
 	
-	// 初始化 contentBGImageView
+	// 初始化内容背景图片控件
 	self.contentBGImageView = [UIImageView new];
 	[self.containerView addSubview:self.contentBGImageView];
 	[self.contentBGImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,7 +154,7 @@
 		make.right.equalTo(self.containerView.mas_right).with.offset(-10);
 	}];
 	
-	// 初始化 contentTextView
+	// 初始化内容控件
 	self.contentTextView = [UITextView new];
 	self.contentTextView.textContainerInset = UIEdgeInsetsMake(8, 0, 8, 0);
 	self.contentTextView.editable = NO;
@@ -167,7 +168,7 @@
 		make.bottom.equalTo(self.contentBGImageView.mas_bottom).with.offset(0);
 	}];
 	
-	// 初始化 praiseNumberBtn
+	// 初始化点赞按钮
 	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
@@ -185,12 +186,24 @@
 		make.height.mas_equalTo(@28);
 		make.bottom.equalTo(self.containerView.mas_bottom).with.offset(-16);
 	}];
+	
+	// 初始化加载中的菊花控件
+	self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	self.indicatorView.hidesWhenStopped = YES;
+	[self addSubview:self.indicatorView];
 }
 
-- (void)configureViewWithHomeEntity:(HomeEntity *)homeEntity {
+- (void)startRefreshing {
+	self.indicatorView.center = self.center;
+	[self.indicatorView startAnimating];
+}
+
+- (void)configureViewWithHomeEntity:(HomeEntity *)homeEntity animated:(BOOL)animated {
+	[self.indicatorView stopAnimating];
+	self.containerView.hidden = NO;
+	
 	self.volLabel.text = homeEntity.strHpTitle;
-//	[self.paintImageView sd_setImageWithURL:[NSURL URLWithString:homeEntity.strThumbnailUrl]];
-	[self.paintImageView configureImageViwWithImageURL:[NSURL URLWithString:homeEntity.strThumbnailUrl]];
+	[self.paintImageView configureImageViwWithImageURL:[NSURL URLWithString:homeEntity.strThumbnailUrl] animated:animated];
 	self.paintNameLabel.text = [homeEntity.strAuthor componentsSeparatedByString:@"&"][0];
 	self.paintAuthorLabel.text = [homeEntity.strAuthor componentsSeparatedByString:@"&"][1];
 	NSString *marketTime = [BaseFunction getHomeENMarketTimeWithOriginalMarketTime:homeEntity.strMarketTime];
@@ -211,6 +224,27 @@
 	[self.praiseNumberBtn sizeToFit];
 
 	self.scrollView.contentSize = CGSizeMake(0, CGRectGetHeight(self.containerView.frame));
+}
+
+- (void)refreshSubviewsForNewItem {
+	self.volLabel.text = @"";
+//	self.paintImageView.image = nil;
+	self.paintNameLabel.text = @"";
+	self.paintAuthorLabel.text = @"";
+	self.dayLabel.text = @"";
+	self.monthAndYearLabel.text = @"";
+	
+	self.contentTextView.text = @"";
+	[self.contentTextView sizeToFit];
+	
+	self.contentBGImageView.image = nil;
+	
+	[self.praiseNumberBtn setTitle:@"" forState:UIControlStateNormal];
+	[self.praiseNumberBtn sizeToFit];
+	
+	self.containerView.hidden = YES;
+	
+	[self startRefreshing];
 }
 
 - (void)praise {

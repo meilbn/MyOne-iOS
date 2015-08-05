@@ -134,7 +134,7 @@ static const CGFloat circleRadius = 20.0;
 #pragma mark - Setter
 
 - (void)setProgress:(CGFloat)progress {
-	NSLog(@"set progress = %lf", progress);
+//	NSLog(@"set progress = %lf", progress);
 	if (progress > 1) {
 		circlePathLayer.strokeEnd = 1;
 	} else if (progress < 0) {

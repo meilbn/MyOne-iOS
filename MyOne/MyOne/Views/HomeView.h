@@ -11,6 +11,8 @@
 
 @interface HomeView : UIView
 
-- (void)configureViewWithHomeEntity:(HomeEntity *)homeEntity;
+- (void)configureViewWithHomeEntity:(HomeEntity *)homeEntity animated:(BOOL)animated;
+
+- (void)refreshSubviewsForNewItem;
 
 @end

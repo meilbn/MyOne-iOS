@@ -15,6 +15,8 @@
 
 #define BAD_NETWORK @"Bad Net Status"
 
+#define REQUEST_SUCCESS @"SUCCESS"
+
 #define DefaultAnimationDuration 0.2
 
 #define WebViewTag 1

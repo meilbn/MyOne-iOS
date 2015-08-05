@@ -74,7 +74,7 @@
 	self.carousel.type = iCarouselTypeLinear;
 	self.carousel.vertical = NO;
 	self.carousel.pagingEnabled = YES;
-	self.carousel.bounceDistance = 0.5;
+	self.carousel.bounceDistance = 0.7;
 	self.carousel.decelerationRate = 0.6;
 	[self addSubview:self.carousel];
 	
@@ -158,7 +158,7 @@
 
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel {
 	numberOfItems = [self.dataSource numberOfItemsInRightPullToRefreshView:self];
-//	NSLog(@"Person numberOfItems = %ld", numberOfItems);
+//	NSLog(@"numberOfItems = %ld", numberOfItems);
 	return numberOfItems;
 }
 
@@ -173,17 +173,17 @@
 }
 
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
-	NSLog(@"carouselCurrentItemIndexDidChange index = %ld", carousel.currentItemIndex);
+//	NSLog(@"carousel CurrentItemIndexDidChange index = %ld", carousel.currentItemIndex);
 }
 
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel {
-	NSLog(@"carouselDidEndDecelerating index = %ld", carousel.currentItemIndex);
-	if (carousel.currentItemIndex == (numberOfItems - 1)) {
-		// 如果当前显示的是最后一个，则回调添加 item 方法
-		if ([self.delegate respondsToSelector:@selector(rightPullToRefreshViewDidScrollToLastItem:)]) {
-			[self.delegate rightPullToRefreshViewDidScrollToLastItem:self];
-		}
-	}
+//	NSLog(@"carousel DidEndDecelerating index = %ld, numberOfItems = %ld", carousel.currentItemIndex, numberOfItems);
+//	if (carousel.currentItemIndex == (numberOfItems - 1)) {
+//		// 如果当前显示的是最后一个，则回调添加 item 方法
+//		if ([self.delegate respondsToSelector:@selector(rightPullToRefreshViewDidScrollToLastItem:)]) {
+//			[self.delegate rightPullToRefreshViewDidScrollToLastItem:self];
+//		}
+//	}
 }
 
 - (void)carouselDidScroll:(iCarousel *)carousel {
@@ -196,7 +196,7 @@
 			CGRect frame = self.leftRefreshLabel.frame;
 			frame.origin.x = draggedX - CGRectGetWidth(self.leftRefreshLabel.frame) - LabelOffsetX;
 			self.leftRefreshLabel.frame = frame;
-			// 当右拉到一定的距离之后将 leftRefreshLabel 的文字改为“松开刷新数据...”，这里的距离为 leftRefreshLabel 的1.5倍
+			// 当右拉到一定的距离之后将 leftRefreshLabel 的文字改为“松开刷新数据...”，这里的距离为 leftRefreshLabel 宽度的1.5倍
 			if (draggedX >= leftRefreshLabelWidth * 1.5 + LabelOffsetX) {
 				// 刷新 leftRefreshLabel
 				self.leftRefreshLabel.text = LeftReleaseToRefreshHintText;
@@ -213,7 +213,7 @@
 }
 
 - (void)carouselDidEndDragging:(iCarousel *)carousel willDecelerate:(BOOL)decelerate {
-//	NSLog(@"carouselDidEndDragging decelerate = %@", decelerate ? @"YES" : @"NO");
+//	NSLog(@"carousel DidEndDragging decelerate = %@", decelerate ? @"YES" : @"NO");
 	// 当当前 item 为第一个的时候，右拉释放，decelerate为 NO，否则为 YES
 	if (!decelerate && isNeedRefresh) {// 右拉释放并且需要刷新数据
 		// 设置 leftRefreshLabel 的显示文字、X 轴坐标
@@ -238,7 +238,7 @@
 }
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel {
-	NSLog(@"carouselDidEndScrollingAnimation");
+//	NSLog(@"carousel DidEndScrollingAnimation");
 	// 如果当前的 item 为第一个并且 leftRefreshLabel 可以 scroll back，那么就刷新 leftRefreshLabel
 	if (carousel.currentItemIndex == 0 && canScrollBack) {
 		self.leftRefreshLabel.text = LeftDragToRightForRefreshHintText;
@@ -248,6 +248,13 @@
 	if ([self.delegate respondsToSelector:@selector(rightPullToRefreshView:didDisplayItemAtIndex:)]) {
 		[self.delegate rightPullToRefreshView:self didDisplayItemAtIndex:carousel.currentItemIndex];
 	}
+	
+//	if (carousel.currentItemIndex == (numberOfItems - 1)) {
+//		// 如果当前显示的是最后一个，则回调添加 item 方法
+//		if ([self.delegate respondsToSelector:@selector(rightPullToRefreshViewDidScrollToLastItem:)]) {
+//			[self.delegate rightPullToRefreshViewDidScrollToLastItem:self];
+//		}
+//	}
 }
 
 /*

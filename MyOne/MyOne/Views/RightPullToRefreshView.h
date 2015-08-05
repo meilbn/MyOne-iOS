@@ -92,6 +92,12 @@
  */
 - (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView;
 
+/**
+ *  item 在屏幕上显示完毕
+ *
+ *  @param rightPullToRefreshView rightPullToRefreshView
+ *  @param index                  当前 item 的下标
+ */
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index;
 
 @end

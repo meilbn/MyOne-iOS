@@ -24,9 +24,11 @@
 	// 当前一共有多少篇文章，默认为3篇
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
-	NSMutableArray *readItems;
+//	NSMutableArray *readItems;
+	NSMutableDictionary *readItems;
 	// 测试数据
-	HomeEntity *homeEntity;
+//	HomeEntity *homeEntity;
+	NSInteger lastConfigureViewForItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -53,9 +55,10 @@
 	[self setUpNavigationBarShowRightBarButtonItem:YES];
 	
 	numberOfItems = 2;
-	readItems = [[NSMutableArray alloc] init];
+	readItems = [[NSMutableDictionary alloc] init];
+	lastConfigureViewForItemIndex = 0;
 	
-	[self loadTestData];
+//	[self loadTestData];
 	
 	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
@@ -68,12 +71,7 @@
 		[weakSelf whenHUDWasHidden];
 	};
 	
-//	[HTTPTool requestHomeContentByDate:@"2015-08-03" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//		NSLog(@"responseObject = %@", responseObject);
-//	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-//		NSLog(@"error = %@", error);
-//	}];
-	
+	[self requestHomeContentAtIndex:0];
 //	UIDevice *device = [UIDevice currentDevice];
 //	NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
 //	NSString *deviceID = [BaseFunction md5Digest:currentDeviceId];
@@ -119,9 +117,16 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-	[homeView configureViewWithHomeEntity:homeEntity];
-	
-	NSLog(@"date = %@", [BaseFunction stringDateBeforeTodaySeveralDays:index]);
+	NSLog(@"viewForItem index = %ld, numberOfItems = %ld, readItems.count = %ld", index, numberOfItems, readItems.count);
+	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+		NSLog(@"refresh index = %ld", index);
+		[homeView refreshSubviewsForNewItem];
+	} else {// 当前这个 item 是展示过了但是没有显示过数据的
+		NSLog(@"configure index = %ld", index);
+		lastConfigureViewForItemIndex = MAX(index, lastConfigureViewForItemIndex);
+		[homeView configureViewWithHomeEntity:readItems[[@(index) stringValue]] animated:YES];
+//		[rightPullToRefreshView endRefreshing];
+	}
 	
 	return view;
 }
@@ -133,11 +138,50 @@
 }
 
 - (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
-	numberOfItems++;
-	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+//	numberOfItems++;
+//	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+//	NSLog(@"DidScrollToLastItem numberOfItems = %ld", numberOfItems);
+}
+
+- (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
+	NSLog(@"didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
+	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
+		NSLog(@"add new item ----");
+		numberOfItems++;
+		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
+	}
+//	else if (index == numberOfItems - 2) {// 如果当前 item 是没有展示过的，因为添加方法先与本方法执行，所以减去 2
+//		
+//	}
+	
+	if (index < readItems.count && readItems[[@(index) stringValue]]) {
+		NSLog(@"didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
+		HomeView *homeView = (HomeView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
+		NSLog(@"lastConfigureViewForItemIndex < index : %@", lastConfigureViewForItemIndex < index ? @"YES" : @"NO");
+		NSLog(@"(!lastConfigureViewForItemIndex && !index) : %@", (!lastConfigureViewForItemIndex && !index) ? @"YES" : @"NO");
+		[homeView configureViewWithHomeEntity:readItems[[@(index) stringValue]] animated:(lastConfigureViewForItemIndex == 0 || lastConfigureViewForItemIndex < index)];
+//		[rightPullToRefreshView endRefreshing];
+	} else {
+		[self requestHomeContentAtIndex:index];
+	}
 }
 
 #pragma mark - Network Requests
+
+- (void)requestHomeContentAtIndex:(NSInteger)index {
+	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
+	[HTTPTool requestHomeContentByDate:date success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//		NSLog(@"responseObject = %@", responseObject);
+		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
+//			NSLog(@"request index = %ld date = %@ success-------", index, date);
+			HomeEntity *returnHomeEntity = [HomeEntity objectWithKeyValues:responseObject[@"hpEntity"]];
+			[readItems setObject:returnHomeEntity forKey:[@(index) stringValue]];
+			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+		}
+	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"error = %@", error);
+	}];
+}
 
 - (void)request {
 	sleep(2);
@@ -150,10 +194,14 @@
 	[self.rightPullToRefreshView endRefreshing];
 }
 
+- (BOOL)needAnimateForItemAtIndex:(NSInteger)index {
+	return NO;
+}
+
 - (void)loadTestData {
 	// 先不做成可变的
-	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"home_content"];
-	homeEntity = [HomeEntity objectWithKeyValues:testData[@"hpEntity"]];
+//	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"home_content"];
+//	homeEntity = [HomeEntity objectWithKeyValues:testData[@"hpEntity"]];
 //	NSLog(@"homeEntity = %@", homeEntity);
 }
 
