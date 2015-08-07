@@ -27,10 +27,13 @@
 }
 
 - (void)setUpViews {
+	self.backgroundColor = [UIColor clearColor];
+	self.nightBackgroundColor = [UIColor clearColor];
 	// 初始化点赞 Button
 	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
+	self.praiseNumberBtn.nightTitleColor = PraiseBtnTextColor;
 	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:20 topCapHeight:2];
 	[self.praiseNumberBtn setBackgroundImage:btnImage forState:UIControlStateNormal];
 	[self.praiseNumberBtn setImage:[UIImage imageNamed:@"home_like"] forState:UIControlStateNormal];

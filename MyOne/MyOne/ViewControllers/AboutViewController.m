@@ -21,10 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	// 设置夜间模式背景色
+	self.view.nightBackgroundColor = NightBGViewColor;
+	
 	[self setTitleView];
 	[self setUpViews];
 	
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://m.wufazhuce.com/about?from=ONEApp"]]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.webView.frame = self.view.bounds;
 }
 
 #pragma mark - Lifecycle
@@ -40,6 +48,7 @@
 	UILabel *titleLabel = [UILabel new];
 	titleLabel.text = @"关于";
 	titleLabel.textColor = TitleTextColor;
+	titleLabel.nightTextColor = TitleTextColor;
 	titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
 	[titleLabel sizeToFit];
 	self.navigationItem.titleView = titleLabel;

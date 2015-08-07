@@ -13,6 +13,7 @@
 #import "ThingViewController.h"
 #import "PersonViewController.h"
 #import "DSNavigationBar.h"
+#import "AppConfigure.h"
 
 @interface AppDelegate ()
 
@@ -48,18 +49,32 @@
 	UINavigationController *personNavigationController = [self dsNavigationController];
 	[personNavigationController setViewControllers:@[personViewController]];
 	
-	// create a color and set it to the DSNavigationBar appereance
-	UIColor * color = [UIColor colorWithRed:236 / 255.0 green:236 / 255.0 blue:236 / 255.0 alpha:1];
-	[[DSNavigationBar appearance] setNavigationBarWithColor:color];
-	
 	rootTabBarController.viewControllers = @[homeNavigationController, readingNavigationController, questionNavigationController, thingNavigationController, personNavigationController];
 	rootTabBarController.tabBar.tintColor = [UIColor colorWithRed:55 / 255.0 green:196 / 255.0 blue:242 / 255.0 alpha:1];
 	rootTabBarController.tabBar.barTintColor = [UIColor colorWithRed:239 / 255.0 green:239 / 255.0 blue:239 / 255.0 alpha:1];
 	rootTabBarController.tabBar.backgroundColor = [UIColor clearColor];
-	rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
 	
-	// 设置状态栏的字体颜色为白色
-	[application setStatusBarStyle:UIStatusBarStyleDefault];
+	if ([AppConfigure boolForKey:APP_THEME_NIGHT_MODE]) {
+		UIColor * color = [UIColor colorWithRed:32 / 255.0 green:32 / 255.0 blue:32 / 255.0 alpha:1];
+		[[DSNavigationBar appearance] setNavigationBarWithColor:color];
+		
+		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
+		
+		// 设置状态栏的字体颜色为黑色
+		[application setStatusBarStyle:UIStatusBarStyleLightContent];
+		
+		[DKNightVersionManager nightFalling];
+	} else {
+		// create a color and set it to the DSNavigationBar appereance
+		UIColor * color = [UIColor colorWithRed:236 / 255.0 green:236 / 255.0 blue:236 / 255.0 alpha:1];
+		[[DSNavigationBar appearance] setNavigationBarWithColor:color];
+		
+		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
+		
+		// 设置状态栏的字体颜色为白色
+		[application setStatusBarStyle:UIStatusBarStyleDefault];
+	}
+	
 	self.window.rootViewController = rootTabBarController;
 	[self.window makeKeyAndVisible];
 	

@@ -7,6 +7,7 @@
 //
 
 #import "TestViewController.h"
+#import <TFHpple.h>
 
 @interface TestViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.view.backgroundColor = [UIColor whiteColor];
+	
+//	NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://m.wufazhuce.com/question/2015-08-05"]];
+//	TFHpple *doc = [[TFHpple alloc] initWithHTMLData:data];
+//	
+//	NSArray *questionDetail = [doc searchWithXPathQuery:@"//table"];
+//	NSLog(@"questionDetail = %@", questionDetail);
 }
 
 - (void)didReceiveMemoryWarning {

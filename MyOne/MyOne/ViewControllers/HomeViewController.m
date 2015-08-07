@@ -30,6 +30,8 @@
 //	HomeEntity *homeEntity;
 	// 最后展示的 item 的下标
 	NSInteger lastConfigureViewForItemIndex;
+	// 当前展示的 item 的下标
+	NSInteger currentItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -58,6 +60,7 @@
 	numberOfItems = 2;
 	readItems = [[NSMutableDictionary alloc] init];
 	lastConfigureViewForItemIndex = 0;
+	currentItemIndex = 0;
 	
 //	[self loadTestData];
 	
@@ -73,6 +76,10 @@
 	};
 	
 	[self requestHomeContentAtIndex:0];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
+	
 //	UIDevice *device = [UIDevice currentDevice];
 //	NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
 //	NSString *deviceID = [BaseFunction md5Digest:currentDeviceId];
@@ -88,11 +95,19 @@
 	self.rightPullToRefreshView.delegate = nil;
 	self.rightPullToRefreshView.dataSource = nil;
 	self.rightPullToRefreshView = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+	[super nightModeSwitch:notification];
+	[self.rightPullToRefreshView reloadItemAtIndex:currentItemIndex animated:NO];
 }
 
 #pragma mark - RightPullToRefreshViewDataSource
@@ -143,6 +158,7 @@
 //}
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
+	currentItemIndex = index;
 	NSLog(@"home didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
 		NSLog(@"home add new item ----");
@@ -189,9 +205,17 @@
 	[self.rightPullToRefreshView endRefreshing];
 }
 
-- (BOOL)needAnimateForItemAtIndex:(NSInteger)index {
-	return NO;
-}
+//- (UIImage *)imageWithColor:(UIColor *)color {
+//	CGRect rect = CGRectMake(0, 0, 1, 1);
+//	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+//	[color setFill];
+//	UIRectFill(rect);
+//	
+//	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//	
+//	return image;
+//}
 
 - (void)loadTestData {
 	// 先不做成可变的

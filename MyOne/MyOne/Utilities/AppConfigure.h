@@ -14,6 +14,8 @@
 #define LAST_SHOW_GUIDE_APP_VERSION @"Last_Show_Guide_App_Version"
 // 用户是否已经登录
 #define IS_LOGINED @"User_Login_Status"
+// App 主题模式是否开启夜间模式
+#define APP_THEME_NIGHT_MODE @"Night_Mode_Is_On"
 
 @interface AppConfigure : NSObject
 

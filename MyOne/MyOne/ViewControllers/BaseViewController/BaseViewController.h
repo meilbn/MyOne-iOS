@@ -10,6 +10,8 @@
 
 @interface BaseViewController : UIViewController
 
+- (void)nightModeSwitch:(NSNotification *)notification;
+
 /**
  *  设置导航栏
  *

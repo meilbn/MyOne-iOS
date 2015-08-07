@@ -45,12 +45,16 @@
 }
 
 - (void)setUpViews {
+	self.backgroundColor = [UIColor whiteColor];
+	// 设置夜间模式背景色
+	self.nightBackgroundColor = NightBGViewColor;
 	// 初始化 ScrollView
 	self.scrollView = [UIScrollView new];
 	self.scrollView.showsVerticalScrollIndicator = YES;
 	self.scrollView.showsHorizontalScrollIndicator = NO;
 	self.scrollView.alwaysBounceVertical = YES;
 	self.scrollView.backgroundColor = [UIColor whiteColor];
+	self.scrollView.nightBackgroundColor = NightBGViewColor;
 	self.scrollView.scrollsToTop = YES;
 	[self addSubview:self.scrollView];
 	[self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,7 +64,8 @@
 	// 初始化容器视图
 	self.containerView = [UIView new];
 	[self.scrollView addSubview:self.containerView];
-	self.containerView.backgroundColor = self.scrollView.backgroundColor;
+	self.containerView.backgroundColor = [UIColor whiteColor];
+	self.containerView.nightBackgroundColor = NightBGViewColor;
 	[self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.scrollView);
 		make.width.equalTo(self.scrollView);
@@ -70,6 +75,7 @@
 	self.volLabel = [UILabel new];
 	self.volLabel.font = systemFont(13);
 	self.volLabel.textColor = VOLTextColor;
+	self.volLabel.nightTextColor = VOLTextColor;
 	[self.containerView addSubview:self.volLabel];
 	[self.volLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.equalTo(self.containerView.mas_left).with.offset(10);
@@ -93,6 +99,7 @@
 	// 初始化画名文字控件
 	self.paintNameLabel = [UILabel new];
 	self.paintNameLabel.textColor = PaintInfoTextColor;
+	self.paintNameLabel.nightTextColor = PaintInfoTextColor;
 	self.paintNameLabel.font = systemFont(12);
 	self.paintNameLabel.textAlignment = NSTextAlignmentRight;
 	[self.containerView addSubview:self.paintNameLabel];
@@ -105,6 +112,7 @@
 	// 初始化画作者
 	self.paintAuthorLabel = [UILabel new];
 	self.paintAuthorLabel.textColor = PaintInfoTextColor;
+	self.paintAuthorLabel.nightTextColor = PaintInfoTextColor;
 	self.paintAuthorLabel.font = systemFont(12);
 	self.paintAuthorLabel.textAlignment = NSTextAlignmentRight;
 	[self.containerView addSubview:self.paintAuthorLabel];
@@ -117,6 +125,7 @@
 	// 初始化日文字控件
 	self.dayLabel = [UILabel new];
 	self.dayLabel.textColor = DayTextColor;
+	self.dayLabel.nightTextColor = DayTextColor;
 	self.dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:43];
 	self.dayLabel.textAlignment = NSTextAlignmentCenter;
 	self.dayLabel.shadowOffset = CGSizeMake(1, 1);
@@ -126,12 +135,13 @@
 		make.top.equalTo(self.paintAuthorLabel.mas_bottom).with.offset(20);
 		make.left.equalTo(self.containerView.mas_left).with.offset(10);
 		make.width.mas_equalTo(@70);
-		make.height.mas_equalTo(@33);
+		make.height.mas_equalTo(@40);
 	}];
 	
 	// 初始化月和年文字控件
 	self.monthAndYearLabel = [UILabel new];
 	self.monthAndYearLabel.textColor = MonthAndYearTextColor;
+	self.monthAndYearLabel.nightTextColor = MonthAndYearTextColor;
 	self.monthAndYearLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:10];
 	self.monthAndYearLabel.textAlignment = NSTextAlignmentCenter;
 	self.monthAndYearLabel.shadowOffset = CGSizeMake(1, 1);
@@ -171,6 +181,7 @@
 	self.praiseNumberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 	self.praiseNumberBtn.titleLabel.font = systemFont(12);
 	[self.praiseNumberBtn setTitleColor:PraiseBtnTextColor forState:UIControlStateNormal];
+	self.praiseNumberBtn.nightTitleColor = PraiseBtnTextColor;
 	UIImage *btnImage = [[UIImage imageNamed:@"home_likeBg"] stretchableImageWithLeftCapWidth:20 topCapHeight:2];
 	[self.praiseNumberBtn setBackgroundImage:btnImage forState:UIControlStateNormal];
 	[self.praiseNumberBtn setImage:[UIImage imageNamed:@"home_like"] forState:UIControlStateNormal];
@@ -194,6 +205,11 @@
 
 - (void)startRefreshing {
 	self.indicatorView.center = self.center;
+	if (Is_Night_Mode) {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+	} else {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+	}
 	[self.indicatorView startAnimating];
 }
 
@@ -208,16 +224,32 @@
 	NSString *marketTime = [BaseFunction getHomeENMarketTimeWithOriginalMarketTime:homeEntity.strMarketTime];
 	self.dayLabel.text = [marketTime componentsSeparatedByString:@"&"][0];
 	self.monthAndYearLabel.text = [marketTime componentsSeparatedByString:@"&"][1];
+	if (Is_Night_Mode) {
+		self.dayLabel.shadowColor = [UIColor blackColor];
+		self.monthAndYearLabel.shadowColor = [UIColor blackColor];
+	}
 	
 	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 	paragraphStyle.lineSpacing = 5;
-	NSDictionary *attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
-								NSForegroundColorAttributeName : [UIColor whiteColor],
-								NSFontAttributeName : [UIFont systemFontOfSize:13]};
+	NSDictionary *attribute;
+	if (Is_Night_Mode) {
+		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
+					  NSForegroundColorAttributeName : NightHomeTextColor,
+					  NSFontAttributeName : [UIFont systemFontOfSize:13]};
+	} else {
+		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
+					  NSForegroundColorAttributeName : [UIColor whiteColor],
+					  NSFontAttributeName : [UIFont systemFontOfSize:13]};
+	}
+	
 	self.contentTextView.attributedText = [[NSAttributedString alloc] initWithString:homeEntity.strContent attributes:attribute];
 	[self.contentTextView sizeToFit];
 	
-	self.contentBGImageView.image = [[UIImage imageNamed:@"contBack"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
+	if (Is_Night_Mode) {
+		self.contentBGImageView.image = [[UIImage imageNamed:@"contBack_nt"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
+	} else {
+		self.contentBGImageView.image = [[UIImage imageNamed:@"contBack"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
+	}
 	
 	[self.praiseNumberBtn setTitle:[NSString stringWithFormat:@"  %@", homeEntity.strPn] forState:UIControlStateNormal];
 	[self.praiseNumberBtn sizeToFit];

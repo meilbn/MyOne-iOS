@@ -7,6 +7,13 @@
 //
 
 #import "SettingsViewController.h"
+#import "AppConfigure.h"
+
+#define DawnViewBGColor [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1] // #EBEBEB
+#define DawnCellBGColor [UIColor colorWithRed:249 / 255.0 green:249 / 255.0 blue:249 / 255.0 alpha:1] // #F9F9F9
+#define NightCellBGColor [UIColor colorWithRed:50 / 255.0 green:50 / 255.0 blue:50 / 255.0 alpha:1] // #323232
+#define NightCellTextColor [UIColor colorWithRed:111 / 255.0 green:111 / 255.0 blue:111 / 255.0 alpha:1] // #6F6F6F
+#define NightCellHeaderTextColor [UIColor colorWithRed:75 / 255.0 green:75 / 255.0 blue:75 / 255.0 alpha:1] // #4B4B4B
 
 @interface SettingsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,6 +36,10 @@ static NSString *CellLogOutID = @"LogOutCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.view.backgroundColor = DawnViewBGColor;
+	// 设置夜间模式背景色
+	self.view.nightBackgroundColor = NightBGViewColor;
+	
 	[self setTitleView];
 	[self setUpViews];
 	
@@ -60,6 +71,7 @@ static NSString *CellLogOutID = @"LogOutCell";
 	UILabel *titleLabel = [UILabel new];
 	titleLabel.text = @"设置";
 	titleLabel.textColor = TitleTextColor;
+	titleLabel.nightTextColor = TitleTextColor;
 	titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
 	[titleLabel sizeToFit];
 	self.navigationItem.titleView = titleLabel;
@@ -81,7 +93,9 @@ static NSString *CellLogOutID = @"LogOutCell";
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasDIID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasSecondLabelID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellLogOutID];
-	self.tableView.backgroundColor = self.view.backgroundColor;
+	self.tableView.backgroundColor = DawnViewBGColor;
+	self.tableView.nightBackgroundColor = NightBGViewColor;
+	self.tableView.nightSeparatorColor = [UIColor blackColor];
 	[self.view addSubview:self.tableView];
 	self.view.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
 }
@@ -121,13 +135,17 @@ static NSString *CellLogOutID = @"LogOutCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	cell.textLabel.text = dataSource[indexPath.section][indexPath.row];
 	cell.textLabel.textColor = [UIColor colorWithRed:128 / 255.0 green:127 / 255.0 blue:125 / 255.0 alpha:1];
+	cell.textLabel.nightTextColor = NightCellTextColor;
 	cell.textLabel.font = systemFont(17);
 	cell.textLabel.textAlignment = NSTextAlignmentLeft;
 	
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	if (indexPath.section == 0) {
-		cell.accessoryView = [[UISwitch alloc] init];
+		UISwitch *nightModeSwitch = [[UISwitch alloc] init];
+		nightModeSwitch.on = [AppConfigure boolForKey:APP_THEME_NIGHT_MODE];
+		[nightModeSwitch addTarget:self action:@selector(nightModeSwitch:) forControlEvents:UIControlEventValueChanged];
+		cell.accessoryView = nightModeSwitch;
 	} else if (indexPath.section == 2 && indexPath.row == 3) {
 		UILabel *versionLabel = [UILabel new];
 		NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -141,6 +159,9 @@ static NSString *CellLogOutID = @"LogOutCell";
 		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
 	
+	cell.backgroundColor = DawnCellBGColor;
+	cell.nightBackgroundColor = NightCellBGColor;
+	
 	return cell;
 }
 
@@ -149,14 +170,16 @@ static NSString *CellLogOutID = @"LogOutCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	NSLog(@"section = %ld", section);
+//	NSLog(@"section = %ld", section);
 	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
 	headerView.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
 	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, CGRectGetWidth(headerView.frame) - 40, CGRectGetHeight(headerView.frame))];
 	headerLabel.text = sectionHeaderTexts[section];
 	headerLabel.textColor = [UIColor colorWithRed:85 / 255.0 green:85 / 255.0 blue:85 / 255.0 alpha:1];
+	headerLabel.nightTextColor = NightCellHeaderTextColor;
 	headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
 	[headerView addSubview:headerLabel];
+	headerView.nightBackgroundColor = NightBGViewColor;
 	
 	return headerView;
 }
@@ -173,6 +196,20 @@ static NSString *CellLogOutID = @"LogOutCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Touch Events
+
+- (void)nightModeSwitch:(UISwitch *)modeSwitch {
+	if (modeSwitch.isOn) {
+		[DKNightVersionManager nightFalling];
+		[AppConfigure setBool:YES forKey:APP_THEME_NIGHT_MODE];
+	} else {
+		[DKNightVersionManager dawnComing];
+		[AppConfigure setBool:NO forKey:APP_THEME_NIGHT_MODE];
+	}
+	
+	[self.tableView reloadData];
 }
 
 /*

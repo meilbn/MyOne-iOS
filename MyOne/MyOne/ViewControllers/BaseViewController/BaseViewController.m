@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "DSNavigationBar.h"
 
 #define HUD_DELAY 1.5
 
@@ -26,13 +27,29 @@
     // Do any additional setup after loading the view.
 	//设置标题栏不能覆盖下面viewcontroller的内容
 	self.edgesForExtendedLayout = UIRectEdgeNone;
+	// 设置夜间模式背景色
+	self.view.nightBackgroundColor = NightBGViewColor;
 }
 
 #pragma mark - Lifecycle
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+//	if (Is_Night_Mode) {
+//		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
+//	} else {
+//		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
+//	}
 }
 
 #pragma mark - Public
@@ -54,6 +71,20 @@
 
 - (void)dontShowBackButtonTitle {
 	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+}
+
+#pragma mark - Private
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+	CGRect rect = CGRectMake(0, 0, 1, 1);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+	[color setFill];
+	UIRectFill(rect);
+	
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return image;
 }
 
 #pragma mark - Touch Events

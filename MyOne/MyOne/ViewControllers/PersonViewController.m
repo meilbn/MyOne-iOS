@@ -9,6 +9,7 @@
 #import "PersonViewController.h"
 #import "AboutViewController.h"
 #import "SettingsViewController.h"
+#import "TestViewController.h"
 
 #define rad(degrees) ((degrees) / (180.0 / M_PI))
 
@@ -49,6 +50,9 @@ static NSString *OtherCellID = @"OtherCell";
 	[self dontShowBackButtonTitle];
 	
 	[self setUpViews];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -89,7 +93,15 @@ static NSString *OtherCellID = @"OtherCell";
 	self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:AccountCellID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:OtherCellID];
+	self.tableView.nightBackgroundColor = NightBGViewColor;
+	self.tableView.nightSeparatorColor = [UIColor blackColor];
 	[self.view addSubview:self.tableView];
+}
+
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+	[self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -111,10 +123,14 @@ static NSString *OtherCellID = @"OtherCell";
 		cell.imageView.image = [UIImage imageNamed:@"setting"];
 	} else if (indexPath.row == 2) {
 		cell.textLabel.text = @"关于";
-		cell.imageView.image = [UIImage imageNamed:@"copyright"];
+		NSString *imageName = Is_Night_Mode ? @"copyright_nt" : @"copyright";
+		cell.imageView.image = [UIImage imageNamed:imageName];
 	}
 	
+	cell.textLabel.textColor = DawnTextColor;
+	cell.textLabel.nightTextColor = NightTextColor;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.nightBackgroundColor = NightBGViewColor;
 	
 	return cell;
 }
@@ -124,6 +140,8 @@ static NSString *OtherCellID = @"OtherCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.row == 0) {// 点击进入个人中心
+		TestViewController *testViewController = [[TestViewController alloc] init];
+		[self.navigationController pushViewController:testViewController animated:YES];
 	} else if (indexPath.row == 1) {// 点击进入设置
 		SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
 		[self.navigationController pushViewController:settingsViewController animated:YES];

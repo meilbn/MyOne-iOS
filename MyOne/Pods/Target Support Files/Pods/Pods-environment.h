@@ -48,6 +48,42 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// DKNightVersion
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion 1
+
+// DKNightVersion/Controller
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion_Controller
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion_Controller 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion_Controller 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion_Controller 1
+
+// DKNightVersion/Core
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion_Core
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion_Core 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion_Core 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion_Core 1
+
+// DKNightVersion/Generator
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion_Generator
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion_Generator 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion_Generator 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion_Generator 1
+
+// DKNightVersion/Helper
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion_Helper
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion_Helper 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion_Helper 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion_Helper 1
+
+// DKNightVersion/UIKit
+#define COCOAPODS_POD_AVAILABLE_DKNightVersion_UIKit
+#define COCOAPODS_VERSION_MAJOR_DKNightVersion_UIKit 0
+#define COCOAPODS_VERSION_MINOR_DKNightVersion_UIKit 8
+#define COCOAPODS_VERSION_PATCH_DKNightVersion_UIKit 1
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
@@ -77,6 +113,12 @@
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 3
+
+// hpple
+#define COCOAPODS_POD_AVAILABLE_hpple
+#define COCOAPODS_VERSION_MAJOR_hpple 0
+#define COCOAPODS_VERSION_MINOR_hpple 2
+#define COCOAPODS_VERSION_PATCH_hpple 0
 
 // iCarousel
 #define COCOAPODS_POD_AVAILABLE_iCarousel

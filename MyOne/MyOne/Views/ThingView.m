@@ -39,12 +39,16 @@
 }
 
 - (void)setUpViews {
+	self.backgroundColor = [UIColor whiteColor];
+	// 设置夜间模式背景色
+	self.nightBackgroundColor = NightBGViewColor;
 	// 初始化 ScrollView
 	self.scrollView = [UIScrollView new];
 	self.scrollView.showsVerticalScrollIndicator = YES;
 	self.scrollView.showsHorizontalScrollIndicator = NO;
 	self.scrollView.alwaysBounceVertical = YES;
 	self.scrollView.backgroundColor = [UIColor whiteColor];
+	self.scrollView.nightBackgroundColor = NightBGViewColor;
 	self.scrollView.scrollsToTop = YES;
 	[self addSubview:self.scrollView];
 	[self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,7 +57,8 @@
 	
 	// 初始化容器视图
 	self.containerView = [UIView new];
-	self.containerView.backgroundColor = self.scrollView.backgroundColor;
+	self.containerView.backgroundColor = [UIColor whiteColor];
+	self.containerView.nightBackgroundColor = NightBGViewColor;
 	[self.scrollView addSubview:self.containerView];
 	[self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.equalTo(self.scrollView);
@@ -64,6 +69,7 @@
 	self.dateLabel = [UILabel new];
 	self.dateLabel.font = systemFont(13);
 	self.dateLabel.textColor = DateTextColor;
+	self.dateLabel.nightTextColor = DateTextColor;
 	[self.containerView addSubview:self.dateLabel];
 	[self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.containerView.mas_top).with.offset(12);
@@ -88,6 +94,7 @@
 	self.thingNameLabel.numberOfLines = 0;
 	self.thingNameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:20];
 	self.thingNameLabel.textColor = ThingNameTextColor;
+	self.thingNameLabel.nightTextColor = NightTextColor;
 	[self.containerView addSubview:self.thingNameLabel];
 	[self.thingNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.thingImageView.mas_bottom).with.offset(32);
@@ -105,6 +112,7 @@
 	self.thingDescriptionTextView.directionalLockEnabled = NO;
 	self.thingDescriptionTextView.alwaysBounceVertical = NO;
 	self.thingDescriptionTextView.alwaysBounceHorizontal = NO;
+	self.thingDescriptionTextView.nightBackgroundColor = NightBGViewColor;
 	[self.containerView addSubview:self.thingDescriptionTextView];
 	[self.thingDescriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.thingNameLabel.mas_bottom).with.offset(25);
@@ -121,6 +129,11 @@
 
 - (void)startRefreshing {
 	self.indicatorView.center = self.center;
+	if (Is_Night_Mode) {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+	} else {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+	}
 	[self.indicatorView startAnimating];
 }
 
@@ -134,9 +147,16 @@
 
 	NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 	paragraphStyle.lineSpacing = 5;
-	NSDictionary *attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
-								NSForegroundColorAttributeName : ThingDescriptionColor,
-								NSFontAttributeName : [UIFont systemFontOfSize:15]};
+	NSDictionary *attribute;
+	if (Is_Night_Mode) {
+		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
+					  NSForegroundColorAttributeName : NightTextColor,
+					  NSFontAttributeName : [UIFont systemFontOfSize:15]};
+	} else {
+		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
+					  NSForegroundColorAttributeName : ThingDescriptionColor,
+					  NSFontAttributeName : [UIFont systemFontOfSize:15]};
+	}
 	self.thingDescriptionTextView.attributedText = [[NSAttributedString alloc] initWithString:thingEntity.strTc attributes:attribute];
 	[self.thingDescriptionTextView sizeToFit];
 	

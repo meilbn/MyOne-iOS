@@ -10,6 +10,7 @@
 #import <iCarousel/iCarousel.h>
 
 #define LabelOffsetX 20
+#define LeftRefreshLabelTextColor [UIColor colorWithRed:90 / 255.0 green:91 / 255.0 blue:92 / 255.0 alpha:1] // #5A5B5C
 
 @interface RightPullToRefreshView () <iCarouselDataSource, iCarouselDelegate>
 
@@ -60,6 +61,9 @@
 
 - (void)setUp {
 	self.backgroundColor = WebViewBGColor;
+	// 设置夜间模式背景色
+	self.nightBackgroundColor = NightBGViewColor;
+	
 	selfHeight = CGRectGetHeight(self.frame);
 	isNeedRefresh = NO;
 	canScrollBack = YES;
@@ -83,7 +87,8 @@
 	
 	self.leftRefreshLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	self.leftRefreshLabel.font = [UIFont systemFontOfSize:10.0f];
-	self.leftRefreshLabel.textColor = [UIColor darkGrayColor];
+	self.leftRefreshLabel.textColor = LeftRefreshLabelTextColor;
+	self.leftRefreshLabel.nightTextColor = LeftRefreshLabelTextColor;
 	self.leftRefreshLabel.textAlignment = NSTextAlignmentRight;
 	self.leftRefreshLabel.text = LeftDragToRightForRefreshHintText;
 	[self.leftRefreshLabel sizeToFit];
