@@ -21,6 +21,8 @@
 5. [MJExtension](https://github.com/CoderMJLee/MJExtension)
 6. [Masonry](https://github.com/SnapKit/Masonry)
 7. [DSTransparentNavigationBar](https://github.com/diegoserranoa/DSTransparentNavigationBar)
+8. [hpple](https://github.com/topfunky/hpple)
+9. [DKNightVersion](https://github.com/Draveness/DKNightVersion)
 
 项目中图片的展示方式，我是根据 [Ray Wenderlich](http://www.raywenderlich.com/) 上[这篇文章](http://www.raywenderlich.com/94302/implement-circular-image-loader-animation-cashapelayer)改写的，原文是用 Swift 写的，我是把这个项目拿来改成 Objective-C 而已，然后在运行的过程中发现最后图片显示出来之后会有闪烁，然后我就去看了文章的评论，发现有一个哥们儿也发现了这个问题，然后看到了评论里面作者的回复，最后解决了这个问题。感觉这个效果很不错，感谢！
 
