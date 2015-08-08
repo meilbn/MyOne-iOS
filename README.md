@@ -57,8 +57,8 @@
 
 #### 个人
 ![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Personal.png)
-![]()
 ##### 设置
 ![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Settings.png)
-
+##### 关于
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/About.png)
 
