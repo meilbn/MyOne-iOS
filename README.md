@@ -38,3 +38,22 @@
 
 ## 0x03 总结
 做这个项目，[Reveal](http://revealapp.com/) 真的是帮了我的大忙！要是光在手机上看官方的 App 的话，不可能在这么短的时间内完成的，多亏了 Reveal，我才能看到 App 内部的一些信息，能让我很快地完成这个项目，没白买！而且在日常的工作中，我也是经常使用 Reveal 的，真的是一个非常棒的软件！
+
+## 0x04 截图
+### 普通模式
+#### 首页
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Home.gif)
+
+#### 文章
+![]()
+
+#### 问题
+![]()
+
+#### 东西
+![]()
+
+#### 个人
+![]()
+
+
