@@ -61,9 +61,10 @@
 		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
 		
 		// 设置状态栏的字体颜色为黑色
-		[application setStatusBarStyle:UIStatusBarStyleLightContent];
+		[application setStatusBarStyle:UIStatusBarStyleDefault];
 		
 		[DKNightVersionManager nightFalling];
+		self.window.backgroundColor = NightBGViewColor;
 	} else {
 		// create a color and set it to the DSNavigationBar appereance
 		UIColor * color = [UIColor colorWithRed:236 / 255.0 green:236 / 255.0 blue:236 / 255.0 alpha:1];
@@ -71,8 +72,9 @@
 		
 		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
 		
-		// 设置状态栏的字体颜色为白色
+		// 设置状态栏的字体颜色为黑色
 		[application setStatusBarStyle:UIStatusBarStyleDefault];
+		self.window.backgroundColor = [UIColor whiteColor];
 	}
 	
 	self.window.rootViewController = rootTabBarController;
@@ -84,6 +86,7 @@
 - (UINavigationController *)dsNavigationController {
 	UINavigationController *navigationController = [[UINavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
 	[navigationController.navigationBar setOpaque:YES];
+	navigationController.navigationBar.tintColor = [UIColor colorWithRed:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:229 / 255.0];
 	
 	return navigationController;
 }

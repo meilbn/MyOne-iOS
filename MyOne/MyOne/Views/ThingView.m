@@ -112,6 +112,7 @@
 	self.thingDescriptionTextView.directionalLockEnabled = NO;
 	self.thingDescriptionTextView.alwaysBounceVertical = NO;
 	self.thingDescriptionTextView.alwaysBounceHorizontal = NO;
+	self.thingDescriptionTextView.backgroundColor = [UIColor whiteColor];
 	self.thingDescriptionTextView.nightBackgroundColor = NightBGViewColor;
 	[self.containerView addSubview:self.thingDescriptionTextView];
 	[self.thingDescriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {

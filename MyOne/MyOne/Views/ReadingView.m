@@ -10,11 +10,12 @@
 #import "ReadingEntity.h"
 #import "ReadingAuthorView.h"
 
-@interface ReadingView () <UIWebViewDelegate>
+@interface ReadingView () <UIWebViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) ReadingAuthorView *readingAuthorView;
+@property (strong, nonatomic) UIActivityIndicatorView *indicatorView;// item 加载中转转的菊花
 
 @end
 
@@ -33,7 +34,7 @@
 }
 
 - (void)setUpViews {
-	self.backgroundColor = Is_Night_Mode ? NightBGViewColor : [UIColor whiteColor];
+	self.backgroundColor = [UIColor whiteColor];// Is_Night_Mode ? NightBGViewColor : [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
 	
@@ -53,7 +54,7 @@
 	// webView 顶部添加一个 UIView，高度为34，UIView 里面再添加一个 UILabel，x 为15，y 为12，高度为16，左右距离为15，水平垂直居中，系统默认字体，颜色#555555，大小为13。
 	UIView *webViewTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 34)];
 	webViewTopView.tag = TopViewTag;
-	webViewTopView.backgroundColor = DawnDateViewBGColor;
+	webViewTopView.backgroundColor = [UIColor whiteColor];
 	webViewTopView.nightBackgroundColor = NightBGViewColor;
 	self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, CGRectGetWidth(webViewTopView.frame) - 30, 16)];
 	self.dateLabel.tag = TopViewTimeLabelTag;
@@ -65,6 +66,21 @@
 	[self.webView.scrollView addSubview:webViewTopView];
 	
 	[self addSubview:self.webView];
+	
+	// 初始化加载中的菊花控件
+	self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	self.indicatorView.hidesWhenStopped = YES;
+	[self addSubview:self.indicatorView];
+}
+
+- (void)startRefreshing {
+	self.indicatorView.center = self.center;
+	if (Is_Night_Mode) {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+	} else {
+		self.indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+	}
+	[self.indicatorView startAnimating];
 }
 
 - (void)configureReadingViewWithReadingEntity:(ReadingEntity *)readingEntity {
@@ -72,7 +88,7 @@
 	
 	self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:readingEntity.strContMarketTime];
 	
-	NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : DawnWebViewBGColorName;
+	NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : @"#ffffff";
 	NSString *webViewContentTextColor = Is_Night_Mode ? NightWebViewTextColorName : DawnWebViewTextColorName;
 	NSString *webViewTitleTextColor = Is_Night_Mode ? NightWebViewTextColorName : @"#5A5A5A";
 	NSString *webViewAuthorTitleTextColor = Is_Night_Mode ? @"#575757" : @"#888888";
@@ -86,12 +102,24 @@
 	
 	[self.webView loadHTMLString:HTMLContent baseURL:nil];
 	self.webView.delegate = self;
+	self.webView.scrollView.delegate = self;
 	[self.webView.scrollView scrollsToTop];
+}
+
+- (void)refreshSubviewsForNewItem {
+	self.dateLabel.text = @"";
+	
+	self.webView.hidden = YES;
+	
+	[self startRefreshing];
 }
 
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+	[self.indicatorView stopAnimating];
+	self.webView.hidden = NO;
+	
 	ReadingAuthorView *readingAuthorView = nil;
 	
 	if (webView.scrollView.subviews.count < 4) {// 小于4说明还没有添加文章底部的作者详情 view
@@ -104,8 +132,18 @@
 	
 	[readingAuthorView configureAuthorViewWithReadingEntity:currentContent];
 	
+	// 获取网页内容的真实高度
+	CGFloat webBrowserViewHeight = 0;
+	for (id view in webView.scrollView.subviews) {
+		if ([view isKindOfClass:NSClassFromString(@"UIWebBrowserView")]) {
+			webBrowserViewHeight = ((UIView *)view).frame.size.height;
+//			NSLog(@"webBrowserViewHeight = %lf", webBrowserViewHeight);
+			break;
+		}
+	}
+	
 	CGSize readingContentSize = webView.scrollView.contentSize;
-	readingContentSize.height += CGRectGetHeight(readingAuthorView.frame);
+	readingContentSize.height = webBrowserViewHeight + CGRectGetHeight(readingAuthorView.frame);
 	webView.scrollView.contentSize = readingContentSize;
 	
 	CGFloat bottomViewHeight = CGRectGetHeight(readingAuthorView.frame);

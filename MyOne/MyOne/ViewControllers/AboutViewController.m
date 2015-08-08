@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	self.view.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.view.nightBackgroundColor = NightBGViewColor;
 	

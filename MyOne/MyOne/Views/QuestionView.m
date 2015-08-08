@@ -54,7 +54,7 @@
 	// webView 顶部添加一个 UIView，高度为34，UIView 里面再添加一个 UILabel，x 为15，y 为12，高度为16，左右距离为15，水平垂直居中，系统默认字体，颜色#555555，大小为13。
 	UIView *webViewTopView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 34)];
 	webViewTopView.tag = TopViewTag;
-	webViewTopView.backgroundColor = DawnDateViewBGColor;
+	webViewTopView.backgroundColor = [UIColor whiteColor];
 	webViewTopView.nightBackgroundColor = NightBGViewColor;
 	self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, CGRectGetWidth(webViewTopView.frame) - 30, 16)];
 	self.dateLabel.tag = TopViewTimeLabelTag;
@@ -94,7 +94,7 @@
 	} else {
 		self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
 		
-		NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : DawnWebViewBGColorName;
+		NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : @"#ffffff";
 		NSString *webViewContentTextColor = Is_Night_Mode ? NightWebViewTextColorName : DawnWebViewTextColorName;
 		NSString *separateLineColor = Is_Night_Mode ? @"#333333" : @"#d4d4d4";
 		

@@ -39,7 +39,7 @@
 }
 
 - (void)setUpViews {
-	self.backgroundColor = DawnDateViewBGColor;
+	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
 	// 初始化点赞 Button

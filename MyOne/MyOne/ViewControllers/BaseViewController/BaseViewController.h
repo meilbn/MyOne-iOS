@@ -12,6 +12,8 @@
 
 - (void)nightModeSwitch:(NSNotification *)notification;
 
+- (UIImage *)imageWithColor:(UIColor *)color;
+
 /**
  *  设置导航栏
  *

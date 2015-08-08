@@ -43,12 +43,19 @@
 /**
  *  获取文章
  *
- *  @param date    日期，"yyyy-MM-dd"格式
- *  @param success 请求成功 Block
- *  @param fail     请求失败 Block
+ *  @param date           日期，"yyyy-MM-dd"格式
+ *  @param lastUpdateDate 最后更新日期，"yyyy-MM-dd"格式或者也可以是"yyyy-MM-dd HH:mm:ss"格式
+ *  @param success        请求成功 Block
+ *  @param fail           请求失败 Block
  */
-+ (void)requestReadingContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail {
-	
++ (void)requestReadingContentByDate:(NSString *)date lastUpdateDate:(NSString *)lastUpdateDate success:(SuccessBlock)success failBlock:(FailBlock)fail {
+	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+	NSDictionary *parameters = @{@"strDate" : date, @"strLastUpdateDate" : lastUpdateDate};
+	[manager GET:URL_GET_READING_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		success(operation,responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		fail(operation,error);
+	}];
 }
 
 /**

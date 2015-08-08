@@ -83,8 +83,6 @@ static NSString *CellLogOutID = @"LogOutCell";
 	self.tableView.tableFooterView = [[UIView alloc] init];
 	// 设置 cell 的行高，固定为 44
 	self.tableView.rowHeight = 44;
-	// 设置 Section Header 的高度固定为 35
-//	self.tableView.sectionHeaderHeight = 35;
 	self.tableView.sectionFooterHeight = 0;
 	self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0);
 	self.tableView.delegate = self;
@@ -93,11 +91,12 @@ static NSString *CellLogOutID = @"LogOutCell";
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasDIID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasSecondLabelID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellLogOutID];
+	self.tableView.backgroundColor = [UIColor clearColor];
 	self.tableView.backgroundColor = DawnViewBGColor;
 	self.tableView.nightBackgroundColor = NightBGViewColor;
+	self.tableView.separatorColor = TableViewCellSeparatorDawnColor;
 	self.tableView.nightSeparatorColor = [UIColor blackColor];
 	[self.view addSubview:self.tableView];
-	self.view.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
 }
 
 #pragma mark - UITableViewDataSource
@@ -151,6 +150,7 @@ static NSString *CellLogOutID = @"LogOutCell";
 		NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 		versionLabel.text = version;
 		versionLabel.textColor = [UIColor colorWithRed:135 / 255.0 green:135 / 255.0 blue:135 / 255.0 alpha:1];
+		versionLabel.nightTextColor = NightTextColor;
 		versionLabel.font = systemFont(17);
 		[versionLabel sizeToFit];
 		cell.accessoryView = versionLabel;
@@ -170,7 +170,6 @@ static NSString *CellLogOutID = @"LogOutCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//	NSLog(@"section = %ld", section);
 	UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
 	headerView.backgroundColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
 	UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, CGRectGetWidth(headerView.frame) - 40, CGRectGetHeight(headerView.frame))];
@@ -183,14 +182,6 @@ static NSString *CellLogOutID = @"LogOutCell";
 	
 	return headerView;
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//	return sectionHeaderTexts[section];
-//}
-//
-//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-//	return @"";
-//}
 
 #pragma mark - UITableViewDelegate
 

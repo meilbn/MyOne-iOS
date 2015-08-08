@@ -35,16 +35,17 @@ typedef void(^FailBlock) (AFHTTPRequestOperation *operation, NSError *error);
  *  @param success 请求成功 Block
  *  @param fail     请求失败 Block
  */
-+ (void)requestHomeContentByDate:(NSString *)date  success:(SuccessBlock)success failBlock:(FailBlock)fail;
++ (void)requestHomeContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail;
 
 /**
  *  获取文章
  *
- *  @param date    日期，"yyyy-MM-dd"格式
- *  @param success 请求成功 Block
- *  @param fail     请求失败 Block
+ *  @param date           日期，"yyyy-MM-dd"格式
+ *  @param lastUpdateDate 最后更新日期，"yyyy-MM-dd"格式或者也可以是"yyyy-MM-dd HH:mm:ss"格式
+ *  @param success        请求成功 Block
+ *  @param fail           请求失败 Block
  */
-+ (void)requestReadingContentByDate:(NSString *)date  success:(SuccessBlock)success failBlock:(FailBlock)fail;
++ (void)requestReadingContentByDate:(NSString *)date lastUpdateDate:(NSString *)lastUpdateDate success:(SuccessBlock)success failBlock:(FailBlock)fail;
 
 /**
  *   获取问题
@@ -73,6 +74,6 @@ typedef void(^FailBlock) (AFHTTPRequestOperation *operation, NSError *error);
  *  @param success 请求成功 Block
  *  @param fail     请求失败 Block
  */
-+ (void)requestThingContentByDate:(NSString *)date  success:(SuccessBlock)success failBlock:(FailBlock)fail;
++ (void)requestThingContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail;
 
 @end

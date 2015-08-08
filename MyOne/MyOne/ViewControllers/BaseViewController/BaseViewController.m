@@ -25,17 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	//设置标题栏不能覆盖下面viewcontroller的内容
-	self.edgesForExtendedLayout = UIRectEdgeNone;
+	self.view.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.view.nightBackgroundColor = NightBGViewColor;
+	//设置标题栏不能覆盖下面viewcontroller的内容
+	self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 #pragma mark - Lifecycle
 
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)dealloc {
+//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -106,7 +106,11 @@
 #pragma mark - NSNotification
 
 - (void)nightModeSwitch:(NSNotification *)notification {
-	[super nightModeSwitch:notification];
+	if (Is_Night_Mode) {
+		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
+	} else {
+		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
+	}
 	[self.rightPullToRefreshView reloadItemAtIndex:currentItemIndex animated:NO];
 }
 

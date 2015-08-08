@@ -13,4 +13,6 @@
 
 - (void)configureReadingViewWithReadingEntity:(ReadingEntity *)readingEntity;
 
+- (void)refreshSubviewsForNewItem;
+
 @end

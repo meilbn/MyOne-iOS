@@ -32,6 +32,8 @@
 	NSString *lastUpdateDate;
 	// 最后展示的 item 的下标
 //	NSInteger lastConfigureViewForItemIndex;
+	// 当前展示的 item 的下标
+	NSInteger currentItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -61,6 +63,7 @@
 	readItems = [[NSMutableDictionary alloc] init];
 	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
 //	lastConfigureViewForItemIndex = -1;
+	currentItemIndex = 0;
 	
 //	[self loadTestData];
 	
@@ -74,6 +77,9 @@
 		[weakSelf whenHUDWasHidden];
 	};
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
+	
 	[self requestQuestionContentAtIndex:0];
 }
 
@@ -83,11 +89,18 @@
 	self.rightPullToRefreshView.delegate = nil;
 	self.rightPullToRefreshView.dataSource = nil;
 	self.rightPullToRefreshView = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+//	[self.rightPullToRefreshView reloadItemAtIndex:currentItemIndex animated:NO];
 }
 
 #pragma mark - RightPullToRefreshViewDataSource
@@ -132,6 +145,7 @@
 }
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
+	currentItemIndex = index;
 	NSLog(@"question didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
 		NSLog(@"question add new item ----");

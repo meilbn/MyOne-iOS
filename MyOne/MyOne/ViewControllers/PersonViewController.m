@@ -46,7 +46,6 @@ static NSString *OtherCellID = @"OtherCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	[self setUpNavigationBarShowRightBarButtonItem:NO];
-	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:0.9];
 	[self dontShowBackButtonTitle];
 	
 	[self setUpViews];
@@ -58,6 +57,8 @@ static NSString *OtherCellID = @"OtherCell";
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     self.hidesBottomBarWhenPushed = YES;
+	// 真蛋疼，这行代码在这个方法的原因是为了解决点击了其他模块之后返回个人界面点击列表项进入下一个界面导航栏的 tintColor 变成白色
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:229 / 255.0];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -72,6 +73,7 @@ static NSString *OtherCellID = @"OtherCell";
 	self.tableView.dataSource = nil;
 	[self.tableView removeFromSuperview];
 	self.tableView = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +95,9 @@ static NSString *OtherCellID = @"OtherCell";
 	self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:AccountCellID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:OtherCellID];
+	self.tableView.backgroundColor = [UIColor whiteColor];
 	self.tableView.nightBackgroundColor = NightBGViewColor;
+	self.tableView.separatorColor = TableViewCellSeparatorDawnColor;
 	self.tableView.nightSeparatorColor = [UIColor blackColor];
 	[self.view addSubview:self.tableView];
 }
@@ -130,6 +134,7 @@ static NSString *OtherCellID = @"OtherCell";
 	cell.textLabel.textColor = DawnTextColor;
 	cell.textLabel.nightTextColor = NightTextColor;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.backgroundColor = [UIColor whiteColor];
 	cell.nightBackgroundColor = NightBGViewColor;
 	
 	return cell;
