@@ -45,15 +45,20 @@
 ![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Home.gif)
 
 #### 文章
-![]()
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Reading_0.png)
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Reading_1.png)
 
 #### 问题
-![]()
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Question_0.png)
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Question_1.png)
 
 #### 东西
-![]()
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Thing.png)
 
 #### 个人
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Personal.png)
 ![]()
+##### 设置
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Settings.png)
 
 
