@@ -89,6 +89,8 @@
 	
 	// 初始化显示画控件
 	self.paintImageView = [[CustomImageView alloc] init];
+	self.paintImageView.backgroundColor = [UIColor whiteColor];
+	self.paintImageView.nightBackgroundColor = NightBGViewColor;
 	[self.containerView addSubview:self.paintImageView];
 	CGFloat paintWidth = SCREEN_WIDTH - 20;
 	CGFloat paintHeight = paintWidth * 0.75;

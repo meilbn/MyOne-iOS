@@ -91,7 +91,6 @@ static NSString *CellLogOutID = @"LogOutCell";
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasDIID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellHasSecondLabelID];
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellLogOutID];
-	self.tableView.backgroundColor = [UIColor clearColor];
 	self.tableView.backgroundColor = DawnViewBGColor;
 	self.tableView.nightBackgroundColor = NightBGViewColor;
 	self.tableView.separatorColor = TableViewCellSeparatorDawnColor;
@@ -194,13 +193,16 @@ static NSString *CellLogOutID = @"LogOutCell";
 - (void)nightModeSwitch:(UISwitch *)modeSwitch {
 	if (modeSwitch.isOn) {
 		[self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:NightNavigationBarColor] forBarMetrics:UIBarMetricsDefault];
+		self.tableView.backgroundColor = NightBGViewColor;
 		[DKNightVersionManager nightFalling];
 		[AppConfigure setBool:YES forKey:APP_THEME_NIGHT_MODE];
-		self.tableView.backgroundColor = NightBGViewColor;
 	} else {
 		[self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:DawnNavigationBarColor] forBarMetrics:UIBarMetricsDefault];
 		self.tableView.backgroundColor = DawnViewBGColor;
 		[DKNightVersionManager dawnComing];
+		// why 要设置两次 TableView 的背景色？因为我发现，在设置界面切换夜间模式到普通模式之后，TableView 的背景色会变黑掉
+		// 很奇怪的问题，然后我在调用 dawnComing 方法之后再设置一遍 Tableview 的背景色就可以解决这个问题。。。
+		self.tableView.backgroundColor = DawnViewBGColor;
 		[AppConfigure setBool:NO forKey:APP_THEME_NIGHT_MODE];
 	}
 	

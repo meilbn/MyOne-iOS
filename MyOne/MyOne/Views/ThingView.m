@@ -82,6 +82,8 @@
 	
 	// 初始化东西图片控件
 	self.thingImageView = [[CustomImageView alloc] init];
+	self.thingImageView.backgroundColor = [UIColor whiteColor];
+	self.thingImageView.nightBackgroundColor = NightBGViewColor;
 	CGFloat imgWidth = SCREEN_WIDTH - 20;
 	CGFloat imgHeight = imgWidth;
 	[self.containerView addSubview:self.thingImageView];

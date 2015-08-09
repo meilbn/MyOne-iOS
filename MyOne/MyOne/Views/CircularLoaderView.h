@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) CGFloat progress;
 //@property (nonatomic, assign) CAShapeLayer *circlePathLayer;
+//@property (nonatomic, assign, getter=isRevealed) BOOL revealed;
 
 - (void)reveal;
 
