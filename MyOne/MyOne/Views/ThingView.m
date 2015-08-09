@@ -39,6 +39,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
@@ -70,6 +71,8 @@
 	self.dateLabel.font = systemFont(13);
 	self.dateLabel.textColor = DateTextColor;
 	self.dateLabel.nightTextColor = DateTextColor;
+	self.dateLabel.backgroundColor = [UIColor whiteColor];
+	self.dateLabel.nightBackgroundColor = NightBGViewColor;
 	[self.containerView addSubview:self.dateLabel];
 	[self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.containerView.mas_top).with.offset(12);
@@ -150,10 +153,14 @@
 	paragraphStyle.lineSpacing = 5;
 	NSDictionary *attribute;
 	if (Is_Night_Mode) {
+		self.thingDescriptionTextView.backgroundColor = NightBGViewColor;
+		
 		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
 					  NSForegroundColorAttributeName : NightTextColor,
 					  NSFontAttributeName : [UIFont systemFontOfSize:15]};
 	} else {
+		self.thingDescriptionTextView.backgroundColor = [UIColor whiteColor];
+		
 		attribute = @{NSParagraphStyleAttributeName : paragraphStyle,
 					  NSForegroundColorAttributeName : ThingDescriptionColor,
 					  NSFontAttributeName : [UIFont systemFontOfSize:15]};

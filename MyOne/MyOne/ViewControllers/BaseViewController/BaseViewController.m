@@ -34,23 +34,9 @@
 
 #pragma mark - Lifecycle
 
-//- (void)dealloc {
-//	[[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - NSNotification
-
-- (void)nightModeSwitch:(NSNotification *)notification {
-//	if (Is_Night_Mode) {
-//		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
-//	} else {
-//		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
-//	}
 }
 
 #pragma mark - Public

@@ -39,6 +39,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
@@ -118,8 +119,10 @@
 	self.authorDescriptionTextView.text = readingEntity.sAuth;
 	if (Is_Night_Mode) {
 		self.authorDescriptionTextView.textColor = NightTextColor;
+		self.authorDescriptionTextView.backgroundColor = NightBGViewColor;
 	} else {
 		self.authorDescriptionTextView.textColor = AuthorTextViewColor;
+		self.authorDescriptionTextView.backgroundColor = [UIColor whiteColor];
 	}
 	[self.authorDescriptionTextView sizeToFit];
 //	NSLog(@"self.authorDescriptionTextView.frame = %@", NSStringFromCGRect(self.authorDescriptionTextView.frame));

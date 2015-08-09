@@ -9,7 +9,6 @@
 #import "PersonViewController.h"
 #import "AboutViewController.h"
 #import "SettingsViewController.h"
-#import "TestViewController.h"
 
 #define rad(degrees) ((degrees) / (180.0 / M_PI))
 
@@ -81,6 +80,12 @@ static NSString *OtherCellID = @"OtherCell";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+	[self.tableView reloadData];
+}
+
 #pragma mark - Pirvate
 
 - (void)setUpViews {
@@ -100,12 +105,6 @@ static NSString *OtherCellID = @"OtherCell";
 	self.tableView.separatorColor = TableViewCellSeparatorDawnColor;
 	self.tableView.nightSeparatorColor = [UIColor blackColor];
 	[self.view addSubview:self.tableView];
-}
-
-#pragma mark - NSNotification
-
-- (void)nightModeSwitch:(NSNotification *)notification {
-	[self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,8 +144,7 @@ static NSString *OtherCellID = @"OtherCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.row == 0) {// 点击进入个人中心
-		TestViewController *testViewController = [[TestViewController alloc] init];
-		[self.navigationController pushViewController:testViewController animated:YES];
+		
 	} else if (indexPath.row == 1) {// 点击进入设置
 		SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
 		[self.navigationController pushViewController:settingsViewController animated:YES];

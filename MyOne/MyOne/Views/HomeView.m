@@ -45,6 +45,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
@@ -76,6 +77,8 @@
 	self.volLabel.font = systemFont(13);
 	self.volLabel.textColor = VOLTextColor;
 	self.volLabel.nightTextColor = VOLTextColor;
+	self.volLabel.backgroundColor = [UIColor whiteColor];
+	self.volLabel.nightBackgroundColor = NightBGViewColor;
 	[self.containerView addSubview:self.volLabel];
 	[self.volLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.equalTo(self.containerView.mas_left).with.offset(10);
@@ -126,6 +129,8 @@
 	self.dayLabel = [UILabel new];
 	self.dayLabel.textColor = DayTextColor;
 	self.dayLabel.nightTextColor = DayTextColor;
+	self.dayLabel.backgroundColor = [UIColor whiteColor];
+	self.dayLabel.nightBackgroundColor = NightBGViewColor;
 	self.dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:43];
 	self.dayLabel.textAlignment = NSTextAlignmentCenter;
 	self.dayLabel.shadowOffset = CGSizeMake(1, 1);
@@ -142,6 +147,8 @@
 	self.monthAndYearLabel = [UILabel new];
 	self.monthAndYearLabel.textColor = MonthAndYearTextColor;
 	self.monthAndYearLabel.nightTextColor = MonthAndYearTextColor;
+	self.monthAndYearLabel.backgroundColor = [UIColor whiteColor];
+	self.monthAndYearLabel.nightBackgroundColor = NightBGViewColor;
 	self.monthAndYearLabel.font = [UIFont fontWithName:@"CenturyGothic-Bold" size:10];
 	self.monthAndYearLabel.textAlignment = NSTextAlignmentCenter;
 	self.monthAndYearLabel.shadowOffset = CGSizeMake(1, 1);
@@ -214,6 +221,8 @@
 }
 
 - (void)configureViewWithHomeEntity:(HomeEntity *)homeEntity animated:(BOOL)animated {
+	self.scrollView.backgroundColor =  Is_Night_Mode ? NightBGViewColor : [UIColor whiteColor];
+	
 	[self.indicatorView stopAnimating];
 	self.containerView.hidden = NO;
 	

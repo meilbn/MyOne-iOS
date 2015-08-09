@@ -55,8 +55,7 @@
 	rootTabBarController.tabBar.backgroundColor = [UIColor clearColor];
 	
 	if ([AppConfigure boolForKey:APP_THEME_NIGHT_MODE]) {
-		UIColor * color = [UIColor colorWithRed:32 / 255.0 green:32 / 255.0 blue:32 / 255.0 alpha:1];
-		[[DSNavigationBar appearance] setNavigationBarWithColor:color];
+		[[DSNavigationBar appearance] setNavigationBarWithColor:NightNavigationBarColor];
 		
 		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
 		
@@ -67,8 +66,7 @@
 		self.window.backgroundColor = NightBGViewColor;
 	} else {
 		// create a color and set it to the DSNavigationBar appereance
-		UIColor * color = [UIColor colorWithRed:236 / 255.0 green:236 / 255.0 blue:236 / 255.0 alpha:1];
-		[[DSNavigationBar appearance] setNavigationBarWithColor:color];
+		[[DSNavigationBar appearance] setNavigationBarWithColor:DawnNavigationBarColor];
 		
 		rootTabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
 		
@@ -76,6 +74,9 @@
 		[application setStatusBarStyle:UIStatusBarStyleDefault];
 		self.window.backgroundColor = [UIColor whiteColor];
 	}
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
 	
 	self.window.rootViewController = rootTabBarController;
 	[self.window makeKeyAndVisible];
@@ -103,6 +104,20 @@
 	return image;
 }
 
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+	if (Is_Night_Mode) {
+		NSLog(@"AppDelegate ---- Night Mode");
+		[[DSNavigationBar appearance] setNavigationBarWithColor:NightNavigationBarColor];
+		self.window.backgroundColor = NightBGViewColor;
+	} else {
+		NSLog(@"AppDelegate ---- Dawn Mode");
+		[[DSNavigationBar appearance] setNavigationBarWithColor:DawnNavigationBarColor];
+		self.window.backgroundColor = [UIColor whiteColor];
+	}
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 	// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -123,6 +138,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

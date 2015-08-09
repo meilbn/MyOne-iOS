@@ -34,6 +34,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor whiteColor];// Is_Night_Mode ? NightBGViewColor : [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;

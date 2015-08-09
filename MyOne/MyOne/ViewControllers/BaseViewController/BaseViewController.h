@@ -10,8 +10,6 @@
 
 @interface BaseViewController : UIViewController
 
-- (void)nightModeSwitch:(NSNotification *)notification;
-
 - (UIImage *)imageWithColor:(UIColor *)color;
 
 /**

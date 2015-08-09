@@ -46,7 +46,6 @@
 		82EE5A2E1B6F51240012DAFD /* HTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A2D1B6F51240012DAFD /* HTTPTool.m */; };
 		82EE5A311B6F611B0012DAFD /* CustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A301B6F611B0012DAFD /* CustomImageView.m */; };
 		82EE5A341B6F624A0012DAFD /* CircularLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A331B6F624A0012DAFD /* CircularLoaderView.m */; };
-		82EE5A3E1B724B530012DAFD /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EE5A3D1B724B530012DAFD /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,8 +132,6 @@
 		82EE5A301B6F611B0012DAFD /* CustomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageView.m; sourceTree = "<group>"; };
 		82EE5A321B6F624A0012DAFD /* CircularLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularLoaderView.h; sourceTree = "<group>"; };
 		82EE5A331B6F624A0012DAFD /* CircularLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLoaderView.m; sourceTree = "<group>"; };
-		82EE5A3C1B724B530012DAFD /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		82EE5A3D1B724B530012DAFD /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		BFAA7262EA632554AE692584 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,8 +307,6 @@
 				82E75E7F1B65F636000C8106 /* AboutViewController.m */,
 				82A7269F1B6E0B2600348EAC /* SettingsViewController.h */,
 				82A726A01B6E0B2600348EAC /* SettingsViewController.m */,
-				82EE5A3C1B724B530012DAFD /* TestViewController.h */,
-				82EE5A3D1B724B530012DAFD /* TestViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -519,7 +514,6 @@
 			files = (
 				82A726A61B6E264200348EAC /* DSNavigationBar.m in Sources */,
 				82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */,
-				82EE5A3E1B724B530012DAFD /* TestViewController.m in Sources */,
 				8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */,
 				82E75E981B6753C9000C8106 /* BaseViewController.m in Sources */,
 				82A7269E1B6DFD3300348EAC /* ReadingView.m in Sources */,

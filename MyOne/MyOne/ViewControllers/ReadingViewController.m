@@ -99,7 +99,7 @@
 #pragma mark - NSNotification
 
 - (void)nightModeSwitch:(NSNotification *)notification {
-//	[self.rightPullToRefreshView reloadItemAtIndex:currentItemIndex animated:NO];
+	[self.rightPullToRefreshView reloadData];
 }
 
 #pragma mark - RightPullToRefreshViewDataSource

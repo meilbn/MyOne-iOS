@@ -27,6 +27,11 @@
 - (void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 /**
+ *  重新加载数据
+ */
+- (void)reloadData;
+
+/**
  *  重新加载指定下标的 item
  *
  *  @param index  要重新加载的 item 的下标

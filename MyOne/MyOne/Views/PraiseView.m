@@ -27,6 +27,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor clearColor];
 	self.nightBackgroundColor = [UIColor clearColor];
 	// 初始化点赞 Button

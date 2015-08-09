@@ -34,6 +34,7 @@
 }
 
 - (void)setUpViews {
+	[DKNightVersionManager addClassToSet:self.class];
 	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
@@ -88,10 +89,12 @@
 	
 	// 如果当前的问题内容没有获取过来，就暂时直接加载该问题对应的官方手机版网页
 	if (IsStringEmpty(questionEntity.strQuestionId)) {
-		self.dateLabel.text = @"What the fuck！日了狗了，获取不到数据了。";
+//		self.dateLabel.text = @"What the fuck！日了狗了，获取不到数据了。";
+		self.dateLabel.superview.hidden = YES;
 		
 		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://m.wufazhuce.com/question/%@", questionEntity.strQuestionMarketTime]]]];
 	} else {
+		self.dateLabel.superview.hidden = NO;
 		self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
 		
 		NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : @"#ffffff";

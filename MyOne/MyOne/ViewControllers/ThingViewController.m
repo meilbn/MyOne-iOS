@@ -72,6 +72,9 @@
 		[weakSelf whenHUDWasHidden];
 	};
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
+	
 	[self requestThingContentAtIndex:0];
 }
 
@@ -81,11 +84,18 @@
 	self.rightPullToRefreshView.delegate = nil;
 	self.rightPullToRefreshView.dataSource = nil;
 	self.rightPullToRefreshView = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
+}
+
+#pragma mark - NSNotification
+
+- (void)nightModeSwitch:(NSNotification *)notification {
+	[self.rightPullToRefreshView reloadData];
 }
 
 #pragma mark - RightPullToRefreshViewDataSource

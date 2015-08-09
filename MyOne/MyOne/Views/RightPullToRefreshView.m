@@ -60,7 +60,8 @@
 #pragma mark - Private
 
 - (void)setUp {
-	self.backgroundColor = WebViewBGColor;
+	[DKNightVersionManager addClassToSet:self.class];
+	self.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
 	self.nightBackgroundColor = NightBGViewColor;
 	
@@ -105,6 +106,10 @@
 	numberOfItems++;
 	// 在 iCarousel 的最后插入一个新的 item
 	[self.carousel insertItemAtIndex:(numberOfItems - 1) animated:YES];
+}
+
+- (void)reloadData {
+	[self.carousel reloadData];
 }
 
 - (void)reloadItemAtIndex:(NSInteger)index animated:(BOOL)animated {

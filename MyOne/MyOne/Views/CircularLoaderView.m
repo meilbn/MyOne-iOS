@@ -54,6 +54,7 @@ static const CGFloat circleRadius = 20.0;
 #pragma mark - Public
 
 - (void)reveal {
+	NSLog(@"circleloaderview.frame = %@", NSStringFromCGRect(self.frame));
 	self.backgroundColor = [UIColor clearColor];
 	self.progress = 1;
 	[circlePathLayer removeAnimationForKey:@"strokeEnd"];

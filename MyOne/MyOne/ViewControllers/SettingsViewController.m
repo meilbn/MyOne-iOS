@@ -36,9 +36,9 @@ static NSString *CellLogOutID = @"LogOutCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	self.view.backgroundColor = DawnViewBGColor;
+//	self.view.backgroundColor = [UIColor whiteColor];
 	// 设置夜间模式背景色
-	self.view.nightBackgroundColor = NightBGViewColor;
+//	self.view.nightBackgroundColor = NightBGViewColor;
 	
 	[self setTitleView];
 	[self setUpViews];
@@ -193,14 +193,32 @@ static NSString *CellLogOutID = @"LogOutCell";
 
 - (void)nightModeSwitch:(UISwitch *)modeSwitch {
 	if (modeSwitch.isOn) {
+		[self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:NightNavigationBarColor] forBarMetrics:UIBarMetricsDefault];
 		[DKNightVersionManager nightFalling];
 		[AppConfigure setBool:YES forKey:APP_THEME_NIGHT_MODE];
+		self.tableView.backgroundColor = NightBGViewColor;
 	} else {
+		[self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:DawnNavigationBarColor] forBarMetrics:UIBarMetricsDefault];
+		self.tableView.backgroundColor = DawnViewBGColor;
 		[DKNightVersionManager dawnComing];
 		[AppConfigure setBool:NO forKey:APP_THEME_NIGHT_MODE];
 	}
 	
 	[self.tableView reloadData];
+}
+
+#pragma mark - Private
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+	CGRect rect = CGRectMake(0, 0, 1, 1);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+	[color setFill];
+	UIRectFill(rect);
+	
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return image;
 }
 
 /*

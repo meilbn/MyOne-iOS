@@ -31,7 +31,7 @@
 	// 最后展示的 item 的下标
 	NSInteger lastConfigureViewForItemIndex;
 	// 当前展示的 item 的下标
-	NSInteger currentItemIndex;
+//	NSInteger currentItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -60,7 +60,7 @@
 	numberOfItems = 2;
 	readItems = [[NSMutableDictionary alloc] init];
 	lastConfigureViewForItemIndex = 0;
-	currentItemIndex = 0;
+//	currentItemIndex = 0;
 	
 //	[self loadTestData];
 	
@@ -107,11 +107,14 @@
 
 - (void)nightModeSwitch:(NSNotification *)notification {
 	if (Is_Night_Mode) {
+		NSLog(@"Home ---- Night Mode");
 		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
 	} else {
+		NSLog(@"Home ---- Dawn Mode");
 		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
 	}
-	[self.rightPullToRefreshView reloadItemAtIndex:currentItemIndex animated:NO];
+//	[self.rightPullToRefreshView reloadItemAtIndex:self.rightPullToRefreshView.currentItemIndex animated:NO];
+	[self.rightPullToRefreshView reloadData];
 }
 
 #pragma mark - RightPullToRefreshViewDataSource
@@ -162,7 +165,7 @@
 //}
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
-	currentItemIndex = index;
+//	currentItemIndex = index;
 	NSLog(@"home didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
 		NSLog(@"home add new item ----");
