@@ -35,12 +35,11 @@ iOS 7.0+
 ## 0x02 遗留问题
 
 1. 在开启夜间模式之后，第一次打开“文章”和“问题”模块的时候，会有白色的闪屏，估计原因在于这两个界面是用 UIWebView 的形式展示数据的 (首页、东西模块是没有这个问题的)，但是尝试过设置 UIWebView 和 UIWebView 的 UIScrollView 子视图的背景色都没有用。
-2. 在设置中切换夜间模式之后，部分控件没有更新颜色，这个还没做好。
-3. “问题”模块，在夜间模式的时候，显示的两个图片样式不是夜间模式的样式，在 HTML 代码里面引用的是官方手机版网页上的图片。
-4. “问题”模块，用官方接口只能获取到最近10天的数据，之后获取过来的数据就是空的了，现在的解决办法暂时是直接显示官方“问题”模块对应的当天的手机版网页。
-5. 还不能点赞，因为官方点赞接口里面有一个参数： ``strDeviceId``，看名字应该是设备的唯一标识，64位长度，我尝试过获取设备的唯一标识然后加密，没有成功获取到和官方的请求接口中相同的值，都是在我自己的 iPhone 5S 上测试的。
-6. 个人模块没有做，主要也是因为一个参数的问题，官方接口中有一个参数： ``strUi``，应该是登录用户的 id。
-7. 阅读第一篇文章、问题的时候，点击状态栏，UIWebView 是可以滚动到顶部的，但是滑动查看其他日期的数据之后，点击状态栏就不能使界面滚动到顶部了。
+2. “问题”模块，在夜间模式的时候，显示的两个图片样式不是夜间模式的样式，在 HTML 代码里面引用的是官方手机版网页上的图片。
+3. “问题”模块，用官方接口只能获取到最近10天的数据，之后获取过来的数据就是空的了，现在的解决办法暂时是直接显示官方“问题”模块对应的当天的手机版网页。
+4. 还不能点赞，因为官方点赞接口里面有一个参数： ``strDeviceId``，看名字应该是设备的唯一标识，64位长度，我尝试过获取设备的唯一标识然后加密，没有成功获取到和官方的请求接口中相同的值，都是在我自己的 iPhone 5S 上测试的。
+5. 个人模块没有做，主要也是因为一个参数的问题，官方接口中有一个参数： ``strUi``，应该是登录用户的 id。
+6. 阅读第一篇文章、问题的时候，点击状态栏，UIWebView 是可以滚动到顶部的，但是滑动查看其他日期的数据之后，点击状态栏就不能使界面滚动到顶部了。
 
 ## 0x03 总结
 做这个项目，[Reveal](http://revealapp.com/) 真的是帮了我的大忙！要是光在手机上看官方的 App 的话，不可能在这么短的时间内完成的，多亏了 Reveal，我才能看到 App 内部的一些信息，能让我很快地完成这个项目，没白买！而且在日常的工作中，我也是经常使用 Reveal 的，真的是一个非常棒的软件！
@@ -67,4 +66,23 @@ iOS 7.0+
 ![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/Settings.png)
 ##### 关于
 ![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/Images/About.png)
+
+### 夜间模式
+#### 首页
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Home.png)
+
+#### 文章
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Reading_0.png)
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Reading_1.png)
+
+#### 问题
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Question.png)
+
+#### 东西
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Thing.png)
+
+#### 个人
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Personal.png)
+##### 设置
+![](https://github.com/ihappyhacking/MyOne-iOS/blob/master/Screenshot/NightMode/Night_Mode_Settings.png)
 
