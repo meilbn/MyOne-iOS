@@ -186,6 +186,11 @@
 
 #pragma mark - Network Requests
 
+// 右拉刷新
+- (void)request {
+	sleep(2);
+}
+
 - (void)requestHomeContentAtIndex:(NSInteger)index {
 	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
 	[HTTPTool requestHomeContentByDate:date success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -201,35 +206,18 @@
 	}];
 }
 
-- (void)request {
-	sleep(2);
-//	[readItems addObject:homeEntity];
-}
-
 #pragma mark - Private
 
 - (void)whenHUDWasHidden {
 	[self.rightPullToRefreshView endRefreshing];
 }
 
-//- (UIImage *)imageWithColor:(UIColor *)color {
-//	CGRect rect = CGRectMake(0, 0, 1, 1);
-//	UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-//	[color setFill];
-//	UIRectFill(rect);
-//	
-//	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//	UIGraphicsEndImageContext();
-//	
-//	return image;
-//}
-
-- (void)loadTestData {
-	// 先不做成可变的
+//- (void)loadTestData {
+//	// 先不做成可变的
 //	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"home_content"];
 //	homeEntity = [HomeEntity objectWithKeyValues:testData[@"hpEntity"]];
 //	NSLog(@"homeEntity = %@", homeEntity);
-}
+//}
 
 #pragma mark - Parent
 

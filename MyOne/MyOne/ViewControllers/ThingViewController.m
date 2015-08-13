@@ -165,6 +165,7 @@
 
 #pragma mark - Network Requests
 
+// 右拉刷新
 - (void)request {
 	sleep(2);
 }

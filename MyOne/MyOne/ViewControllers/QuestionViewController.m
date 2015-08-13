@@ -33,7 +33,7 @@
 	// 最后展示的 item 的下标
 //	NSInteger lastConfigureViewForItemIndex;
 	// 当前展示的 item 的下标
-	NSInteger currentItemIndex;
+//	NSInteger currentItemIndex;
 }
 
 #pragma mark - View Lifecycle
@@ -63,7 +63,7 @@
 	readItems = [[NSMutableDictionary alloc] init];
 	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
 //	lastConfigureViewForItemIndex = -1;
-	currentItemIndex = 0;
+//	currentItemIndex = 0;
 	
 //	[self loadTestData];
 	
@@ -145,7 +145,7 @@
 }
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
-	currentItemIndex = index;
+//	currentItemIndex = index;
 	NSLog(@"question didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
 		NSLog(@"question add new item ----");
@@ -165,6 +165,7 @@
 
 #pragma mark - Network Requests
 
+// 右拉刷新
 - (void)request {
 	sleep(2);
 }
