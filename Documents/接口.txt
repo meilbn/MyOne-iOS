@@ -2,7 +2,7 @@
 地址：http://bea.wufazhuce.com/OneForWeb/one/getHp_N
 参数：
 1. 日期（strDate）
-2. strRow（未知）
+2. 当前页的下标（strRow）
 列子：http://bea.wufazhuce.com/OneForWeb/one/getHp_N?strDate=2015-07-23&strRow=1
 返回数据：
 {
@@ -109,7 +109,7 @@
 地址：http://bea.wufazhuce.com/OneForWeb/one/o_f
 参数：
 1. 日期（strDate）
-2. strRow（未知）
+2. 当前页的下标（strRow）
 列子：http://bea.wufazhuce.com/OneForWeb/one/o_f?strDate=2015-07-28&strRow=1
 返回数据：
 {
