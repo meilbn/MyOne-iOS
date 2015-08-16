@@ -15,6 +15,7 @@
 		821392421B6A60FD004D91EF /* reading_content_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923E1B6A60FD004D91EF /* reading_content_4.txt */; };
 		821392451B6B3A9D004D91EF /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821392441B6B3A9D004D91EF /* HomeView.m */; };
 		8213924C1B6BAAD5004D91EF /* Century Gothic Bold.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8213924A1B6BA788004D91EF /* Century Gothic Bold.TTF */; };
+		824443691B80389300B06C82 /* TopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 824443681B80389300B06C82 /* TopWindow.m */; };
 		8269D2821B65DC5C0041AE0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2811B65DC5C0041AE0B /* main.m */; };
 		8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2841B65DC5C0041AE0B /* AppDelegate.m */; };
 		8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269D28C1B65DC5C0041AE0B /* Images.xcassets */; };
@@ -70,6 +71,8 @@
 		821392431B6B3A9D004D91EF /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		821392441B6B3A9D004D91EF /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		8213924A1B6BA788004D91EF /* Century Gothic Bold.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Century Gothic Bold.TTF"; sourceTree = "<group>"; };
+		824443671B80389300B06C82 /* TopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopWindow.h; sourceTree = "<group>"; };
+		824443681B80389300B06C82 /* TopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopWindow.m; sourceTree = "<group>"; };
 		8269D27C1B65DC5C0041AE0B /* MyOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269D2801B65DC5C0041AE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8269D2811B65DC5C0041AE0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				82E75E931B6725F8000C8106 /* BaseFunction.m */,
 				82EE5A2C1B6F51240012DAFD /* HTTPTool.h */,
 				82EE5A2D1B6F51240012DAFD /* HTTPTool.m */,
+				824443671B80389300B06C82 /* TopWindow.h */,
+				824443681B80389300B06C82 /* TopWindow.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				82A726A11B6E0B2600348EAC /* SettingsViewController.m in Sources */,
 				8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
+				824443691B80389300B06C82 /* TopWindow.m in Sources */,
 				82EE5A341B6F624A0012DAFD /* CircularLoaderView.m in Sources */,
 				821392451B6B3A9D004D91EF /* HomeView.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
