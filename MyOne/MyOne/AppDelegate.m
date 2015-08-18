@@ -112,11 +112,11 @@
 
 - (void)nightModeSwitch:(NSNotification *)notification {
 	if (Is_Night_Mode) {
-		NSLog(@"AppDelegate ---- Night Mode");
+//		NSLog(@"AppDelegate ---- Night Mode");
 		[[DSNavigationBar appearance] setNavigationBarWithColor:NightNavigationBarColor];
 		self.window.backgroundColor = NightBGViewColor;
 	} else {
-		NSLog(@"AppDelegate ---- Dawn Mode");
+//		NSLog(@"AppDelegate ---- Dawn Mode");
 		[[DSNavigationBar appearance] setNavigationBarWithColor:DawnNavigationBarColor];
 		self.window.backgroundColor = [UIColor whiteColor];
 	}

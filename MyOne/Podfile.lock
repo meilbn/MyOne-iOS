@@ -36,7 +36,6 @@ PODS:
   - DKNightVersion/UIKit (0.8.1):
     - DKNightVersion/Core
     - DKNightVersion/Helper
-  - hpple (0.2.0)
   - iCarousel (1.8.1)
   - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
@@ -48,7 +47,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
   - DKNightVersion (~> 0.8.1)
-  - hpple (~> 0.2.0)
   - iCarousel (~> 1.8.1)
   - Masonry (~> 0.6.2)
   - MBProgressHUD (~> 0.9.1)
@@ -58,7 +56,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   DKNightVersion: 5416e74d11f696c6dd0c8f1318cf5871aa6b6070
-  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
   iCarousel: dace1cb858e3f4dc2614bee3201041247f82feda
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
