@@ -2,12 +2,12 @@
 我的《一个》 iOS App
 
 ## 0x00 前言
-其实主要是因为不太想看广告，所以在抓包之后尝试自己写一下。不过仅仅是学习和娱乐而已。
+因为一般睡前都会看《一个》，感觉上面的有些句子、文章非常精彩，很喜欢，所以在抓包之后尝试自己写一下。不过仅仅是学习和娱乐而已。
 
 ## 0x01 关于这个项目
 与[官方的 App](http://wufazhuce.com/) 区别暂时有：
 
-0. 没有广告（初衷）。
+0. 没有广告。
 1. 没有阅读限制。官方是首页、文章、问题、东西都限制为查看最近的 10 条。
 2. 暂时没做登录。收藏应该是存在本地 (待定)。
 3. 暂时没做分享功能。
@@ -24,8 +24,7 @@
 5. [MJExtension](https://github.com/CoderMJLee/MJExtension)
 6. [Masonry](https://github.com/SnapKit/Masonry)
 7. [DSTransparentNavigationBar](https://github.com/diegoserranoa/DSTransparentNavigationBar)
-8. [hpple](https://github.com/topfunky/hpple) (可能不用了)
-9. [DKNightVersion](https://github.com/Draveness/DKNightVersion)
+8. [DKNightVersion](https://github.com/Draveness/DKNightVersion)
 
 项目中图片的展示方式，我是根据 [Ray Wenderlich](http://www.raywenderlich.com/) 上[这篇文章](http://www.raywenderlich.com/94302/implement-circular-image-loader-animation-cashapelayer)改写的，原文是用 Swift 写的，我是把这个项目拿来改成 Objective-C 而已，然后在运行的过程中发现最后图片显示出来之后会有闪烁，然后我就去看了文章的评论，发现有一个哥们儿也发现了这个问题，然后看到了评论里面作者的回复，最后解决了这个问题。感觉这个效果很不错，感谢！
 
