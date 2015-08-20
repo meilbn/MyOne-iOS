@@ -34,6 +34,8 @@
 //	NSInteger lastConfigureViewForItemIndex;
 	// 当前展示的 item 的下标
 //	NSInteger currentItemIndex;
+	// 当前是否正在右拉刷新标记
+	BOOL isRefreshing;
 }
 
 #pragma mark - View Lifecycle
@@ -64,6 +66,7 @@
 	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
 //	lastConfigureViewForItemIndex = -1;
 //	currentItemIndex = 0;
+	isRefreshing = NO;
 	
 //	[self loadTestData];
 	
@@ -71,11 +74,6 @@
 	self.rightPullToRefreshView.delegate = self;
 	self.rightPullToRefreshView.dataSource = self;
 	[self.view addSubview:self.rightPullToRefreshView];
-	
-	__weak typeof(self) weakSelf = self;
-	self.hudWasHidden = ^() {
-		[weakSelf whenHUDWasHidden];
-	};
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
@@ -126,7 +124,7 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+	if (index == numberOfItems - 1 || index == readItems.allKeys.count) {// 当前这个 item 是没有展示过的
 		NSLog(@"question refresh index = %ld", index);
 		[questionView refreshSubviewsForNewItem];
 	} else {// 当前这个 item 是展示过了但是没有显示过数据的
@@ -141,7 +139,8 @@
 #pragma mark - RightPullToRefreshViewDelegate
 
 - (void)rightPullToRefreshViewRefreshing:(RightPullToRefreshView *)rightPullToRefreshView {
-	[self showHUDWaitingWhileExecuting:@selector(request)];
+//	[self showHUDWaitingWhileExecuting:@selector(request)];
+	[self refreshing];
 }
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
@@ -153,7 +152,7 @@
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
 	
-	if (index < readItems.count && readItems[[@(index) stringValue]]) {
+	if (index < readItems.allKeys.count && readItems[[@(index) stringValue]]) {
 //		NSLog(@"question lastConfigureViewForItemIndex = %ld index = %ld", lastConfigureViewForItemIndex, index);
 		NSLog(@"question didDisplay index = %ld", index);
 		QuestionView *questionView = (QuestionView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
@@ -166,18 +165,37 @@
 #pragma mark - Network Requests
 
 // 右拉刷新
-- (void)request {
-	sleep(2);
+- (void)refreshing {
+	//	sleep(2);
+	if (readItems.allKeys.count > 0) {// 避免第一个还未加载的时候右拉刷新更新数据
+		[self showHUDWithText:@""];
+		isRefreshing = YES;
+		[self requestQuestionContentAtIndex:0];
+	}
 }
 
 - (void)requestQuestionContentAtIndex:(NSInteger)index {
 	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
 	[HTTPTool requestQuestionContentByDate:date lastUpdateDate:lastUpdateDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
-			NSLog(@"question request index = %ld date = %@ success-------", index, date);
+//			NSLog(@"question request index = %ld date = %@ success-------", index, date);
 			QuestionEntity *returnQuestionEntity = [QuestionEntity objectWithKeyValues:responseObject[@"questionAdEntity"]];
 			if (IsStringEmpty(returnQuestionEntity.strQuestionId)) {
 				returnQuestionEntity.strQuestionMarketTime = date;
+			}
+			
+			if (isRefreshing) {
+				[self endRefreshing];
+				if ([returnQuestionEntity.strQuestionId isEqualToString:((QuestionEntity *)readItems[@"0"]).strQuestionId]) {// 没有最新数据
+					[self showHUDWithText:IsLatestData delay:HUD_DELAY];
+					[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
+				} else {// 有新数据
+					// 删掉所有的已读数据，不用考虑第一个已读数据和最新数据之间相差几天，简单粗暴
+					[readItems removeAllObjects];
+					[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
+				}
+			} else {
+				[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
 			}
 			[readItems setObject:returnQuestionEntity forKey:[@(index) stringValue]];
 			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
@@ -189,16 +207,22 @@
 
 #pragma mark - Private
 
-- (void)whenHUDWasHidden {
+- (void)endRefreshing {
+	isRefreshing = NO;
 	[self.rightPullToRefreshView endRefreshing];
 }
 
-- (void)loadTestData {
+- (void)endRequestQuestionContent:(QuestionEntity *)questionEntity atIndex:(NSInteger)index {
+	[readItems setObject:questionEntity forKey:[@(index) stringValue]];
+	[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+}
+
+//- (void)loadTestData {
 	// 先不做成可变的
 //	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
 //	questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
 //	NSLog(@"questionEntity = %@", questionEntity);
-}
+//}
 
 #pragma mark - Parent
 

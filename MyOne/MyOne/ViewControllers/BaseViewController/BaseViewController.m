@@ -10,8 +10,6 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "DSNavigationBar.h"
 
-#define HUD_DELAY 1.5
-
 @interface BaseViewController () <MBProgressHUDDelegate>
 
 @end
@@ -106,6 +104,8 @@
 	HUD.labelText = text;
 	HUD.margin = 10.f;
 	HUD.removeFromSuperViewOnHide = YES;
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	HUD.delegate = self;
 	[HUD hide:YES afterDelay:delay];
 }
 
@@ -122,6 +122,8 @@
 	HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_icon_right"]];
 	HUD.mode = MBProgressHUDModeCustomView;
 	HUD.labelText = text;
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	HUD.delegate = self;
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
 }
@@ -135,12 +137,14 @@
 	HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_icon_error"]];
 	HUD.mode = MBProgressHUDModeCustomView;
 	HUD.labelText = text;
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	HUD.delegate = self;
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
 }
 
 - (void)showHUDNetError {
-	[self showHUDErrorWithText:BAD_NETWORK];
+	[self showHUDErrorWithText:BadNetwork];
 }
 
 - (void)showHUDServerError {
@@ -154,6 +158,8 @@
 	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.navigationController.view addSubview:HUD];
 	HUD.labelText = showText;
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	HUD.delegate = self;
 	[HUD showWhileExecuting:method onTarget:self withObject:nil animated:YES];
 }
 
@@ -164,6 +170,8 @@
 	HUD.mode = MBProgressHUDModeIndeterminate;
 	HUD.labelText = text;
 	HUD.margin = 10.f;
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+	HUD.delegate = self;
 	HUD.removeFromSuperViewOnHide = YES;
 }
 

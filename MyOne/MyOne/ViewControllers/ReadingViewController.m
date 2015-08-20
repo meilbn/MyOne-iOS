@@ -32,6 +32,8 @@
 	NSString *lastUpdateDate;
 	// 当前展示的 item 的下标
 //	NSInteger currentItemIndex;
+	// 当前是否正在右拉刷新标记
+	BOOL isRefreshing;
 }
 
 #pragma mark - View Lifecycle
@@ -62,6 +64,7 @@
 	readItems = [[NSMutableDictionary alloc] init];
 	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
 //	currentItemIndex = 0;
+	isRefreshing = NO;
 	
 //	[self loadTestData];
 	
@@ -69,12 +72,6 @@
 	self.rightPullToRefreshView.delegate = self;
 	self.rightPullToRefreshView.dataSource = self;
 	[self.view addSubview:self.rightPullToRefreshView];
-	
-	__weak typeof(self) weakSelf = self;
-	self.hudWasHidden = ^() {
-//		NSLog(@"hudWasHidden");
-		[weakSelf whenHUDWasHidden];
-	};
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionNightFallingNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightModeSwitch:) name:@"DKNightVersionDawnComingNotification" object:nil];
@@ -125,7 +122,7 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+	if (index == numberOfItems - 1 || index == readItems.allKeys.count) {// 当前这个 item 是没有展示过的
 //		NSLog(@"reading refresh index = %ld", index);
 		[readingView refreshSubviewsForNewItem];
 	} else {// 当前这个 item 是展示过了但是没有显示过数据的
@@ -140,7 +137,8 @@
 #pragma mark - RightPullToRefreshViewDelegate
 
 - (void)rightPullToRefreshViewRefreshing:(RightPullToRefreshView *)rightPullToRefreshView {
-	[self showHUDWaitingWhileExecuting:@selector(request)];
+//	[self showHUDWaitingWhileExecuting:@selector(request)];
+	[self refreshing];
 }
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
@@ -152,7 +150,7 @@
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
 	
-	if (index < readItems.count && readItems[[@(index) stringValue]]) {
+	if (index < readItems.allKeys.count && readItems[[@(index) stringValue]]) {
 		//		NSLog(@"question lastConfigureViewForItemIndex = %ld index = %ld", lastConfigureViewForItemIndex, index);
 //		NSLog(@"reading didDisplay index = %ld", index);
 		ReadingView *readingView = (ReadingView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
@@ -165,8 +163,13 @@
 #pragma mark - Network Requests
 
 // 右拉刷新
-- (void)request {
-	sleep(2);
+- (void)refreshing {
+	//	sleep(2);
+	if (readItems.allKeys.count > 0) {// 避免第一个还未加载的时候右拉刷新更新数据
+		[self showHUDWithText:@""];
+		isRefreshing = YES;
+		[self requestReadingContentAtIndex:0];
+	}
 }
 
 - (void)requestReadingContentAtIndex:(NSInteger)index {
@@ -175,8 +178,19 @@
 		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
 //			NSLog(@"reading request index = %ld date = %@ success-------", index, date);
 			ReadingEntity *returnReadingEntity = [ReadingEntity objectWithKeyValues:responseObject[@"contentEntity"]];
-			[readItems setObject:returnReadingEntity forKey:[@(index) stringValue]];
-			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+			if (isRefreshing) {
+				[self endRefreshing];
+				if ([returnReadingEntity.strContentId isEqualToString:((ReadingEntity *)readItems[@"0"]).strContentId]) {// 没有最新数据
+					[self showHUDWithText:IsLatestData delay:HUD_DELAY];
+					[self endRequestReadingContent:returnReadingEntity atIndex:index];
+				} else {// 有新数据
+					// 删掉所有的已读数据，不用考虑第一个已读数据和最新数据之间相差几天，简单粗暴
+					[readItems removeAllObjects];
+					[self endRequestReadingContent:returnReadingEntity atIndex:index];
+				}
+			} else {
+				[self endRequestReadingContent:returnReadingEntity atIndex:index];
+			}
 		}
 	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
 //		NSLog(@"reading error = %@", error);
@@ -185,8 +199,14 @@
 
 #pragma mark - Private
 
-- (void)whenHUDWasHidden {
+- (void)endRefreshing {
+	isRefreshing = NO;
 	[self.rightPullToRefreshView endRefreshing];
+}
+
+- (void)endRequestReadingContent:(ReadingEntity *)readingEntity atIndex:(NSInteger)index {
+	[readItems setObject:readingEntity forKey:[@(index) stringValue]];
+	[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
 }
 
 //- (void)loadTestData {

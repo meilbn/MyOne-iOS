@@ -32,6 +32,8 @@
 	NSInteger lastConfigureViewForItemIndex;
 	// 当前展示的 item 的下标
 //	NSInteger currentItemIndex;
+	// 当前是否正在右拉刷新标记
+	BOOL isRefreshing;
 }
 
 #pragma mark - View Lifecycle
@@ -61,6 +63,7 @@
 	readItems = [[NSMutableDictionary alloc] init];
 	lastConfigureViewForItemIndex = 0;
 //	currentItemIndex = 0;
+	isRefreshing = NO;
 	
 //	[self loadTestData];
 	
@@ -68,12 +71,6 @@
 	self.rightPullToRefreshView.delegate = self;
 	self.rightPullToRefreshView.dataSource = self;
 	[self.view addSubview:self.rightPullToRefreshView];
-	
-	__weak typeof(self) weakSelf = self;
-	self.hudWasHidden = ^() {
-//		NSLog(@"home hudWasHidden");
-		[weakSelf whenHUDWasHidden];
-	};
 	
 	[self requestHomeContentAtIndex:0];
 	
@@ -107,10 +104,10 @@
 
 - (void)nightModeSwitch:(NSNotification *)notification {
 	if (Is_Night_Mode) {
-		NSLog(@"Home ---- Night Mode");
+//		NSLog(@"Home ---- Night Mode");
 		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:48 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]];
 	} else {
-		NSLog(@"Home ---- Dawn Mode");
+//		NSLog(@"Home ---- Dawn Mode");
 		self.tabBarController.tabBar.backgroundImage = [self imageWithColor:[UIColor colorWithRed:241 / 255.0 green:241 / 255.0 blue:241 / 255.0 alpha:1]];
 	}
 //	[self.rightPullToRefreshView reloadItemAtIndex:self.rightPullToRefreshView.currentItemIndex animated:NO];
@@ -140,7 +137,7 @@
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
 //	NSLog(@"home viewForItem index = %ld, numberOfItems = %ld, readItems.count = %ld", index, numberOfItems, readItems.count);
-	if (index == numberOfItems - 1 || index == readItems.count) {// 当前这个 item 是没有展示过的
+	if (index == numberOfItems - 1 || index == readItems.allKeys.count) {// 当前这个 item 是没有展示过的
 //		NSLog(@"home refresh index = %ld", index);
 		[homeView refreshSubviewsForNewItem];
 	} else {// 当前这个 item 是展示过了但是没有显示过数据的
@@ -155,7 +152,8 @@
 #pragma mark - RightPullToRefreshViewDelegate
 
 - (void)rightPullToRefreshViewRefreshing:(RightPullToRefreshView *)rightPullToRefreshView {
-	[self showHUDWaitingWhileExecuting:@selector(request)];
+//	[self showHUDWaitingWhileExecuting:@selector(refreshing)];
+	[self refreshing];
 }
 
 //- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
@@ -166,15 +164,15 @@
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
 //	currentItemIndex = index;
-	NSLog(@"home didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
+//	NSLog(@"home didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
-		NSLog(@"home add new item ----");
+//		NSLog(@"home add new item ----");
 		numberOfItems++;
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
 	
-	if (index < readItems.count && readItems[[@(index) stringValue]]) {
-		NSLog(@"home didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
+	if (index < readItems.allKeys.count && readItems[[@(index) stringValue]]) {
+//		NSLog(@"home didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
 		HomeView *homeView = (HomeView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
 //		NSLog(@"home lastConfigureViewForItemIndex < index : %@", lastConfigureViewForItemIndex < index ? @"YES" : @"NO");
 //		NSLog(@"home (!lastConfigureViewForItemIndex && !index) : %@", (!lastConfigureViewForItemIndex && !index) ? @"YES" : @"NO");
@@ -187,8 +185,13 @@
 #pragma mark - Network Requests
 
 // 右拉刷新
-- (void)request {
-	sleep(2);
+- (void)refreshing {
+//	sleep(2);
+	if (readItems.allKeys.count > 0) {// 避免第一个还未加载的时候右拉刷新更新数据
+		[self showHUDWithText:@""];
+		isRefreshing = YES;
+		[self requestHomeContentAtIndex:0];
+	}
 }
 
 - (void)requestHomeContentAtIndex:(NSInteger)index {
@@ -198,8 +201,19 @@
 		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
 //			NSLog(@"home request index = %ld date = %@ success-------", index, date);
 			HomeEntity *returnHomeEntity = [HomeEntity objectWithKeyValues:responseObject[@"hpEntity"]];
-			[readItems setObject:returnHomeEntity forKey:[@(index) stringValue]];
-			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
+			if (isRefreshing) {
+				[self endRefreshing];
+				if ([returnHomeEntity.strHpId isEqualToString:((HomeEntity *)readItems[@"0"]).strHpId]) {// 没有最新数据
+					[self showHUDWithText:IsLatestData delay:HUD_DELAY];
+					[self endRequestHomeContent:returnHomeEntity atIndex:index];
+				} else {// 有新数据
+					// 删掉所有的已读数据，不用考虑第一个已读数据和最新数据之间相差几天，简单粗暴
+					[readItems removeAllObjects];
+					[self endRequestHomeContent:returnHomeEntity atIndex:index];
+				}
+			} else {
+				[self endRequestHomeContent:returnHomeEntity atIndex:index];
+			}
 		}
 	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"home error = %@", error);
@@ -208,8 +222,14 @@
 
 #pragma mark - Private
 
-- (void)whenHUDWasHidden {
+- (void)endRefreshing {
+	isRefreshing = NO;
 	[self.rightPullToRefreshView endRefreshing];
+}
+
+- (void)endRequestHomeContent:(HomeEntity *)homeEntity atIndex:(NSInteger)index {
+	[readItems setObject:homeEntity forKey:[@(index) stringValue]];
+	[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
 }
 
 //- (void)loadTestData {

@@ -13,7 +13,10 @@
 #define LeftReleaseToRefreshHintText @"松开刷新数据..."
 #define LeftReleaseIsRefreshingHintText @"正在载入..."
 
-#define BAD_NETWORK @"Bad Net Status"
+#define HUD_DELAY 1.5
+
+#define BadNetwork @"Bad Net Status"
+#define IsLatestData @"已是最新数据"
 
 #define REQUEST_SUCCESS @"SUCCESS"
 
