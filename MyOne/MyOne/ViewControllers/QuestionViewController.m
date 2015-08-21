@@ -8,7 +8,6 @@
 
 #import "QuestionViewController.h"
 #import "RightPullToRefreshView.h"
-#import <unistd.h>
 #import "QuestionEntity.h"
 #import <MJExtension/MJExtension.h>
 #import "QuestionView.h"
@@ -24,16 +23,9 @@
 	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
-//	NSMutableArray *readItems;
 	NSMutableDictionary *readItems;
-	// 测试数据
-//	QuestionEntity *questionEntity;
 	// 最后更新的日期
 	NSString *lastUpdateDate;
-	// 最后展示的 item 的下标
-//	NSInteger lastConfigureViewForItemIndex;
-	// 当前展示的 item 的下标
-//	NSInteger currentItemIndex;
 	// 当前是否正在右拉刷新标记
 	BOOL isRefreshing;
 }
@@ -64,11 +56,7 @@
 	numberOfItems = 2;
 	readItems = [[NSMutableDictionary alloc] init];
 	lastUpdateDate = [BaseFunction stringDateBeforeTodaySeveralDays:0];
-//	lastConfigureViewForItemIndex = -1;
-//	currentItemIndex = 0;
 	isRefreshing = NO;
-	
-//	[self loadTestData];
 	
 	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
@@ -125,11 +113,8 @@
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
 	if (index == numberOfItems - 1 || index == readItems.allKeys.count) {// 当前这个 item 是没有展示过的
-		NSLog(@"question refresh index = %ld", index);
 		[questionView refreshSubviewsForNewItem];
 	} else {// 当前这个 item 是展示过了但是没有显示过数据的
-		NSLog(@"question configure index = %ld", index);
-//		lastConfigureViewForItemIndex = MAX(index, lastConfigureViewForItemIndex);
 		[questionView configureViewWithQuestionEntity:readItems[[@(index) stringValue]]];
 	}
 	
@@ -139,22 +124,16 @@
 #pragma mark - RightPullToRefreshViewDelegate
 
 - (void)rightPullToRefreshViewRefreshing:(RightPullToRefreshView *)rightPullToRefreshView {
-//	[self showHUDWaitingWhileExecuting:@selector(request)];
 	[self refreshing];
 }
 
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
-//	currentItemIndex = index;
-	NSLog(@"question didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
-		NSLog(@"question add new item ----");
 		numberOfItems++;
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
 	
 	if (index < readItems.allKeys.count && readItems[[@(index) stringValue]]) {
-//		NSLog(@"question lastConfigureViewForItemIndex = %ld index = %ld", lastConfigureViewForItemIndex, index);
-		NSLog(@"question didDisplay index = %ld", index);
 		QuestionView *questionView = (QuestionView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
 		[questionView configureViewWithQuestionEntity:readItems[[@(index) stringValue]]];
 	} else {
@@ -166,7 +145,6 @@
 
 // 右拉刷新
 - (void)refreshing {
-	//	sleep(2);
 	if (readItems.allKeys.count > 0) {// 避免第一个还未加载的时候右拉刷新更新数据
 		[self showHUDWithText:@""];
 		isRefreshing = YES;
@@ -178,7 +156,6 @@
 	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
 	[HTTPTool requestQuestionContentByDate:date lastUpdateDate:lastUpdateDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		if ([responseObject[@"result"] isEqualToString:REQUEST_SUCCESS]) {
-//			NSLog(@"question request index = %ld date = %@ success-------", index, date);
 			QuestionEntity *returnQuestionEntity = [QuestionEntity objectWithKeyValues:responseObject[@"questionAdEntity"]];
 			if (IsStringEmpty(returnQuestionEntity.strQuestionId)) {
 				returnQuestionEntity.strQuestionMarketTime = date;
@@ -217,18 +194,10 @@
 	[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
 }
 
-//- (void)loadTestData {
-	// 先不做成可变的
-//	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"question_content"];
-//	questionEntity = [QuestionEntity objectWithKeyValues:testData[@"questionAdEntity"]];
-//	NSLog(@"questionEntity = %@", questionEntity);
-//}
-
 #pragma mark - Parent
 
 - (void)share {
 	[super share];
-//	NSLog(@"share --------");
 }
 
 /*

@@ -23,6 +23,20 @@
 	return manager;
 }
 
++ (NSDictionary *)parametersWithIndex:(NSInteger)index {
+	if (index > 9) {
+		NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
+		NSDictionary *parameters = @{@"strDate" : date, @"strRow" : @"1"};
+		
+		return parameters;
+	} else {
+		NSString *date = [BaseFunction stringDateFromCurrent];
+		NSDictionary *parameters = @{@"strDate" : date, @"strRow" : [@(++index) stringValue]};
+		
+		return parameters;
+	}
+}
+
 /**
  *  获取首页数据
  *
@@ -32,7 +46,24 @@
  */
 + (void)requestHomeContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail {
 	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
-	NSDictionary *parameters = @{@"strDate" : date, @"strRow" : @"1"};
+	NSDictionary *parameters = @{@"strDate" : date, @"strRow" : [@1 stringValue]};
+	[manager GET:URL_GET_HOME_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		success(operation,responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		fail(operation,error);
+	}];
+}
+
+/**
+ *  获取首页数据
+ *
+ *  @param index   要展示数据的 Item 的下标
+ *  @param success 请求成功 Block
+ *  @param fail    请求失败 Block
+ */
++ (void)requestHomeContentByIndex:(NSInteger)index success:(SuccessBlock)success failBlock:(FailBlock)fail {
+	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+	NSDictionary *parameters = [self parametersWithIndex:index];
 	[manager GET:URL_GET_HOME_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		success(operation,responseObject);
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -58,6 +89,16 @@
 	}];
 }
 
+//+ (void)requestReadingContentByIndex:(NSInteger)index lastUpdateDate:(NSString *)lastUpdateDate success:(SuccessBlock)success failBlock:(FailBlock)fail {
+//	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+//	NSDictionary *parameters = @{@"strDate" : date, @"strLastUpdateDate" : lastUpdateDate};
+//	[manager GET:URL_GET_READING_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//		success(operation,responseObject);
+//	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//		fail(operation,error);
+//	}];
+//}
+
 /**
  *   获取问题
  *
@@ -75,6 +116,16 @@
 		fail(operation,error);
 	}];
 }
+
+//+ (void)requestQuestionContentByIndex:(NSInteger)index lastUpdateDate:(NSString *)lastUpdateDate success:(SuccessBlock)success failBlock:(FailBlock)fail {
+//	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+//	NSDictionary *parameters = @{@"strDate" : date, @"strLastUpdateDate" : lastUpdateDate};
+//	[manager GET:URL_GET_QUESTION_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//		success(operation,responseObject);
+//	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//		fail(operation,error);
+//	}];
+//}
 
 //+ (void)requestQuestionContentBackupByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail {
 //	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
@@ -96,6 +147,23 @@
 + (void)requestThingContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail {
 	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
 	NSDictionary *parameters = @{@"strDate" : date, @"strRow" : @"1"};
+	[manager GET:URL_GET_THING_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		success(operation,responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		fail(operation,error);
+	}];
+}
+
+/**
+ *  获取东西
+ *
+ *  @param index   要展示数据的 Item 的下标
+ *  @param success 请求成功 Block
+ *  @param fail    请求失败 Block
+ */
++ (void)requestThingContentByIndex:(NSInteger)index success:(SuccessBlock)success failBlock:(FailBlock)fail {
+	AFHTTPRequestOperationManager *manager = [HTTPTool initAFHttpManager];
+	NSDictionary *parameters = [self parametersWithIndex:index];
 	[manager GET:URL_GET_THING_CONTENT parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		success(operation,responseObject);
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {

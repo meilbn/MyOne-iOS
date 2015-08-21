@@ -8,7 +8,6 @@
 
 #import "ThingViewController.h"
 #import "RightPullToRefreshView.h"
-#import <unistd.h>
 #import "ThingEntity.h"
 #import <MJExtension/MJExtension.h>
 #import "ThingView.h"
@@ -24,10 +23,7 @@
 	// 当前一共有多少 item，默认为3个
 	NSInteger numberOfItems;
 	// 保存当前查看过的数据
-//	NSMutableArray *readItems;
 	NSMutableDictionary *readItems;
-	// 测试数据
-//	ThingEntity *thingEntity;
 	// 最后展示的 item 的下标
 	NSInteger lastConfigureViewForItemIndex;
 	// 当前是否正在右拉刷新标记
@@ -61,8 +57,6 @@
 	readItems = [[NSMutableDictionary alloc] init];
 	lastConfigureViewForItemIndex = 0;
 	isRefreshing = NO;
-	
-//	[self loadTestData];
 	
 	self.rightPullToRefreshView = [[RightPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - CGRectGetHeight(self.tabBarController.tabBar.frame))];
 	self.rightPullToRefreshView.delegate = self;
@@ -117,12 +111,9 @@
 	//views outside of the `if (view == nil) {...}` check otherwise
 	//you'll get weird issues with carousel item content appearing
 	//in the wrong place in the carousel
-//	NSLog(@"thing viewForItem index = %ld, numberOfItems = %ld, readItems.count = %ld", index, numberOfItems, readItems.count);
 	if (index == numberOfItems - 1 || index == readItems.allKeys.count) {// 当前这个 item 是没有展示过的
-//		NSLog(@"thing refresh index = %ld", index);
 		[thingView refreshSubviewsForNewItem];
 	} else {// 当前这个 item 是展示过了但是没有显示过数据的
-//		NSLog(@"thing configure index = %ld", index);
 		lastConfigureViewForItemIndex = MAX(index, lastConfigureViewForItemIndex);
 		[thingView configureViewWithThingEntity:readItems[[@(index) stringValue]] animated:YES];
 	}
@@ -133,28 +124,17 @@
 #pragma mark - RightPullToRefreshViewDelegate
 
 - (void)rightPullToRefreshViewRefreshing:(RightPullToRefreshView *)rightPullToRefreshView {
-//	[self showHUDWaitingWhileExecuting:@selector(request)];
 	[self refreshing];
 }
 
-//- (void)rightPullToRefreshViewDidScrollToLastItem:(RightPullToRefreshView *)rightPullToRefreshView {
-//	numberOfItems++;
-//	[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
-//}
-
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index {
-//	NSLog(@"thing didDisplayItemAtIndex index = %ld, numberOfItems = %ld", index, numberOfItems);
 	if (index == numberOfItems - 1) {// 如果当前显示的是最后一个，则添加一个 item
-//		NSLog(@"thing add new item ----");
 		numberOfItems++;
 		[self.rightPullToRefreshView insertItemAtIndex:(numberOfItems - 1) animated:YES];
 	}
 	
 	if (index < readItems.allKeys.count && readItems[[@(index) stringValue]]) {
-//		NSLog(@"thing didDisplay configure index = %ld lastConfigureViewForItemIndex = %ld------", index, lastConfigureViewForItemIndex);
 		ThingView *thingView = (ThingView *)[rightPullToRefreshView itemViewAtIndex:index].subviews[0];
-//		NSLog(@"thing lastConfigureViewForItemIndex < index : %@", lastConfigureViewForItemIndex < index ? @"YES" : @"NO");
-//		NSLog(@"thing (!lastConfigureViewForItemIndex && !index) : %@", (!lastConfigureViewForItemIndex && !index) ? @"YES" : @"NO");
 		[thingView configureViewWithThingEntity:readItems[[@(index) stringValue]] animated:(lastConfigureViewForItemIndex == 0 || lastConfigureViewForItemIndex < index)];
 	} else {
 		[self requestThingContentAtIndex:index];
@@ -165,7 +145,6 @@
 
 // 右拉刷新
 - (void)refreshing {
-	//	sleep(2);
 	if (readItems.allKeys.count > 0) {// 避免第一个还未加载的时候右拉刷新更新数据
 		[self showHUDWithText:@""];
 		isRefreshing = YES;
@@ -174,11 +153,8 @@
 }
 
 - (void)requestThingContentAtIndex:(NSInteger)index {
-	NSString *date = [BaseFunction stringDateBeforeTodaySeveralDays:index];
-	[HTTPTool requestThingContentByDate:date success:^(AFHTTPRequestOperation *operation, id responseObject) {
-		//		NSLog(@"thing responseObject = %@", responseObject);
+	[HTTPTool requestThingContentByIndex:index success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		if ([responseObject[@"rs"] isEqualToString:REQUEST_SUCCESS]) {
-			//			NSLog(@"thing request index = %ld date = %@ success-------", index, date);
 			ThingEntity *returnThingEntity = [ThingEntity objectWithKeyValues:responseObject[@"entTg"]];
 			if (isRefreshing) {
 				[self endRefreshing];
@@ -211,18 +187,10 @@
 	[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
 }
 
-//- (void)loadTestData {
-	// 先不做成可变的
-//	NSDictionary *testData = [BaseFunction loadTestDatasWithFileName:@"thing_content"];
-//	thingEntity = [ThingEntity objectWithKeyValues:testData[@"entTg"]];
-//	NSLog(@"thingEntity = %@", thingEntity);
-//}
-
 #pragma mark - Parent
 
 - (void)share {
 	[super share];
-//	NSLog(@"share --------");
 }
 
 /*

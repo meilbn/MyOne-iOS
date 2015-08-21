@@ -55,6 +55,8 @@
  */
 + (NSString *)getHomeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
 
++ (NSString *)stringDateFromCurrent;
+
 /**
  *  获取今天之前的相应天数的日期
  *

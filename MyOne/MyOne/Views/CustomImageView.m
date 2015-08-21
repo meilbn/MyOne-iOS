@@ -30,9 +30,9 @@
 }
 
 - (void)configureImageViwWithImageURL:(NSURL *)url animated:(BOOL)animated {
+//	NSLog(@"%@, animated = %@", NSStringFromSelector(_cmd), animated ? @"YES" : @"NO");
 	if (animated) {
 		self.progressIndicatorView.frame = self.bounds;
-//		NSLog(@"self.frame = %@", NSStringFromCGRect(self.frame));
 		[self.progressIndicatorView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		
 		[self sd_setImageWithURL:url placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {

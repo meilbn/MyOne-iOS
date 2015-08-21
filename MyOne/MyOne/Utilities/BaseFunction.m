@@ -78,6 +78,16 @@ static const NSTimeInterval oneDay = 24 * 60 * 60;
 	return [inputFormatter dateFromString:dateStr];
 }
 
+// 将当前时间转成字符串，格式：yyyy-MM-dd
++ (NSString *)stringDateFromCurrent {
+	NSDate *currentDate = [NSDate date];
+	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+	[dateformatter setDateFormat:@"yyyy-MM-dd"];
+	NSString *currDateString = [dateformatter stringFromDate:currentDate];
+	
+	return currDateString;
+}
+
 /**
  *  获取今天之前的相应天数的日期
  *

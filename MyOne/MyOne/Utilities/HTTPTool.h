@@ -38,6 +38,15 @@ typedef void(^FailBlock) (AFHTTPRequestOperation *operation, NSError *error);
 + (void)requestHomeContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail;
 
 /**
+ *  获取首页数据
+ *
+ *  @param index   要展示数据的 Item 的下标
+ *  @param success 请求成功 Block
+ *  @param fail    请求失败 Block
+ */
++ (void)requestHomeContentByIndex:(NSInteger)index success:(SuccessBlock)success failBlock:(FailBlock)fail ;
+
+/**
  *  获取文章
  *
  *  @param date           日期，"yyyy-MM-dd"格式
@@ -75,5 +84,14 @@ typedef void(^FailBlock) (AFHTTPRequestOperation *operation, NSError *error);
  *  @param fail     请求失败 Block
  */
 + (void)requestThingContentByDate:(NSString *)date success:(SuccessBlock)success failBlock:(FailBlock)fail;
+
+/**
+ *  获取东西
+ *
+ *  @param index   要展示数据的 Item 的下标
+ *  @param success 请求成功 Block
+ *  @param fail    请求失败 Block
+ */
++ (void)requestThingContentByIndex:(NSInteger)index success:(SuccessBlock)success failBlock:(FailBlock)fail;
 
 @end
