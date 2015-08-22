@@ -147,7 +147,7 @@
 	[self.indicatorView stopAnimating];
 	self.containerView.hidden = NO;
 	
-	self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:thingEntity.strTm];
+	self.dateLabel.text = [BaseFunction enMarketTimeWithOriginalMarketTime:thingEntity.strTm];
 	[self.thingImageView configureImageViwWithImageURL:[NSURL URLWithString:thingEntity.strBu] animated:animated];
 	self.thingNameLabel.text = thingEntity.strTt;
 

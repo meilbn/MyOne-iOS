@@ -87,7 +87,7 @@
 - (void)configureReadingViewWithReadingEntity:(ReadingEntity *)readingEntity {
 	currentContent = readingEntity;
 	
-	self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:readingEntity.strContMarketTime];
+	self.dateLabel.text = [BaseFunction enMarketTimeWithOriginalMarketTime:readingEntity.strContMarketTime];
 	
 	NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : @"#ffffff";
 	NSString *webViewContentTextColor = Is_Night_Mode ? NightWebViewTextColorName : DawnWebViewTextColorName;

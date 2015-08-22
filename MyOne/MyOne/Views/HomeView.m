@@ -232,7 +232,7 @@
 	[self.paintImageView configureImageViwWithImageURL:[NSURL URLWithString:homeEntity.strThumbnailUrl] animated:animated];
 	self.paintNameLabel.text = [homeEntity.strAuthor componentsSeparatedByString:@"&"][0];
 	self.paintAuthorLabel.text = [homeEntity.strAuthor componentsSeparatedByString:@"&"][1];
-	NSString *marketTime = [BaseFunction getHomeENMarketTimeWithOriginalMarketTime:homeEntity.strMarketTime];
+	NSString *marketTime = [BaseFunction homeENMarketTimeWithOriginalMarketTime:homeEntity.strMarketTime];
 	self.dayLabel.text = [marketTime componentsSeparatedByString:@"&"][0];
 	self.monthAndYearLabel.text = [marketTime componentsSeparatedByString:@"&"][1];
 	if (Is_Night_Mode) {

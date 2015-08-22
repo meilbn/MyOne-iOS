@@ -44,7 +44,7 @@
  *
  *  @return 转换之后的时间
  */
-+ (NSString *)getENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
++ (NSString *)enMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
 
 /**
  *  根据“yyyy-MM-dd”格式的时间获取首页的时间格式（天）和（月、年）用 & 连接，用来切割字符串
@@ -53,7 +53,7 @@
  *
  *  @return 转换之后的时间
  */
-+ (NSString *)getHomeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
++ (NSString *)homeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime;
 
 + (NSString *)stringDateFromCurrent;
 

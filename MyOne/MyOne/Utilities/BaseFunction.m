@@ -52,7 +52,7 @@ static const NSTimeInterval oneDay = 24 * 60 * 60;
 	return testData;
 }
 
-+ (NSString *)getENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime {
++ (NSString *)enMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime {
 	NSDate *marketTime = [self dateFromString:originalMarketTime];
 	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
 	[dateformatter setDateFormat:@"MMMM dd, yyyy"];
@@ -61,7 +61,7 @@ static const NSTimeInterval oneDay = 24 * 60 * 60;
 	return readingENMarketTime;
 }
 
-+ (NSString *)getHomeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime {
++ (NSString *)homeENMarketTimeWithOriginalMarketTime:(NSString *)originalMarketTime {
 	NSDate *marketTime = [self dateFromString:originalMarketTime];
 	NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
 	[dateformatter setDateFormat:@"dd&MMMM , yyyy"];

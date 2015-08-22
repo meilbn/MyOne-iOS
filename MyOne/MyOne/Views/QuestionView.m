@@ -95,7 +95,7 @@
 		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://m.wufazhuce.com/question/%@", questionEntity.strQuestionMarketTime]]]];
 	} else {
 		self.dateLabel.superview.hidden = NO;
-		self.dateLabel.text = [BaseFunction getENMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
+		self.dateLabel.text = [BaseFunction enMarketTimeWithOriginalMarketTime:questionEntity.strQuestionMarketTime];
 		
 		NSString *webViewBGColor = Is_Night_Mode ? NightWebViewBGColorName : @"#ffffff";
 		NSString *webViewContentTextColor = Is_Night_Mode ? NightWebViewTextColorName : DawnWebViewTextColorName;
