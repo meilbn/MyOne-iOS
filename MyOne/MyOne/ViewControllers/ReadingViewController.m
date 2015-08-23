@@ -161,13 +161,15 @@
 				[self endRefreshing];
 				if ([returnReadingEntity.strContentId isEqualToString:((ReadingEntity *)readItems[@"0"]).strContentId]) {// 没有最新数据
 					[self showHUDWithText:IsLatestData delay:HUD_DELAY];
-					[self endRequestReadingContent:returnReadingEntity atIndex:index];
 				} else {// 有新数据
 					// 删掉所有的已读数据，不用考虑第一个已读数据和最新数据之间相差几天，简单粗暴
 					[readItems removeAllObjects];
-					[self endRequestReadingContent:returnReadingEntity atIndex:index];
+					[self hideHud];
 				}
+				
+				[self endRequestReadingContent:returnReadingEntity atIndex:index];
 			} else {
+				[self hideHud];
 				[self endRequestReadingContent:returnReadingEntity atIndex:index];
 			}
 		}

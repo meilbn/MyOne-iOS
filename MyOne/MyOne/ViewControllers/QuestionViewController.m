@@ -165,17 +165,17 @@
 				[self endRefreshing];
 				if ([returnQuestionEntity.strQuestionId isEqualToString:((QuestionEntity *)readItems[@"0"]).strQuestionId]) {// 没有最新数据
 					[self showHUDWithText:IsLatestData delay:HUD_DELAY];
-					[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
 				} else {// 有新数据
 					// 删掉所有的已读数据，不用考虑第一个已读数据和最新数据之间相差几天，简单粗暴
 					[readItems removeAllObjects];
-					[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
+					[self hideHud];
 				}
+				
+				[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
 			} else {
+				[self hideHud];
 				[self endRequestQuestionContent:returnQuestionEntity atIndex:index];
 			}
-			[readItems setObject:returnQuestionEntity forKey:[@(index) stringValue]];
-			[self.rightPullToRefreshView reloadItemAtIndex:index animated:NO];
 		}
 	} failBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
 		NSLog(@"question error = %@", error);
