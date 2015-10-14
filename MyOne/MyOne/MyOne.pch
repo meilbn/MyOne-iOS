@@ -18,6 +18,7 @@
 #define BoldSystemFont(size)  [UIFont boldSystemFontOfSize:size]
 #define systemFont(size)      [UIFont systemFontOfSize:size]
 #define isIOS7                [[UIDevice currentDevice].systemVersion doubleValue]>=7.0?YES:NO
+#define isGreatThanIOS9       [[UIDevice currentDevice].systemVersion doubleValue]>=9.0
 #define SYSTEM_VERSION        [[[UIDevice currentDevice] systemVersion] floatValue]
 #define STATUSBAR_HEIGHT      [[UIApplication sharedApplication] statusBarFrame].size.height
 #define NAVBAR_HEIGHT         (44.f + ((SYSTEM_VERSION >= 7) ? STATUSBAR_HEIGHT : 0))

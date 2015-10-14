@@ -17,6 +17,7 @@
 @property (nonatomic, assign) id <RightPullToRefreshViewDataSource> dataSource;
 @property (nonatomic, readonly) NSInteger currentItemIndex;
 @property (nonatomic, strong, readonly) UIView *currentItemView;
+@property (nonatomic, strong, readonly) UIView *contentView;
 
 /**
  *  插入一个新的 item
@@ -104,5 +105,12 @@
  *  @param index                  当前 item 的下标
  */
 - (void)rightPullToRefreshView:(RightPullToRefreshView *)rightPullToRefreshView didDisplayItemAtIndex:(NSInteger)index;
+
+/**
+ *  当前要展示的 item 的下标发生变化
+ *
+ *  @param rightPullToRefreshView rightPullToRefreshView
+ */
+- (void)rightPullToRefreshViewCurrentItemIndexDidChange:(RightPullToRefreshView *)rightPullToRefreshView;
 
 @end

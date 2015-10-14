@@ -155,6 +155,24 @@
 	}
 }
 
+- (void)rightPullToRefreshViewCurrentItemIndexDidChange:(RightPullToRefreshView *)rightPullToRefreshView {
+	if (isGreatThanIOS9) {
+		UIView *currentItemView = [rightPullToRefreshView currentItemView];
+		for (id subView in rightPullToRefreshView.contentView.subviews) {
+			if (![subView isKindOfClass:[UILabel class]]) {
+				UIView *itemView = (UIView *)subView;
+				HomeView *homeView = (HomeView *)itemView.subviews[0].subviews[0];
+				UIScrollView *scrollView = (UIScrollView *)[homeView viewWithTag:ScrollViewTag];
+				if (itemView == currentItemView.superview) {
+					scrollView.scrollsToTop = YES;
+				} else {
+					scrollView.scrollsToTop = NO;
+				}
+			}
+		}
+	}
+}
+
 #pragma mark - Network Requests
 
 // 右拉刷新

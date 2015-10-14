@@ -145,6 +145,10 @@
 	return [self.carousel itemViewAtIndex:self.currentItemIndex];
 }
 
+- (UIView *)contentView {
+	return self.carousel.contentView;
+}
+
 #pragma mark - Setter
 
 - (void)setDelegate:(id<RightPullToRefreshViewDelegate>)delegate {
@@ -187,6 +191,9 @@
 
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
 //	NSLog(@"carousel CurrentItemIndexDidChange index = %ld", carousel.currentItemIndex);
+	if ([self.delegate respondsToSelector:@selector(rightPullToRefreshViewCurrentItemIndexDidChange:)]) {
+		[self.delegate rightPullToRefreshViewCurrentItemIndexDidChange:self];
+	}
 }
 
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel {

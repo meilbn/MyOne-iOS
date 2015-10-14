@@ -48,6 +48,7 @@
 	self.scrollView.showsVerticalScrollIndicator = YES;
 	self.scrollView.showsHorizontalScrollIndicator = NO;
 	self.scrollView.alwaysBounceVertical = YES;
+	self.scrollView.tag = ScrollViewTag;
 	self.scrollView.backgroundColor = [UIColor whiteColor];
 	self.scrollView.nightBackgroundColor = NightBGViewColor;
 	self.scrollView.scrollsToTop = YES;
@@ -147,6 +148,15 @@
 	[self.indicatorView stopAnimating];
 	self.containerView.hidden = NO;
 	
+	if (isGreatThanIOS9) {
+		CGFloat activationPointX = self.scrollView.accessibilityActivationPoint.x;
+		if (activationPointX > 0 && activationPointX < SCREEN_WIDTH) {
+			self.scrollView.scrollsToTop = YES;
+		} else {
+			self.scrollView.scrollsToTop = NO;
+		}
+	}
+	
 	self.dateLabel.text = [BaseFunction enMarketTimeWithOriginalMarketTime:thingEntity.strTm];
 	[self.thingImageView configureImageViwWithImageURL:[NSURL URLWithString:thingEntity.strBu] animated:animated];
 	self.thingNameLabel.text = thingEntity.strTt;
@@ -181,6 +191,7 @@
 	[self.thingDescriptionTextView sizeToFit];
 	
 	self.containerView.hidden = YES;
+	self.scrollView.scrollsToTop = NO;
 	
 	[self startRefreshing];
 }

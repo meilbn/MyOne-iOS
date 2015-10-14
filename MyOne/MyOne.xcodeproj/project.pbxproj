@@ -15,7 +15,6 @@
 		821392421B6A60FD004D91EF /* reading_content_4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8213923E1B6A60FD004D91EF /* reading_content_4.txt */; };
 		821392451B6B3A9D004D91EF /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 821392441B6B3A9D004D91EF /* HomeView.m */; };
 		8213924C1B6BAAD5004D91EF /* Century Gothic Bold.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 8213924A1B6BA788004D91EF /* Century Gothic Bold.TTF */; };
-		824443691B80389300B06C82 /* TopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 824443681B80389300B06C82 /* TopWindow.m */; };
 		8269D2821B65DC5C0041AE0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2811B65DC5C0041AE0B /* main.m */; };
 		8269D2851B65DC5C0041AE0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8269D2841B65DC5C0041AE0B /* AppDelegate.m */; };
 		8269D28D1B65DC5C0041AE0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8269D28C1B65DC5C0041AE0B /* Images.xcassets */; };
@@ -28,6 +27,7 @@
 		828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */; };
 		828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D321B68E9BE007521F0 /* QuestionEntity.m */; };
 		828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D351B68E9CF007521F0 /* ThingEntity.m */; };
+		829059441BCE348200084E7E /* TopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 829059431BCE348200084E7E /* TopWindow.m */; settings = {ASSET_TAGS = (); }; };
 		82A726951B6DB60000348EAC /* ThingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726941B6DB60000348EAC /* ThingView.m */; };
 		82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726971B6DC0BE00348EAC /* QuestionView.m */; };
 		82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269A1B6DF10F00348EAC /* PraiseView.m */; };
@@ -71,8 +71,6 @@
 		821392431B6B3A9D004D91EF /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		821392441B6B3A9D004D91EF /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		8213924A1B6BA788004D91EF /* Century Gothic Bold.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Century Gothic Bold.TTF"; sourceTree = "<group>"; };
-		824443671B80389300B06C82 /* TopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopWindow.h; sourceTree = "<group>"; };
-		824443681B80389300B06C82 /* TopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopWindow.m; sourceTree = "<group>"; };
 		8269D27C1B65DC5C0041AE0B /* MyOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269D2801B65DC5C0041AE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8269D2811B65DC5C0041AE0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,6 +92,8 @@
 		828F6D321B68E9BE007521F0 /* QuestionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionEntity.m; sourceTree = "<group>"; };
 		828F6D341B68E9CF007521F0 /* ThingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingEntity.h; sourceTree = "<group>"; };
 		828F6D351B68E9CF007521F0 /* ThingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingEntity.m; sourceTree = "<group>"; };
+		829059421BCE348200084E7E /* TopWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopWindow.h; sourceTree = "<group>"; };
+		829059431BCE348200084E7E /* TopWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopWindow.m; sourceTree = "<group>"; };
 		82A726931B6DB60000348EAC /* ThingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingView.h; sourceTree = "<group>"; };
 		82A726941B6DB60000348EAC /* ThingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingView.m; sourceTree = "<group>"; };
 		82A726961B6DC0BE00348EAC /* QuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionView.h; sourceTree = "<group>"; };
@@ -288,8 +288,8 @@
 				82E75E931B6725F8000C8106 /* BaseFunction.m */,
 				82EE5A2C1B6F51240012DAFD /* HTTPTool.h */,
 				82EE5A2D1B6F51240012DAFD /* HTTPTool.m */,
-				824443671B80389300B06C82 /* TopWindow.h */,
-				824443681B80389300B06C82 /* TopWindow.m */,
+				829059421BCE348200084E7E /* TopWindow.h */,
+				829059431BCE348200084E7E /* TopWindow.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -534,7 +534,7 @@
 				82A726A11B6E0B2600348EAC /* SettingsViewController.m in Sources */,
 				8213923A1B6A4749004D91EF /* ReadingAuthorView.m in Sources */,
 				82E75E7D1B65F5CD000C8106 /* PersonViewController.m in Sources */,
-				824443691B80389300B06C82 /* TopWindow.m in Sources */,
+				829059441BCE348200084E7E /* TopWindow.m in Sources */,
 				82EE5A341B6F624A0012DAFD /* CircularLoaderView.m in Sources */,
 				821392451B6B3A9D004D91EF /* HomeView.m in Sources */,
 				8269D2821B65DC5C0041AE0B /* main.m in Sources */,
@@ -653,6 +653,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -692,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

@@ -121,6 +121,15 @@
 	[self.indicatorView stopAnimating];
 	self.webView.hidden = NO;
 	
+	if (isGreatThanIOS9) {
+		CGFloat activationPointX = self.webView.scrollView.accessibilityActivationPoint.x;
+		if (activationPointX > 0 && activationPointX < SCREEN_WIDTH) {
+			self.webView.scrollView.scrollsToTop = YES;
+		} else {
+			self.webView.scrollView.scrollsToTop = NO;
+		}
+	}
+	
 	ReadingAuthorView *readingAuthorView = nil;
 	
 	if (webView.scrollView.subviews.count < 4) {// 小于4说明还没有添加文章底部的作者详情 view

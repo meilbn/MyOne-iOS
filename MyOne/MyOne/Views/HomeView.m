@@ -54,6 +54,7 @@
 	self.scrollView.showsVerticalScrollIndicator = YES;
 	self.scrollView.showsHorizontalScrollIndicator = NO;
 	self.scrollView.alwaysBounceVertical = YES;
+	self.scrollView.tag = ScrollViewTag;
 	self.scrollView.backgroundColor = [UIColor whiteColor];
 	self.scrollView.nightBackgroundColor = NightBGViewColor;
 	self.scrollView.scrollsToTop = YES;
@@ -228,6 +229,13 @@
 	[self.indicatorView stopAnimating];
 	self.containerView.hidden = NO;
 	
+	CGFloat activationPointX = self.scrollView.accessibilityActivationPoint.x;
+	if (activationPointX > 0 && activationPointX < SCREEN_WIDTH) {
+		self.scrollView.scrollsToTop = YES;
+	} else {
+		self.scrollView.scrollsToTop = NO;
+	}
+	
 	self.volLabel.text = homeEntity.strHpTitle;
 	[self.paintImageView configureImageViwWithImageURL:[NSURL URLWithString:homeEntity.strThumbnailUrl] animated:animated];
 	self.paintNameLabel.text = [homeEntity.strAuthor componentsSeparatedByString:@"&"][0];
@@ -285,6 +293,7 @@
 	[self.praiseNumberBtn sizeToFit];
 	
 	self.containerView.hidden = YES;
+	self.scrollView.scrollsToTop = NO;
 	
 	[self startRefreshing];
 }

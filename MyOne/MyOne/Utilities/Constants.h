@@ -23,6 +23,7 @@
 #define DefaultAnimationDuration 0.2
 
 #define WebViewTag 1
+#define ScrollViewTag 2
 #define TopViewTag 10
 #define TopViewTimeLabelTag 11
 #define BottomViewTag 20

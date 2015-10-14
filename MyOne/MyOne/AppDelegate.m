@@ -82,8 +82,10 @@
 	self.window.rootViewController = rootTabBarController;
 	[self.window makeKeyAndVisible];
 	
-	// 添加一个window, 点击这个window, 可以让屏幕上的scrollView滚到最顶部
-	[TopWindow show];
+	if (!(isGreatThanIOS9)) {
+		// 添加一个window, 点击这个window, 可以让屏幕上的scrollView滚到最顶部
+		[TopWindow show];
+	}
 	
 	return YES;
 }
