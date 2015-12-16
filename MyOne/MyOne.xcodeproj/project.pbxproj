@@ -27,7 +27,7 @@
 		828F6D301B68E9A9007521F0 /* ReadingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D2F1B68E9A9007521F0 /* ReadingEntity.m */; };
 		828F6D331B68E9BE007521F0 /* QuestionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D321B68E9BE007521F0 /* QuestionEntity.m */; };
 		828F6D361B68E9CF007521F0 /* ThingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 828F6D351B68E9CF007521F0 /* ThingEntity.m */; };
-		829059441BCE348200084E7E /* TopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 829059431BCE348200084E7E /* TopWindow.m */; settings = {ASSET_TAGS = (); }; };
+		829059441BCE348200084E7E /* TopWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 829059431BCE348200084E7E /* TopWindow.m */; };
 		82A726951B6DB60000348EAC /* ThingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726941B6DB60000348EAC /* ThingView.m */; };
 		82A726981B6DC0BE00348EAC /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A726971B6DC0BE00348EAC /* QuestionView.m */; };
 		82A7269B1B6DF10F00348EAC /* PraiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82A7269A1B6DF10F00348EAC /* PraiseView.m */; };
@@ -118,7 +118,6 @@
 		82E75E7C1B65F5CD000C8106 /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		82E75E7E1B65F636000C8106 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		82E75E7F1B65F636000C8106 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		82E75E811B65FF2C000C8106 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		82E75E841B660FB0000C8106 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		82E75E881B66102C000C8106 /* AppConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfigure.h; sourceTree = "<group>"; };
 		82E75E891B66102C000C8106 /* AppConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfigure.m; sourceTree = "<group>"; };
@@ -360,7 +359,6 @@
 		9C7621FC42D527A526CB7B8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				82E75E811B65FF2C000C8106 /* Reveal.framework */,
 				11BEA97E2777D806B33A72EC /* libPods.a */,
 			);
 			name = Frameworks;
@@ -678,11 +676,8 @@
 					"\"Security\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-ObjC",
-					"-lz",
-					"-framework",
-					Reveal,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.meilbn.MyOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -718,11 +713,8 @@
 					"\"Security\"",
 					"-framework",
 					"\"SystemConfiguration\"",
-					"-ObjC",
-					"-lz",
-					"-framework",
-					Reveal,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.meilbn.MyOne;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
