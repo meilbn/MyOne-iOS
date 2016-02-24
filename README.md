@@ -5,7 +5,7 @@
 因为一般睡前都会看《一个》，感觉上面的有些句子、文章非常精彩，很喜欢，所以在抓包之后尝试自己写一下。不过仅仅是学习和娱乐而已。
 
 ## 0x01 关于这个项目
-仿官方 3.x 版在[这里](https://github.com/meilbn/MyOne3-iOS)。
+__仿官方 3.x 版在[这里](https://github.com/meilbn/MyOne3-iOS)。__
 
 与[官方的 App](http://wufazhuce.com/) 区别暂时有：
 
